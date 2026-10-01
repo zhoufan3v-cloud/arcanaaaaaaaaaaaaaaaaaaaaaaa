@@ -2,6 +2,24 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+<style id="arcanaBootStyle">
+#arcanaBoot{position:fixed;inset:0;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(ellipse at 50% 38%,#1b1633 0%,#0a0c12 62%);color:#fff;font-family:Tahoma,'Segoe UI',sans-serif;direction:rtl;transition:opacity .55s ease,visibility .55s}
+#arcanaBoot.out{opacity:0;visibility:hidden;pointer-events:none}
+#arcanaBoot svg{width:132px;height:132px;overflow:visible;filter:drop-shadow(0 0 18px rgba(255,214,107,.55))}
+#arcanaBoot .o,#arcanaBoot .r{transform-origin:60px 60px;animation:abSpin 9s linear infinite}
+#arcanaBoot .r{animation-duration:6s;animation-direction:reverse}
+#arcanaBoot h1{margin:0;font-size:46px;font-weight:900;color:#ffd66b;text-shadow:0 0 26px rgba(255,190,50,.5)}
+#arcanaBoot .t{font-size:16px;color:#aeb8d4}
+#arcanaBoot .t b::after{content:'';animation:abDots 1.2s steps(1) infinite}
+#arcanaBoot .bar{width:min(300px,76vw);height:7px;border-radius:7px;background:rgba(255,255,255,.1);overflow:hidden}
+#arcanaBoot .bar i{display:block;height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,#b56bff,#ffd66b);box-shadow:0 0 14px #ffd66b;transition:width .25s ease}
+#arcanaBoot .p{font-size:13px;color:#ffd66b;font-weight:800;min-height:1em}
+#arcanaBoot .tip{position:absolute;bottom:7vh;width:min(420px,86vw);text-align:center;font-size:13px;line-height:1.8;color:#8f9ab8}
+@keyframes abSpin{to{transform:rotate(360deg)}}
+@keyframes abDots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+@media (prefers-reduced-motion:reduce){#arcanaBoot .o,#arcanaBoot .r{animation:none}}
+</style>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لعبة أركانا - Arcana RPG Online | لعبة RPG عربية مجانية</title>
     <meta name="description" content="لعبة أركانا - Arcana RPG Online: لعبة RPG عربية في المتصفح، استكشف العالم، قاتل الوحوش، طوّر شخصيتك وخض معارك PvP بدون تحميل.">
@@ -35,8 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.9.0",
+  "version": "2.10.0",
   "history": [
+    {"version":"2.10.0","date":"2026-10-01","title":"شاشة التحميل ومؤثرات الترقية","notes":["⏳ شاشة تحميل جديدة عند فتح اللعبة: شعار يدور وشريط تقدم ونصائح، وتختفي لما تجهز اللعبة بدل ما تشوف الصفحة مخربطة","🌟 ترقية المستوى صارت سينمائية: أشعة ذهبية دوّارة، حلقات طاقة، نجوم متطايرة وأصوات احتفال","📈 عند صرف نقطة تطوير (ATK / HP / DEF / SPD) تظهر بطاقة بعدّاد من القيمة القديمة للجديدة، مع مؤثر وصوت خاص لكل إحصائية، وتنبض الأرقام في الهيدر واللوبي"]},
     {"version":"2.9.0","date":"2026-10-01","title":"مؤثرات أدوات القتال","notes":["🩸 عند استخدام جرعة الدم يظهر انفجار طاقة حمراء مع قلوب وشرارات واهتزاز ووميض","⚡ عند استخدام جرعة الطاقة تظهر طاقة كهربائية زرقاء مع صواعق وشرارات وهالة قوية","🪨 عند تفعيل حجر الصمود يظهر مؤثر نهضة ضخم مع حلقات ضوئية وأحجار متطايرة ووميض قوي","🎵 أضيف اهتزاز خفيف لساحة القتال ومؤثرات صوتية متدرجة عند استخدام الأدوات","🛡️ تم الحفاظ على طريقة عمل الأدوات وحدود استخدامها كما هي"]},
     {"version":"2.8.0","date":"2026-09-29","title":"تفتيت البطاقات","notes":["💥 عند هزيمة العدو بطاقته تتفتت بأنميشن وأصوات وشرارات","💀 عند خسارتك بطاقة البطل تتفتت بأنميشن وأصوات وتأثير أحمر"]},
     {"version":"2.7.0","date":"2026-09-29","title":"مستويات الأعداء","notes":["🎖️ كل عدو له مستوى Lv. يظهر على بطاقته ويُحسب من إحصائياته، ومستوى البطل يظهر على بطاقته"]},
@@ -1909,6 +1928,31 @@ window.ARCANA_CONFIG = {
 </style>
 </head>
 <body>
+<div id="arcanaBoot" role="status" aria-live="polite">
+<svg viewBox="0 0 120 120" fill="none" stroke-width="2" aria-hidden="true"><g class="o"><circle cx="60" cy="60" r="56" stroke="#ffd66b" stroke-dasharray="3 7"/><circle cx="60" cy="60" r="48" stroke="#ffd66b" opacity=".6"/></g><g class="r" stroke="#b56bff"><rect x="26" y="26" width="68" height="68"/><rect x="26" y="26" width="68" height="68" transform="rotate(45 60 60)"/></g><circle cx="60" cy="60" r="9" fill="#ffd66b" stroke="none"/></svg>
+<h1>أركانا</h1>
+<div class="t"><b>جاري التحميل</b></div>
+<div class="bar"><i></i></div><div class="p">0%</div>
+<div class="tip"></div>
+</div>
+<script>(function(){
+var B=document.getElementById('arcanaBoot');if(!B)return;
+var bar=B.querySelector('.bar i'),pc=B.querySelector('.p'),tp=B.querySelector('.tip'),t0=Date.now(),p=0,fin=false,L=document.readyState==='complete',C=false,k=0;
+var tips=['الضربة العادية تجمّع +0.5 طاقة، يعني ضربتين = طاقة كاملة.','لما تهزم عدو في فيز غير أخير ترجع لك صحة بقدر جرعة دم مستوى 1.','حجر الصمود يقومك بكامل صحتك لو متّ في المعركة.','كل 10 مستويات تزيد سعة الطاقة +1 لين توصل 10.','لكل لاعب ID خاص (ARC-XXXXXX) تضيف به أصدقاءك.','طوّر أسلحتك وجرعاتك من الحدّاد لمؤثرات خاصة.'];
+function set(v){p=Math.max(p,Math.min(100,v));bar.style.width=p+'%';pc.textContent=Math.floor(p)+'%'}
+function tipNext(){tp.textContent='💡 '+tips[k++%tips.length]}
+tipNext();
+var tI=setInterval(tipNext,2400);
+function done(){if(fin)return;fin=true;clearInterval(cI);clearInterval(tI);set(100);setTimeout(function(){B.classList.add('out');setTimeout(function(){B.remove();window.dispatchEvent(new Event('arcanaBootDone'))},650)},280)}
+var cI=setInterval(function(){
+ set(p<90?p+(90-p)*.06:p);
+ var el=Date.now()-t0;
+ if((window.__ARCANA_GAME_READY&&L&&C&&el>1100)||el>9000)done();
+},100);
+window.addEventListener('load',function(){L=true});
+var f=function(){C=true};(window.__ARCANA_SUPABASE_READY||Promise.resolve()).then(f,f);setTimeout(f,3500);
+window.arcanaBoot={done:done};
+})();</script>
     <div id="seo-description" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
       لعبة أركانا - Arcana RPG Online هي لعبة RPG عربية تعمل مباشرة في المتصفح. أنشئ شخصيتك،
       خض المعارك، استخدم المهارات والعناصر، طوّر معداتك، واستكشف أنظمة PvP والألعاب الخاصة.
@@ -9829,5 +9873,75 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 })();
 </script>
 
+<style id="arcanaFx210Style">
+.lvx-rays{position:absolute;left:50%;top:50%;width:960px;height:960px;margin:-480px 0 0 -480px;z-index:-1;pointer-events:none;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,214,107,.26) 0 7deg,transparent 7deg 22deg);-webkit-mask:radial-gradient(circle,#000 8%,transparent 66%);mask:radial-gradient(circle,#000 8%,transparent 66%);animation:lvxSpin 16s linear infinite}
+@keyframes lvxSpin{to{transform:rotate(360deg)}}
+.levelup-overlay.show .levelup-panel{animation:lvxGlow 1.8s ease-in-out infinite}
+@keyframes lvxGlow{50%{box-shadow:0 30px 100px rgba(0,0,0,.72),0 0 60px rgba(255,214,107,.45)}}
+#astCard{position:fixed;left:50%;top:42%;z-index:2147483000;transform:translate(-50%,-50%);pointer-events:none;text-align:center;direction:rtl;min-width:230px;padding:18px 28px;border-radius:22px;background:linear-gradient(150deg,rgba(20,26,44,.97),rgba(8,11,20,.97));border:2px solid var(--c);box-shadow:0 0 50px var(--c),0 20px 60px rgba(0,0,0,.6);color:#fff}
+#astCard .i{font-size:54px;filter:drop-shadow(0 0 14px var(--c))}
+#astCard .n{font-size:15px;font-weight:900;color:var(--c)}
+#astCard .v{font-size:42px;font-weight:1000;margin:2px 0}
+#astCard .d{font-size:22px;font-weight:1000;color:var(--c)}
+#astCard .b{height:8px;border-radius:8px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:10px}
+#astCard .b i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c),#fff);box-shadow:0 0 12px var(--c)}
+#astCard .h{margin-top:8px}
+.ast-pop{display:inline-block;color:var(--c,#ffd66b)!important;text-shadow:0 0 12px var(--c,#ffd66b);animation:astPop .8s cubic-bezier(.2,1.6,.3,1)}
+@keyframes astPop{0%{transform:scale(1)}35%{transform:scale(1.7)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.lvx-rays,.levelup-overlay.show .levelup-panel,.ast-pop{animation:none}}
+</style>
+<script id="arcanaFx210">(function(){
+'use strict';
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,shown=null;
+function T(f,d,ty,v,w){try{var S=window.arcanaSfx;if(S&&S.tone)S.tone(f,d,ty,v,w||0)}catch(e){}}
+function later(fn,ms){setTimeout(function(){try{fn()}catch(e){}},ms)}
+var STAT={
+ atk:{c:'#ff6a4d',i:'⚔️',n:'الهجوم ATK',e:['⚔️','🔥','✨'],ids:['headerAtk','lobbyAtk'],s:function(){T(180,.12,'sawtooth',.09);T(90,.25,'square',.07,.04);T(900,.08,'sawtooth',.05,.1);T(1400,.2,'triangle',.06,.16)}},
+ hp:{c:'#52e08a',i:'❤️',n:'الصحة HP',e:['❤️','💚','✨'],ids:['headerHp','headerMaxHp','lobbyHp'],s:function(){[523,659,784,1047].forEach(function(f,i){T(f,.2,'sine',.08,i*.09)})}},
+ def:{c:'#5fb4ff',i:'🛡️',n:'الدفاع DEF',e:['🛡️','💠','✨'],ids:['headerDef','lobbyDef'],s:function(){T(150,.2,'square',.08);T(300,.3,'triangle',.07,.05);T(600,.35,'sine',.05,.1)}},
+ spd:{c:'#ffd23f',i:'⚡',n:'السرعة SPD',e:['⚡','💨','✨'],ids:['lobbySpd'],s:function(){for(var i=0;i<6;i++)T(500+i*140,.07,'sawtooth',.04,i*.05);T(1500,.25,'sine',.06,.32)}}
+};
+function flash(c){if(RM)return;var f=document.createElement('div');f.style.cssText='position:fixed;inset:0;z-index:2147482999;pointer-events:none;background:radial-gradient(circle,'+c+'66,transparent 65%)';document.body.appendChild(f);f.animate([{opacity:0},{opacity:1,offset:.2},{opacity:0}],{duration:700}).onfinish=function(){f.remove()}}
+function count(el,a,b,ms){var t0=performance.now();(function s(t){var k=Math.min(1,(t-t0)/ms);el.textContent=Math.round(a+(b-a)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(s)})(t0)}
+function statFx(k,b,a){
+ var S=STAT[k],o=b[k],n=a[k],FX=window.arcanaFX||{},old=document.getElementById('astCard');if(old)old.remove();
+ var c=document.createElement('div');c.id='astCard';c.style.setProperty('--c',S.c);
+ c.innerHTML='<div class="i">'+S.i+'</div><div class="n">'+S.n+'</div><div class="v">'+o+'</div><div class="d">+'+(n-o)+'</div><div class="b"><i></i></div>'+(k==='hp'?'<div class="n h">💚 امتلأت صحتك</div>':'');
+ document.body.appendChild(c);
+ var v=c.querySelector('.v'),bi=c.querySelector('.b i');
+ if(!RM)c.animate([{transform:'translate(-50%,-50%) scale(.3) rotate(-8deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.12)',opacity:1,offset:.55},{transform:'translate(-50%,-50%) scale(1)',opacity:1}],{duration:480,easing:'ease-out'});
+ bi.style.transition='width .9s cubic-bezier(.2,.9,.25,1)';bi.style.width=(n?o/n*100:0)+'%';
+ later(function(){bi.style.width='100%';count(v,o,n,800)},420);
+ S.s();flash(S.c);
+ later(function(){if(FX.ring){FX.ring(c,S.c,260);FX.burst(c,{emoji:S.e,count:22,spread:170,rise:30})}},300);
+ later(function(){T(1319,.3,'sine',.06);T(1760,.4,'sine',.05,.1);if(FX.ring)FX.ring(c,'#fff',180)},900);
+ S.ids.forEach(function(id){var e=document.getElementById(id);if(!e)return;e.style.setProperty('--c',S.c);e.classList.remove('ast-pop');void e.offsetWidth;e.classList.add('ast-pop');later(function(){e.classList.remove('ast-pop')},1000)});
+ later(function(){c.animate([{opacity:1},{opacity:0,transform:'translate(-50%,-70%) scale(.9)'}],{duration:450,fill:'forwards'}).onfinish=function(){c.remove()}},2100);
+}
+var oSP=window.spendSkillPoint;
+if(typeof oSP==='function')window.spendSkillPoint=function(stat){
+ var b=null;try{var ch=getChar();if(ch&&ch.skillPoints>0)b=getPermanentDisplayStats(ch)}catch(e){}
+ var r=oSP.apply(this,arguments);
+ try{if(b&&STAT[stat])statFx(stat,b,getPermanentDisplayStats(getChar()))}catch(e){}
+ return r;
+};
+function lvSound(){T(220,1,'triangle',.07);T(277,1,'triangle',.06,.02);T(330,1,'triangle',.06,.04);[880,1109,1319,1760].forEach(function(f,i){T(f,.28,'sine',.07,.55+i*.11)});T(2217,.4,'sine',.04,1.1);T(2637,.5,'sine',.04,1.2)}
+function lvFx(ov){
+ if(!ov.querySelector('.lvx-rays')){var r=document.createElement('div');r.className='lvx-rays';ov.insertBefore(r,ov.firstChild)}
+ var ch=getChar(),lv=ch&&ch.level,fresh=lv!==shown;shown=lv;
+ var t=ov.querySelector('.levelup-title'),L=document.getElementById('levelUpLevel'),FX=window.arcanaFX||{};
+ if(t&&!RM)t.animate([{transform:'scale(.4)',opacity:0},{transform:'scale(1.25)',opacity:1,offset:.6},{transform:'scale(1)'}],{duration:900,easing:'cubic-bezier(.2,1.4,.3,1)'});
+ if(!fresh)return;
+ flash('#ffd66b');lvSound();
+ later(function(){if(FX.ring){FX.ring(L,'#ffd66b',260);FX.burst(L,{emoji:['⭐','✨','💫','🌟'],count:30,spread:230,rise:60})}},250);
+ later(function(){if(FX.ring)FX.ring(L,'#b56bff',340)},550);
+}
+var oLV=window.showLevelUpModal;
+if(typeof oLV==='function')window.showLevelUpModal=function(){
+ var r=oLV.apply(this,arguments);
+ try{var ov=document.getElementById('levelUpOverlay');if(ov&&ov.classList.contains('show'))lvFx(ov)}catch(e){}
+ return r;
+};
+})();</script>
 </body>
 </html>
