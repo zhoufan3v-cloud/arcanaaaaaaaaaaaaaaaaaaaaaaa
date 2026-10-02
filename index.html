@@ -53,8 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.13.0",
+  "version": "2.13.1",
   "history": [
+    {"version":"2.13.1","date":"2026-10-02","title":"إعادة ضبط موسم المصنف","notes":["🔄 تصفير تقدم المصنف لجميع اللاعبين عند تحميل الحفظ لأول مرة بعد التحديث","🥉 الجميع يعود إلى البرونزي ويبدأ من 1/12 مع فتح 3 فرص جديدة","⭐ تصفير تقدم الرتب وفتح الرتب السابقة وWin Streak وبيانات المصنف الخاصة بالموسم","📊 إعادة Ranked Rating إلى 1000 حتى يتطابق العرض مع الرتبة البرونزية","💾 يتم حفظ إعادة الضبط ضمن الحفظ المحلي والسحابي بدون المساس بمستوى الشخصية أو الأدوات أو بقية تقدم اللعبة"]},
     {"version":"2.13.0","date":"2026-10-02","title":"تطوير المصنف Ranked PvP","notes":["🏆 مسارات جديدة حسب كل رتبة: برونزي 12 · فضي 12 · ذهبي 20 · بلاتيني 20 · ألماسي 25 · ماستر 30","⚔️ قوة أعداء مختلفة لكل رتبة (×1 إلى ×4) مع ذكاء أعلى وأنماط لعب متنوعة","⭐ أعداء Elite موزعة على المسار بمكافآت وتأثيرات خاصة","👑 زعيم لكل رتبة بصورته الخاصة وPassive مميز","💰 مكافآت متدرجة 🔥 وWin Streak يزيد الذهب والخبرة","🔍 معاينة الخصم قبل المعركة وشاشة إكمال الرتبة","💾 حفظ تقدم المصنف ضمن الحفظ المحلي والسحابي مع ترحيل الحفظ القديم","🖼️ صور جديدة للخصوم والزعماء وأصوات ومؤثرات للمصنف"]},
     {"version":"2.12.0","date":"2026-10-02","title":"أصوات المهارات ومهارات البوصات وإحياء القصة","notes":["🔊 كل مهارة خاصة (من المراحل ومن السيوف) لها صوت ومؤثر وبانر باسمها عند الإطلاق وعند الإصابة","⚖️ توازن البطل صار ينكسر فعلًا: الحد أقل، والخسارة أكبر، وClose/Miss يكسرانه أسرع","🎬 صور القصة (الفتاة الشريرة، اللعنة، تنين الجليد) صارت حية: جسيمات، هالة، نبض، وهز","👑 كل بوص يطلق مهارته القصوى مرة واحدة عند نصف دمه: سهام، شاشة مظلمة، رجّة وأصوات قوية"]},
     {"version":"2.11.4","date":"2026-10-01","title":"أسهم QTE بضرر مستقل وأصدقاء عبر السيرفر","notes":["🏹 دفاع QTE جديد: ضرر المهارة يتقسم على عدد الأسهم، وكل سهم له ضرره الخاص (Perfect 0% · Good 50% · Close 100% · Miss 120%)، ويُطبَّق مجموع الأسهم دفعة واحدة في النهاية","🎁 المكافأة الإضافية للمرحلة (ذهب/جرعة/مادة) تُمنح أول مرة فقط عند إكمال المرحلة","🌐 الأصدقاء عبر السيرفر: ابحث بالـ ID عن أي لاعب (ضيف أو حساب) على أي جهاز، وأرسل طلب صداقة واقبله (يتطلب تشغيل ملف SQL مرة واحدة)","⚖️ توازن اللاعب صار شريطًا واضحًا في واجهة القتال مثل العدو، ينقص مع أثر أحمر، ويتوهج لما يقل"]},
@@ -8216,12 +8217,40 @@ window.arcanaBoot={done:done};
   const RK_NAMES=['المبارز القرمزي','حارس الحديد','صياد البرق','ساحر الرماد','ظل الغابة','محارب العاصفة','سيد السموم','فارس الليل','حامل الفولاذ','سيد القلعة','الجلاد الملكي','قاتل الفجر'];
   function getRankedEnemyMultiplier(t){const c=RANKED_CONFIG[t];return c?c.enemyMultiplier:1}
   function rkEff(m,k){return 1+(m-1)*k} /* تخفيف: ×4 لا يعني كل شيء ×4 */
-  function rkInit(d){if(!d.rankedProg||typeof d.rankedProg!=='object')d.rankedProg={};if(!d.rankedStats||typeof d.rankedStats!=='object')d.rankedStats={};if(!d.rankedCleared||typeof d.rankedCleared!=='object')d.rankedCleared={};if(!d.rankedBotCache||typeof d.rankedBotCache!=='object')d.rankedBotCache={};
+  const RANKED_GLOBAL_RESET_ID='ranked-season-reset-2026-10-02-v1';
+  function rkApplyGlobalSeasonReset(d){
+    if(d.rankedSeasonResetId===RANKED_GLOBAL_RESET_ID)return false;
+    d.rating=1000;
+    d.rankedTier=0;
+    d.rankedUnlocked=0;
+    d.rankedStage=1;
+    d.rankedHighest=0;
+    d.rankedBestStage=1;
+    d.rankedStreak=0;
+    d.rankedBestStreak=0;
+    d.rankedProg={bronze:1,silver:1,gold:1,platinum:1,diamond:1,master:1};
+    d.rankedCleared={bronze:false,silver:false,gold:false,platinum:false,diamond:false,master:false};
+    d.rankedStats={};
+    d.rankedBotCache={};
+    d.rankedSeasonResetId=RANKED_GLOBAL_RESET_ID;
+    d.rankedSeasonResetAt=new Date().toISOString();
+    return true;
+  }
+  function rkInit(d){
+    const __reset=rkApplyGlobalSeasonReset(d);
+    if(!d.rankedProg||typeof d.rankedProg!=='object')d.rankedProg={};if(!d.rankedStats||typeof d.rankedStats!=='object')d.rankedStats={};if(!d.rankedCleared||typeof d.rankedCleared!=='object')d.rankedCleared={};if(!d.rankedBotCache||typeof d.rankedBotCache!=='object')d.rankedBotCache={};
     if(!Number.isFinite(d.rankedUnlocked))d.rankedUnlocked=0;if(!Number.isFinite(d.rankedTier))d.rankedTier=0;d.rankedTier=clamp(d.rankedTier,0,d.rankedUnlocked);
     if(d.rankedProg.bronze==null)d.rankedProg.bronze=clamp(Number(d.rankedStage||1),1,12); /* migration من الحفظ القديم */
     if(!Number.isFinite(d.rankedStreak))d.rankedStreak=0;if(!Number.isFinite(d.rankedBestStreak))d.rankedBestStreak=0;
     const t=RANKED_ORDER[d.rankedTier];d.rankedProg[t]=clamp(Number(d.rankedProg[t]||1),1,RANKED_CONFIG[t].nodes);d.rankedStage=d.rankedProg[t];
-    d.rankedHighest=Math.max(Number(d.rankedHighest||0),d.rankedUnlocked);return d}
+    d.rankedHighest=Math.max(Number(d.rankedHighest||0),d.rankedUnlocked);
+    if(__reset){
+      try{ save(d); }catch(e){ console.warn('[Arcana] تعذر حفظ تصفير موسم المصنف',e); }
+      window.__ARCANA_RANKED_GLOBAL_RESET=true;
+      setTimeout(()=>{try{toast('🔄 تم بدء موسم جديد للمصنف: عدت إلى البرونزي.','ok')}catch(e){}},120);
+    }
+    return d
+  }
   function rkSt(d,t){return d.rankedStats[t]||(d.rankedStats[t]={w:0,l:0,bs:0,e:0,n:0})}
   function rkNodeType(t,n){const c=RANKED_CONFIG[t];if(n===c.nodes)return'boss';const m=c.elites;for(let k=1;k<=m;k++)if(Math.round(c.nodes*k/(m+1))===n)return'elite';return'normal'}
   function buildRankedEnemy(tier,node,type){
@@ -8295,6 +8324,8 @@ window.arcanaBoot={done:done};
   function rkTierDone(){const x=window.__rkDone;if(!x)return;window.__rkDone=null;const c=RANKED_CONFIG[x.tier],nx=x.next?RANKED_CONFIG[x.next]:null;rkSnd('tier');
     const o=document.createElement('div');o.className='rk-ov rk-done';let sp='';for(let i=0;i<36;i++)sp+=`<i style="left:${Math.random()*100}%;animation-delay:${Math.random()*2}s;animation-duration:${2+Math.random()*2}s;background:hsl(${Math.random()*60+30},100%,${60+Math.random()*20}%)"></i>`;
     o.innerHTML=`<div class="rk-sparks">${sp}</div><div class="rk-card boss rk-rise"><div class="rk-trophy">🏆</div><h2>تم إكمال الرتبة</h2><h3>${c.icon} ${c.name}</h3><div class="rk-cimg small">${rkImg(x.bossImg)}</div><div class="rk-sub">Boss المهزوم: ${esc(x.boss)}</div><div class="rk-grid"><span>العقد المكتملة<b>${c.nodes}/${c.nodes}</b></span><span>الفوز<b>${x.s.w}</b></span><span>الخسارة<b>${x.s.l}</b></span><span>أفضل Streak<b>${x.s.bs}</b></span><span>Elite المهزومين<b>${x.s.e}</b></span><span>مكافأة الإكمال<b>💰 ${x.bonus}</b></span></div>${nx?`<div class="rk-unlock">✨ تم فتح الرتبة التالية: ${nx.icon} ${nx.name}</div>`:'<div class="rk-unlock">👑 أنت في قمة المصنف!</div>'}<div class="rk-btns"><button class="ranked-start-btn" onclick="this.closest('.rk-ov').remove();try{renderRankedPath()}catch(e){}">➡️ متابعة</button></div></div>`;document.body.appendChild(o)}
+  // 🌍 Reset موسم المصنف لجميع اللاعبين الذين يحملون هذه النسخة، مع حفظ التغيير محليًا وسحابيًا.
+  setTimeout(()=>{try{rkInit(data())}catch(e){console.warn('[Arcana] ranked season reset',e)}},3500);
   window.renderRankedPathRK=renderRankedPath;
   window.openRankedPath=openRankedPath;window.closeRankedPath=closeRankedPath;window.selectRankedStage=selectRankedStage;window.startRankedStage=startRankedStage;
   function rowFriend(f,i){
