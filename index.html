@@ -53,8 +53,14 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.10.0",
+  "version": "2.11.5",
   "history": [
+    {"version":"2.11.5","date":"2026-10-01","title":"تثبيت نظام الضيف السحابي ونقل التقدم","notes":["☁️ الضيف يعمل بهوية سحابية مؤقتة ويحفظ تقدمه ومقتنياته أونلاين","🔄 عند إنشاء الحساب من داخل وضع الضيف يتم ترقية نفس الهوية بدل إنشاء حفظ جديد","📩 إذا كان تأكيد البريد مفعّلًا، يكمل اللاعب التحويل بعد تأكيد البريد بدون فقدان التقدم","🌍 بعد التحويل يصبح الحساب قابلًا للدخول من أي جهاز واسترجاع نفس التقدم" ]},
+    {"version":"2.11.4","date":"2026-10-01","title":"الضيف السحابي وتحويل الحساب","notes":["☁️ الضيف أصبح جلسة سحابية فعلية عند توفر Supabase ويحفظ تقدمه تلقائيًا","🔄 تحويل الضيف إلى حساب يحافظ على نفس التقدم والحفظ السحابي بدل إنشاء بداية جديدة","🌍 الحساب بعد التحويل يمكن استرجاعه من أي جهاز عبر تسجيل الدخول"]},
+    {"version":"2.11.3","date":"2026-10-01","title":"تطوير التوازن والمقاومات وإصلاح اللاق","notes":["⚖️ زر جديد «توازن» في ترقية المستوى: +1 توازن، وتختار مقاومة (حرق / سم / تجميد / صعق) تزيد +5%، وحدها الأقصى 80%","🛡️ المقاومة تخفف الأثر فقط (فرصة الحالة ومدتها وضررها، وضرر العنصر قليلًا) بدون مناعة وبدون قوة زايدة","🔥 الأعداء يطبقون عليك حرق وسم وتجميد وصعق حسب عنصرهم، وتظهر تحت بطاقتك","🚀 إصلاح اللاق لما ينكسر التوازن مع قتل العدو أو الخسارة، مع مؤثر خاص لكسر توازنك وانميشن لموتك","📊 تفاصيل القتال تعرض التوازن والمقاومات والحالات"]},
+    {"version":"2.11.2","date":"2026-10-01","title":"توازن الضرر ومؤثرات كسر التوازن","notes":["🛡️ دفاع QTE أوضح: Perfect = صفر ضرر، Good = نصف الضرر، Close = ضرر كامل، Miss = ضرر زايد، وضرر الأعداء أقوى شوي وضرر اللاعب أخف شوي","💥 كسر التوازن بمؤثرات قوية: BREAK! ضخمة، وميض، رجّة شاشة، حلقات ونجوم، ونجوم تدور فوق العدو وهو مترنّح","🟠 توازن كل وحش صار مختلف: الدبابات والزعماء توازنهم عالي وصعب الكسر، والقتلة والذئاب ينكسرون أسرع، ويرجع التوازن شوي كل دور","🎯 اللاعب: ضربة حرجة CRITICAL، شريط زخم ⚡ (عند 10 ضربة +15%)، توازن للاعب، Defense Mastery، زر 📊 تفاصيل القتال","📖 سجل الوحوش أعرض وأكبر والبطاقات أوضح"]},
+    {"version":"2.11.1","date":"2026-10-01","title":"تحسين الواجهة وسجل الوحوش","notes":["✍️ نصوص معلومات الوحش (الحركة القادمة والسلبية) صارت بيضاء وواضحة فوق خلفية داكنة","📖 سجل الوحوش صار كتابًا حقيقيًا: صفحات تتقلب، بطاقات وحوش بإطار عنصري، توهج للزعماء، ميلان ثلاثي الأبعاد مع اللمس، وأصوات ومؤثرات"]},
+    {"version":"2.11.0","date":"2026-10-01","title":"نظام القتال الذكي — نظام الوحوش والذكاء القتالي","notes":["⚖️ شريط «التوازن» لكل وحش: الضربات تكسره (Perfect أقوى)، ولما ينكسر يترنح ويفقد دوره ويستقبل +15% ضرر في الضربة التالية","🔥 العناصر: WEAK عند نقطة الضعف و RESIST عند المقاومة، وكل عنصر قد يطبّق حالة (حرق، تباطؤ، سم، كسر دفاع، نزيف) وتظهر أيقونات تحت البطاقة","🧠 ذكاء الأعداء حسب النوع (Guardian, Tank, Berserker, Assassin, Mage, Boss...) مع «الحركة القادمة» ظاهرة بدون كشف التفاصيل","👑 مراحل وغضب للزعماء (غوبلن البوص، زعيم الصحراء، ملك الجليد، التنين، الوحش البركاني، الملك...)","📖 «سجل الوحوش» من اللوبي: يحفظ ما اكتشفته من نقاط الضعف وعدد الانتصارات"]},
     {"version":"2.10.0","date":"2026-10-01","title":"شاشة التحميل ومؤثرات الترقية","notes":["⏳ شاشة تحميل جديدة عند فتح اللعبة: شعار يدور وشريط تقدم ونصائح، وتختفي لما تجهز اللعبة بدل ما تشوف الصفحة مخربطة","🌟 ترقية المستوى صارت سينمائية: أشعة ذهبية دوّارة، حلقات طاقة، نجوم متطايرة وأصوات احتفال","📈 عند صرف نقطة تطوير (ATK / HP / DEF / SPD) تظهر بطاقة بعدّاد من القيمة القديمة للجديدة، مع مؤثر وصوت خاص لكل إحصائية، وتنبض الأرقام في الهيدر واللوبي"]},
     {"version":"2.9.0","date":"2026-10-01","title":"مؤثرات أدوات القتال","notes":["🩸 عند استخدام جرعة الدم يظهر انفجار طاقة حمراء مع قلوب وشرارات واهتزاز ووميض","⚡ عند استخدام جرعة الطاقة تظهر طاقة كهربائية زرقاء مع صواعق وشرارات وهالة قوية","🪨 عند تفعيل حجر الصمود يظهر مؤثر نهضة ضخم مع حلقات ضوئية وأحجار متطايرة ووميض قوي","🎵 أضيف اهتزاز خفيف لساحة القتال ومؤثرات صوتية متدرجة عند استخدام الأدوات","🛡️ تم الحفاظ على طريقة عمل الأدوات وحدود استخدامها كما هي"]},
     {"version":"2.8.0","date":"2026-09-29","title":"تفتيت البطاقات","notes":["💥 عند هزيمة العدو بطاقته تتفتت بأنميشن وأصوات وشرارات","💀 عند خسارتك بطاقة البطل تتفتت بأنميشن وأصوات وتأثير أحمر"]},
@@ -207,23 +213,32 @@ window.ARCANA_CONFIG = {
     const {data:{session}}=await sb.auth.getSession();
     const current=window.__ARCANA_SESSION;
     if(session?.user){
-      const uid=session.user.id;
-      const display=session.user.user_metadata?.display_name || session.user.email?.split('@')[0] || 'لاعب';
-      const next={mode:'account',uid,provider:'supabase',name:display,email:session.user.email||''};
-      if(!current || current.mode!=='account' || current.uid!==uid || current.provider!=='supabase'){
+      const u=session.user;
+      const uid=u.id;
+      const isAnon=!!u.is_anonymous;
+      const display=u.user_metadata?.display_name || u.email?.split('@')[0] || (isAnon?'ضيف':'لاعب');
+      const next=isAnon
+        ? {mode:'guest',uid,provider:'supabase_guest',name:'ضيف'}
+        : {mode:'account',uid,provider:'supabase',name:display,email:u.email||''};
+      const matches = isAnon
+        ? (current?.mode==='guest' && current?.provider==='supabase_guest' && current?.uid===uid)
+        : (current?.mode==='account' && current?.provider==='supabase' && current?.uid===uid);
+      if(!matches){
         try{ localStorage.setItem('arcanaauth_session',JSON.stringify(next)); }catch(e){}
         location.reload();
         return;
       }
-      // الحساب موجود بالفعل؛ استرجع الحفظ بعد جاهزية بيانات اللعبة.
+      // استرجاع الحفظ بعد جاهزية اللعبة، للضيف السحابي والحساب السحابي معًا.
       if (window.__ARCANA_GAME_READY) window.arcanaCloudRestore();
       else window.addEventListener('arcanaGameReady',()=>window.arcanaCloudRestore(),{once:true});
-    } else if(current?.provider==='supabase'){
+    } else if(current?.provider === 'supabase' || current?.provider === 'supabase_guest'){
       localStorage.removeItem('arcanaauth_session');
       location.reload();
     }
     sb.auth.onAuthStateChange((_event,sess)=>{
-      if(!sess?.user && window.__ARCANA_SESSION?.provider==='supabase'){
+      const u=sess?.user;
+      const cur=window.__ARCANA_SESSION;
+      if(!u && (cur?.provider==='supabase' || cur?.provider==='supabase_guest')){
         localStorage.removeItem('arcanaauth_session');
         location.reload();
       }
@@ -2878,7 +2893,7 @@ window.arcanaBoot={done:done};
     function saveGameData(data) {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            if (!window.__ARCANA_CLOUD_RESTORING && window.__ARCANA_SESSION?.mode === 'account' && window.__ARCANA_SESSION?.provider === 'supabase' && typeof window.arcanaCloudSave === 'function') {
+            if (!window.__ARCANA_CLOUD_RESTORING && typeof window.arcanaCloudSave === 'function' && ((window.__ARCANA_SESSION?.mode === 'account' && window.__ARCANA_SESSION?.provider === 'supabase') || (window.__ARCANA_SESSION?.mode === 'guest' && window.__ARCANA_SESSION?.provider === 'supabase_guest'))) {
                 clearTimeout(__arcanaCloudSaveTimer);
                 const snapshot = JSON.parse(JSON.stringify(data));
                 __arcanaCloudSaveTimer = setTimeout(() => window.arcanaCloudSave(snapshot), 700);
@@ -6090,10 +6105,12 @@ window.arcanaBoot={done:done};
     const QTE_DIRECTION_ARROWS = {ArrowUp:'↑',ArrowDown:'↓',ArrowLeft:'←',ArrowRight:'→'};
     const QTE_GRADE_DATA = {
         perfect: { label:'PERFECT!', ar:'مثالي!', attackMult:1.65, defenseMult:0.00 },
-        good:    { label:'GOOD!', ar:'جيد!', attackMult:1.25, defenseMult:0.35 },
-        close:   { label:'CLOSE!', ar:'قريبة!', attackMult:0.72, defenseMult:0.68 },
-        miss:    { label:'MISS!', ar:'فشل!', attackMult:0.15, defenseMult:1.00 }
+        good:    { label:'GOOD!', ar:'جيد!', attackMult:1.25, defenseMult:0.50 },
+        close:   { label:'CLOSE!', ar:'قريبة!', attackMult:0.72, defenseMult:1.00 },
+        miss:    { label:'MISS!', ar:'فشل!', attackMult:0.15, defenseMult:1.20 }
     };
+    // 🏹 دفاع اللاعب: كل سهم = حصة مستقلة من ضرر المهارة (ضرر المهارة ÷ عدد الأسهم) × نسبة نتيجته
+    const QTE_ARROW_DAMAGE_MULTIPLIER = { perfect:0, good:0.5, close:1.0, miss:1.2 };
 
     function qteClamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
     function qteRandomDir(prev){
@@ -6244,7 +6261,7 @@ window.arcanaBoot={done:done};
         battleState.qteActive=false;
     }
 
-    function runBattleQTE({side='hero',skill=null,attacker=null,defender=null}={}){
+    function runBattleQTE({side='hero',skill=null,attacker=null,defender=null,baseDamage=null}={}){
         return new Promise(resolve=>{
             try{ if(window.__qteCleanup) window.__qteCleanup(); }catch(e){}
             const profile=qteBuildProfile(side,skill,attacker,defender);
@@ -6256,6 +6273,8 @@ window.arcanaBoot={done:done};
             battleState.qteNonce++;
             const nonce=battleState.qteNonce;
             let dirs=[],grades=[],index=0,prev=null,frame=0,started=performance.now()+QTE_LEAD_FIRST,resolved=false;
+            const arrowMode=(side==='enemy' && Number(baseDamage)>0);   // 🏹 كل سهم له حصته الخاصة من الضرر
+            const arrowResults=[]; const perArrowDamage=arrowMode?(Number(baseDamage)/profile.length):0;
             for(let i=0;i<profile.length;i++){prev=qteRandomDir(prev);dirs.push(prev);}
             qteSetSequence(dirs,0);
             const arrow=document.getElementById('qteMovingArrow'), meter=document.getElementById('qteMeterFill'), result=document.getElementById('qteResult');
@@ -6268,7 +6287,14 @@ window.arcanaBoot={done:done};
                 const data=QTE_GRADE_DATA[grade];
                 if(grade==='perfect') qtePlayPerfectSound(); else if(grade==='good') qtePlayGoodSound(); else if(grade==='close') qtePlayNearSound(); else qtePlayMissSound();
                 qteBurst(grade,side);
-                if(result){result.textContent=`${data.label}  ${data.ar}`;result.className='qte-result '+grade;}
+                if(arrowMode){
+                    // نحسب نتيجة السهم فقط — لا يُخصم أي HP أثناء السلسلة
+                    const mult=QTE_ARROW_DAMAGE_MULTIPLIER[grade];
+                    const arrowDmg=perArrowDamage*mult;               // بدون تقريب (التقريب مرة واحدة في النهاية)
+                    arrowResults.push({grade,baseDamage:perArrowDamage,multiplier:mult,damage:arrowDmg});
+                    if(result){result.innerHTML=`<div>${data.label}  ${data.ar}</div><div style="font-size:12px;margin-top:2px;color:#fff">🏹 السهم ${arrowResults.length} · ${arrowDmg.toFixed(1)} Damage</div>`;result.className='qte-result '+grade;}
+                    try{addBattleLog(`🏹 السهم ${arrowResults.length}: ${data.label} — ${arrowDmg.toFixed(1)} Damage (من ${perArrowDamage.toFixed(1)})`, grade==='miss'?'damage':'defense');}catch(e){}
+                } else if(result){result.textContent=`${data.label}  ${data.ar}`;result.className='qte-result '+grade;}
                 const isPerfect=grade==='perfect';
                 if(side==='hero'){
                     if(isPerfect) {battleState.qteCombo=(battleState.qteCombo||0)+1;battleState.qteBestCombo=Math.max(battleState.qteBestCombo||0,battleState.qteCombo);}
@@ -6280,13 +6306,23 @@ window.arcanaBoot={done:done};
                         index++;resolved=false;started=performance.now()+QTE_LEAD_NEXT;attachInput();qteSetSequence(dirs,index);resetArrow();qtePlayReadySound();runFrame();return;
                     }
                     const values=grades.map(g=>side==='hero'?QTE_GRADE_DATA[g].attackMult:QTE_GRADE_DATA[g].defenseMult);
-                    const avg=values.reduce((a,b)=>a+b,0)/values.length;
-                    const finalGrade=grades.includes('miss')?'miss':(grades.every(g=>g==='perfect')?'perfect':(avg>=.82?'good':'close'));
+                    let avg=values.reduce((a,b)=>a+b,0)/values.length;
+                    let finalGrade=grades.includes('miss')?'miss':(grades.every(g=>g==='perfect')?'perfect':(avg>=.82?'good':'close'));
+                    let finalDamage=null;
+                    if(arrowMode){
+                        // 💥 جمع أضرار كل الأسهم ثم تقريب واحد فقط
+                        finalDamage=Math.round(arrowResults.reduce((t,a)=>t+a.damage,0));
+                        avg=finalDamage/Math.max(1,Number(baseDamage));   // للتوافق فقط (لا يُستخدم لحساب الضرر)
+                        const ratio=avg;
+                        finalGrade=grades.includes('miss')?'miss':(grades.every(g=>g==='perfect')?'perfect':(ratio<=.6?'good':'close'));
+                        if(result){result.innerHTML=`<div style="color:#8fa2bd">━━━━━━━━━━━━━━</div><div style="color:#fff;font-size:16px">💥 الضرر النهائي: ${finalDamage}</div><div style="color:#8fa2bd">━━━━━━━━━━━━━━</div>`;result.className='qte-result';}
+                        try{addBattleLog(`💥 مجموع ضرر ${arrowResults.length} أسهم = ${finalDamage}`, finalDamage>0?'damage':'defense');}catch(e){}
+                    }
                     if(side==='hero' && battleState.qteCombo>=2 && finalGrade==='perfect'){
                         qtePlayPerfectSound();
                         setTimeout(()=>playTone(1760,.22,'triangle',.10),150);
                     }
-                    setTimeout(()=>{qteResolveOverlay();resolve({grade:finalGrade,averageMultiplier:avg,grades,profile,reason,combo:battleState.qteCombo||0});},Math.max(0,wait));
+                    setTimeout(()=>{qteResolveOverlay();resolve({grade:finalGrade,averageMultiplier:avg,grades,profile,reason,combo:battleState.qteCombo||0,side,arrowResults:arrowMode?arrowResults:null,finalDamage,baseDamage:arrowMode?Number(baseDamage):null});},arrowMode?850:Math.max(0,wait));
                 },wait);
             };
             const handleInput=(key,ts)=>{
@@ -6356,6 +6392,8 @@ window.arcanaBoot={done:done};
     }
 
     function qteApplyDefenseMultiplier(incomingDmg,qteResult){
+        // 🏹 مجموع حصص الأسهم (محسوب مسبقًا ومقرّب مرة واحدة) — لا متوسط
+        if(qteResult?.arrowResults && qteResult.finalDamage!=null) return Math.max(0,qteResult.finalDamage);
         const mult=qteResult?.averageMultiplier ?? 1;
         return Math.max(0,Math.round(incomingDmg*mult));
     }
@@ -6676,7 +6714,7 @@ window.arcanaBoot={done:done};
             const baseDmg = Math.max(1, (Number(skill.dmg) || Number(enemy.atk) || 1));
             const incomingDmgBase = Math.max(1, baseDmg + Math.floor(Math.random() * 4) - 2);
             // 🛡️ QTE دفاع اللاعب: التوقيت يحدد نسبة الضرر الذي يصل إليه.
-            const qteResult = await runBattleQTE({ side:'enemy', skill, attacker:enemy, defender:char });
+            const qteResult = await runBattleQTE({ side:'enemy', skill, attacker:enemy, defender:char, baseDamage:incomingDmgBase });
             if (battleState.isBattleOver) { battleState.isProcessing=false; return; }
             const incomingDmg = qteApplyDefenseMultiplier(incomingDmgBase, qteResult);
             addBattleLog(`🛡️ دفاع QTE [${qteResult.profile.tierAr}]: ${qteResult.grade.toUpperCase()} — الضرر ${incomingDmg}/${incomingDmgBase}`, qteResult.grade==='perfect'?'defense':(qteResult.grade==='miss'?'damage':'defense'));
@@ -7010,6 +7048,13 @@ window.arcanaBoot={done:done};
             }
 
             const bonus = stageConfigNow.bonusRewards || { gold: gold, potion: 1, material: 1 };
+            // 🎁 المكافأة الإضافية (اختيار ذهب/جرعة/مادة) تُمنح عند أول إكمال للمرحلة فقط
+            const bonusAlreadyClaimed = !!(char.completedStages && char.completedStages[battleState.stage]);
+            if (bonusAlreadyClaimed) {
+                char.gold += gold;
+                showLootNotification('💰', 'تم الحصول على', gold);
+                addBattleLog('ℹ️ المكافأة الإضافية للمرحلة تُمنح أول مرة فقط.', '');
+            } else {
             const choice = await showBossLootChoices([
                 { id:'gold', icon:'💰', label:`${bonus.gold} ذهب`, desc:'يضاف مباشرة إلى رصيدك' },
                 { id:'potion', icon:`<img class="boss-loot-potion-image" src="${getPotionImage(char)}" alt="جرعة دم">`, label:`جرعة دم ×${bonus.potion}`, desc:'تضاف مباشرة إلى المخزن' },
@@ -7025,6 +7070,7 @@ window.arcanaBoot={done:done};
                 const mat = randomMaterial();
                 addInventoryItem({...mat,count:bonus.material});
                 showLootNotification(mat.icon, `تم الحصول على ${mat.name} ×${bonus.material}`);
+            }
             }
         } else {
             char.gold += gold;
@@ -8464,13 +8510,91 @@ window.arcanaBoot={done:done};
   }
   const newUid = () => 'u' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
+  const GUEST_CONVERSION_KEY = 'arcana_guest_conversion_v1';
+  function readGuestConversion(){
+    try { const v=RAW.get(GUEST_CONVERSION_KEY); return v ? JSON.parse(v) : null; } catch(e){ return null; }
+  }
+  function writeGuestConversion(v){ try{ RAW.set(GUEST_CONVERSION_KEY,JSON.stringify(v)); }catch(e){} }
+  function clearGuestConversion(){ try{ RAW.remove(GUEST_CONVERSION_KEY); }catch(e){} }
+  function isCloudGuest(){ return window.__ARCANA_SESSION?.mode === 'guest' && window.__ARCANA_SESSION?.provider === 'supabase_guest'; }
+  function captureGuestSnapshot(){
+    try{ if(typeof saveCurrent==='function') saveCurrent(); }catch(e){}
+    let data=null;
+    try{ data=JSON.parse(RAW.get('arcana_game_data_v3') || 'null'); }catch(e){}
+    if(!data && typeof gameData==='object'){
+      try{ data=JSON.parse(JSON.stringify(gameData)); }catch(e){}
+    }
+    const extras=(typeof window.arcanaCollectExtras==='function') ? window.arcanaCollectExtras() : {};
+    return { data, extras };
+  }
+  async function promoteGuestUser(email,password,display){
+    const sb=await window.__ARCANA_SUPABASE_READY;
+    const {data:{session}}=await sb.auth.getSession();
+    const u=session?.user;
+    if(!u || !u.is_anonymous) throw new Error('هذه الجلسة ليست جلسة ضيف سحابية.');
+    const pending=readGuestConversion() || {};
+    // إذا كانت رسالة التحقق أرسلت سابقًا، فهذه المحاولة تكمل التحويل بإضافة كلمة المرور.
+    if(pending.email){
+      try{ await sb.auth.refreshSession(); }catch(e){}
+      const gu=(await sb.auth.getUser())?.data?.user || u;
+      const verified=!!(gu?.email_confirmed_at || gu?.confirmed_at);
+      if(!verified) throw new Error('أكد بريدك الإلكتروني أولًا، ثم اضغط «إكمال تحويل الضيف».');
+      const {data,error}=await sb.auth.updateUser({password, data:{display_name:pending.displayName||display||'لاعب'}});
+      if(error) throw error;
+      clearGuestConversion();
+      const name=data?.user?.user_metadata?.display_name || pending.displayName || display || email.split('@')[0] || 'لاعب';
+      return {uid:u.id,name,email:data?.user?.email||pending.email};
+    }
+    // نربط البريد أولًا حتى تبقى نفس هوية الضيف وبياناته السحابية.
+    const {data,error}=await sb.auth.updateUser({email,data:{display_name:display||'لاعب'}});
+    if(error) throw error;
+    const nu=data?.user;
+    const verified=!!(nu?.email_confirmed_at || nu?.confirmed_at);
+    if(!verified){
+      writeGuestConversion({email,display:display||'لاعب',displayName:display||'لاعب',startedAt:Date.now()});
+      throw new Error('تم إرسال رسالة تأكيد إلى بريدك. أكد البريد ثم عد إلى اللعبة واضغط «إكمال تحويل الضيف» لإضافة كلمة المرور.');
+    }
+    const out=await sb.auth.updateUser({password,data:{display_name:display||'لاعب'}});
+    if(out.error) throw out.error;
+    clearGuestConversion();
+    const name=out.data?.user?.user_metadata?.display_name || display || email.split('@')[0] || 'لاعب';
+    return {uid:u.id,name,email:out.data?.user?.email||email};
+  }
+  async function beginGuestOnline(){
+    if(!(CFG.SUPABASE_URL && CFG.SUPABASE_KEY)){
+      startSession({mode:'guest',name:'ضيف',provider:'guest_local'});
+      return;
+    }
+    try{
+      const sb=await window.__ARCANA_SUPABASE_READY;
+      let {data:{session}}=await sb.auth.getSession();
+      if(!session?.user || !session.user.is_anonymous){
+        const r=await sb.auth.signInAnonymously({options:{data:{display_name:'ضيف'}}});
+        if(r.error) throw r.error;
+        session=r.data?.session;
+      }
+      const u=session?.user;
+      if(!u?.id || !u.is_anonymous) throw new Error('تعذر إنشاء جلسة الضيف السحابية.');
+      LS.setItem('arcanaauth_session',JSON.stringify({mode:'guest',uid:u.id,provider:'supabase_guest',name:'ضيف'}));
+      location.reload();
+    }catch(e){
+      console.warn('Guest cloud auth failed:',e);
+      try{ LS.setItem('arcanaauth_session',JSON.stringify({mode:'guest',name:'ضيف',provider:'guest_local'})); }catch(x){}
+      try{ msg('تعذر تشغيل الضيف السحابي الآن، سيتم الدخول كضيف محليًا مؤقتًا.'); }catch(x){}
+      setTimeout(()=>location.reload(),450);
+    }
+  }
+
   function hasGuestProgress(){
     try { return !!RAW.get('arcana_game_data_v3'); } catch(e){ return false; }
   }
   function copyGuestProgress(uid){
     const prefix = 'acc_' + uid + ':';
     const keys = [];
-    for (let i = 0; i < LS.length; i++) { const k = LS.key(i); if (k && k.indexOf('arcana_') === 0) keys.push(k); }
+    for (let i = 0; i < LS.length; i++) {
+      const k = LS.key(i);
+      if (k && k.indexOf('arcana_') === 0) keys.push(k);
+    }
     keys.forEach(k => RAW.set(prefix + k, RAW.get(k)));
   }
   function startSession(sess){
@@ -8479,8 +8603,8 @@ window.arcanaBoot={done:done};
   }
 
   window.arcanaLogout = function(){
-    if (!confirm('تسجيل الخروج؟ تقدمك محفوظ ويمكنك العودة إليه عند الدخول مجددًا.')) return;
-    if (window.__ARCANA_SESSION?.provider === 'supabase' && window.arcanaSupabase) {
+    if (!confirm(window.__ARCANA_SESSION?.provider === 'supabase_guest' ? 'الخروج من الضيف؟ سيبقى الحفظ محليًا، لكن جلسة الضيف السحابية الحالية لن يمكن استعادتها بعد تسجيل الخروج. الأفضل تحويل الضيف إلى حساب أولًا.' : 'تسجيل الخروج؟ تقدمك محفوظ ويمكنك العودة إليه عند الدخول مجددًا.')) return;
+    if ((window.__ARCANA_SESSION?.provider === 'supabase' || window.__ARCANA_SESSION?.provider === 'supabase_guest') && window.arcanaSupabase) {
       window.arcanaSupabase.auth.signOut().finally(()=>{ LS.removeItem('arcanaauth_session'); location.reload(); });
     } else {
       LS.removeItem('arcanaauth_session');
@@ -8533,6 +8657,8 @@ window.arcanaBoot={done:done};
     if (!hasAcc && tab === 'login' && !render._init) { tab = 'register'; }
     render._init = true;
     const guestData = hasGuestProgress();
+    const cloudGuest = isCloudGuest();
+    const pendingGuest = readGuestConversion();
     body.innerHTML = `
       <div class="auth-tabs">
         <button class="auth-tab ${tab === 'login' ? 'active' : ''}" data-tab="login">تسجيل الدخول</button>
@@ -8541,18 +8667,20 @@ window.arcanaBoot={done:done};
       <label class="auth-field"><span>${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? 'البريد الإلكتروني' : 'اسم المستخدم'}</span><input id="authUser" ${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? 'type="email" maxlength="120" autocomplete="email" placeholder="you@example.com"' : 'maxlength="16" autocomplete="username" placeholder="مثال: Warrior_DZ"'}></label>
       ${tab === 'register' ? '<label class="auth-field"><span>الاسم الظاهر في اللعبة (اختياري)</span><input id="authDisplay" maxlength="20" placeholder="اسم بطلك"></label>' : ''}
       <label class="auth-field"><span>كلمة المرور</span><input id="authPass" type="password" autocomplete="${tab === 'login' ? 'current-password' : 'new-password'}" placeholder="4 أحرف على الأقل"></label>
-      ${tab === 'register' && guestData ? '<label class="auth-check"><input type="checkbox" id="authKeep" checked><span>نقل تقدمي الحالي في اللعبة إلى هذا الحساب (لن تخسر شيئًا)</span></label>' : ''}
+      ${tab === 'register' && guestData && !cloudGuest ? '<label class="auth-check"><input type="checkbox" id="authKeep" checked><span>نقل تقدمي الحالي في اللعبة إلى هذا الحساب (لن تخسر شيئًا)</span></label>' : ''}
+      ${cloudGuest && tab === 'register' ? '<div class="auth-check"><span>☁️ تقدم الضيف محفوظ سحابيًا وسيبقى معك عند تحويله إلى حساب.</span></div>' : ''}
+      ${pendingGuest && tab === 'register' ? '<div class="auth-check"><span>📩 تم إرسال التحقق إلى <b>'+esc(pendingGuest.email)+'</b>. أكد البريد ثم أرسل كلمة المرور لإكمال التحويل.</span></div>' : ''}
       <div class="auth-msg" id="authMsg"></div>
       <button class="auth-main" id="authGo">${tab === 'login' ? '⚔️ دخول' : '✨ إنشاء الحساب'}</button>
       <div class="auth-sep">أو</div>
       <button class="auth-guest" id="authGuest">👤 الدخول كضيف</button>
       <button class="auth-guest" id="authImport">📥 استعادة حساب من ملف نسخة احتياطية</button>
       <input type="file" id="authImportFile" accept=".json,application/json" style="display:none">
-      <div class="auth-foot">${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? '☁️ الحساب السحابي: تقدمك ومقتنياتك تُحفظ في Supabase ويمكنك الدخول من أي جهاز. ضيف اللعبة يبقى محليًا.' : 'تقدم كل حساب يُحفظ في هذا المتصفح، وعند تحديث اللعبة يعود كما هو إذا فتحتها من نفس المتصفح. لنقل حسابك إلى جهاز أو متصفح آخر: من صفحة الحساب اضغط «نسخة احتياطية» ثم استعدها من هنا.'}</div>`;
+      <div class="auth-foot">${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? (cloudGuest ? '☁️ ضيف سحابي: تقدمك ومقتنياتك تُحفظ أونلاين على هذا الجهاز. حوّله إلى حساب من «إنشاء حساب» ليصبح الدخول من أي جهاز ممكنًا.' : '☁️ الحساب السحابي: تقدمك ومقتنياتك تُحفظ في Supabase ويمكنك الدخول من أي جهاز.') : 'تقدم كل حساب يُحفظ في هذا المتصفح، وللنقل إلى جهاز آخر استخدم النسخة الاحتياطية.'}</div>`;
     body.querySelectorAll('.auth-tab').forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
     $('authGo').onclick = submit;
     body.querySelectorAll('.auth-field input').forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); }));
-    $('authGuest').onclick = guest;
+    $('authGuest').onclick = beginGuestOnline;
     $('authImport').onclick = () => $('authImportFile').click();
     $('authImportFile').onchange = e => { const f = e.target.files && e.target.files[0]; if (f) importBackup(f); };
   }
@@ -8570,17 +8698,58 @@ window.arcanaBoot={done:done};
       try {
         const sb = await window.__ARCANA_SUPABASE_READY;
         if (tab === 'login') {
-          const {data,error} = await sb.auth.signInWithPassword({email:user,password:pass});
+          const wasCloudGuest = isCloudGuest();
+          let guestSnap = null;
+          if (wasCloudGuest) guestSnap = captureGuestSnapshot();
+          const {data,error}=await sb.auth.signInWithPassword({email:user,password:pass});
           if (error) throw error;
           const u=data.user;
           const display=u?.user_metadata?.display_name || u?.email?.split('@')[0] || 'لاعب';
+          const pending=readGuestConversion();
           const sess={mode:'account',uid:u.id,provider:'supabase',name:display,email:u.email||user};
           const all=accounts();
-          all[u.id]={uid:u.id,provider:'supabase',username:u.email||user,displayName:display,email:u.email||user,created:Date.now()};
+          all[u.id]={uid:u.id,provider:'supabase',username:u.email||user,displayName:display,email:u.email||user,created:all[u.id]?.created||Date.now()};
           saveAccounts(all);
+          // إذا كان هذا الدخول جاء من ضيف سحابي في نفس الجهاز، انقل تقدمه اختياريًا للحساب الذي سجّل الدخول إليه.
+          if(wasCloudGuest && guestSnap?.data){
+            const move = confirm('أنت دخلت بحساب موجود. هل تريد نقل تقدم الضيف الحالي إليه؟\n\nسيتم استبدال حفظ هذا الحساب الحالي بتقدم الضيف.');
+            if(move){
+              await window.arcanaCloudSave(Object.assign({}, guestSnap.data, {__extras: guestSnap.extras || {}}));
+            }
+          } else if(pending?.data){
+            if(!confirm('يوجد تقدم محفوظ من جلسة ضيف سابقة. هل تريد نقله إلى هذا الحساب؟\n\nسيحل محل تقدم هذا الحساب الحالي إذا كان موجودًا.')){
+              clearGuestConversion();
+            }else{
+              const snap= pending.data;
+              await window.arcanaCloudSave(snap);
+              clearGuestConversion();
+            }
+          }
           startSession(sess);
         } else {
-          const display = ($('authDisplay').value || '').trim() || user.split('@')[0] || 'لاعب';
+          const display = ($('authDisplay')?.value || '').trim() || user.split('@')[0] || 'لاعب';
+          if (window.__ARCANA_SESSION?.mode === 'guest' && window.__ARCANA_SESSION?.provider === 'supabase_guest') {
+            const snap=captureGuestSnapshot();
+            if(snap.data){
+              try{ writeGuestConversion({ ...(readGuestConversion()||{}), email:user,displayName:display, data:Object.assign({},snap.data,{__extras:snap.extras}), guestUid:window.__ARCANA_SESSION.uid, startedAt:Date.now() }); }catch(e){}
+            }
+            try{
+              const out=await promoteGuestUser(user,pass,display);
+              const uid=out.uid;
+              const all=accounts();
+              all[uid]={uid,provider:'supabase',username:out.email||user,displayName:out.name||display,email:out.email||user,created:all[uid]?.created||Date.now()};
+              saveAccounts(all);
+              const sess={mode:'account',uid,provider:'supabase',name:out.name||display,email:out.email||user};
+              startSession(sess);
+            }catch(e){
+              busy(false);
+              render();
+              try{ $('authUser').value=user; }catch(x){}
+              try{ $('authPass').value=''; }catch(x){}
+              msg(e?.message || 'تعذر تحويل جلسة الضيف إلى حساب.');
+            }
+            return;
+          }
           const {data,error} = await sb.auth.signUp({email:user,password:pass,options:{data:{display_name:display}}});
           if (error) throw error;
           if (!data.user) throw new Error('تعذر إنشاء الحساب.');
@@ -8593,8 +8762,6 @@ window.arcanaBoot={done:done};
           const all=accounts();
           all[uid]={uid,provider:'supabase',username:user,displayName:display,email:user,created:Date.now()};
           saveAccounts(all);
-          const keep=$('authKeep');
-          if (keep && keep.checked) copyGuestProgress(uid);
           startSession({mode:'account',uid,provider:'supabase',name:display,email:user});
         }
       } catch(e) {
@@ -8630,7 +8797,7 @@ window.arcanaBoot={done:done};
   }
 
   function guest(){
-    startSession({ mode: 'guest', name: 'ضيف' });
+    return beginGuestOnline();
   }
 
   /* ---------- استعادة حساب من ملف ---------- */
@@ -9786,7 +9953,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   function readSession(){ return window.__ARCANA_SESSION || null; }
   function providerName(s){
     if (!s) return '—';
-    if (s.mode === 'guest') return 'ضيف';
+    if (s.mode === 'guest') return s.provider === 'supabase_guest' ? 'ضيف سحابي ☁️' : 'ضيف';
     return ({ local: 'حساب أركانا', supabase: 'حساب سحابي ☁️', google: 'Google', facebook: 'Facebook' })[s.provider] || 'حساب';
   }
   function fmtDate(ts){
@@ -9798,6 +9965,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     var header = document.querySelector('.content > .header') || document.querySelector('.header');
     if (!header || $('arcanaAcctBar')) return;
     var guest = s.mode === 'guest';
+    var guestCloud = guest && s.provider === 'supabase_guest';
     var acc = (window.arcanaGetAccount && window.arcanaGetAccount()) || null;
     var name = (acc && acc.displayName) || s.name || (guest ? 'ضيف' : 'لاعب');
 
@@ -9808,7 +9976,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         '<span class="ac-txt"><span class="ac-name">' + esc(name) + '</span><span class="ac-sub">' + (guest ? '👤 تلعب كضيف' : '🟢 مسجّل الدخول · ' + esc(providerName(s))) + '</span></span>' +
         '<span class="ac-arrow">▼</span>' +
       '</button>' +
-      '<span id="arcanaSaveState" class="' + (guest ? 'guest' : '') + '">' + (guest ? '⚠️ التقدم محفوظ على هذا المتصفح فقط' : (s.provider === 'supabase' ? '☁️ التقدم محفوظ في السحابة' : '💾 يُحفظ تلقائيًا على هذا الجهاز')) + '</span>' +
+      '<span id="arcanaSaveState" class="' + (guest ? 'guest' : '') + '">' + (guestCloud ? '☁️ الضيف محفوظ سحابيًا' : (guest ? '⚠️ التقدم محفوظ على هذا المتصفح فقط' : (s.provider === 'supabase' ? '☁️ التقدم محفوظ في السحابة' : '💾 يُحفظ تلقائيًا على هذا الجهاز'))) + '</span>' +
       '<div id="arcanaAcctPanel" role="dialog"></div>';
     header.parentNode.insertBefore(bar, header);
 
@@ -9825,12 +9993,12 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       if (acc && acc.created) rows.push(['تاريخ الإنشاء', fmtDate(acc.created)]);
       rows.push(['الشخصية الحالية', esc(char.name || '—') + ' · ' + esc(char.lvl || '')]);
       rows.push(['الذهب', '💰 ' + esc(char.gold || '0')]);
-      rows.push(['مكان الحفظ', guest ? 'هذا المتصفح (مشترك)' : (s.provider === 'supabase' ? 'السحابة ☁️' : 'مساحة مستقلة لحسابك')]);
+      rows.push(['مكان الحفظ', guestCloud ? 'السحابة ☁️ (جلسة ضيف)' : (guest ? 'هذا المتصفح (مشترك)' : (s.provider === 'supabase' ? 'السحابة ☁️' : 'مساحة مستقلة لحسابك'))]);
       if (window.ARCANA_VERSION) rows.push(['إصدار اللعبة', 'v' + esc(window.ARCANA_VERSION)]);
       panel.innerHTML =
         '<h4>' + (guest ? '👤 وضع الضيف' : '🪪 معلومات حسابك') + '</h4>' +
         rows.map(function(r){ return '<div class="ap-row"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('') +
-        (guest ? '<div class="ap-note">⚠️ أنت تلعب كضيف. أنشئ حسابًا لتفصل تقدمك عن غيرك ولا تخسره.</div>' : '') +
+        (guest ? (guestCloud ? '<div class="ap-note">☁️ تقدمك محفوظ أونلاين كضيف مؤقت. أنشئ حسابًا لترقية نفس الحفظ إلى حساب دائم.</div>' : '<div class="ap-note">⚠️ أنت تلعب كضيف محلي. أنشئ حسابًا لحفظ تقدمك بشكل دائم عبر الأجهزة.</div>') : '') +
         '<div class="ap-btns">' +
           '<button type="button" data-a="acc">🪪 صفحة الحساب</button>' +
           (guest ? '<button type="button" data-a="up">✨ إنشاء حساب</button>' : '<button type="button" data-a="bk">💾 نسخة احتياطية</button>') +
@@ -9942,6 +10110,328 @@ if(typeof oLV==='function')window.showLevelUpModal=function(){
  try{var ov=document.getElementById('levelUpOverlay');if(ov&&ov.classList.contains('show'))lvFx(ov)}catch(e){}
  return r;
 };
+})();</script>
+<style id="arcanaCombat211Style">
+#acx{margin-top:6px;font-size:13px;direction:rtl;text-align:right}
+#acx .r{display:flex;align-items:center;gap:6px;color:#cfd8ee}
+#acx .bar{flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden}
+#acx .bar i{display:block;height:100%;background:linear-gradient(90deg,#ffb347,#fff3b0);transition:width .35s}
+#acx .it{margin-top:5px;padding:4px 8px;border-radius:9px;border:1px solid #ff6a6a;background:rgba(0,0,0,.28);font-weight:800}
+#acx .tg{margin-top:4px;color:#ffd23f;font-weight:900}
+#acx .st{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+#acx .st span{padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.1);font-size:12px}
+#acx details{margin-top:4px;color:#aeb8d4;line-height:1.7}
+#acx summary{cursor:pointer;color:#8ac4ff}
+#acxBtn{display:none;position:fixed;left:12px;bottom:12px;z-index:9990;padding:9px 14px;border-radius:14px;border:1px solid #3b5178;background:#16213a;color:#ffd66b;font:800 13px inherit;cursor:pointer}
+body:has(#pageLobby.active) #acxBtn{display:block}
+#acx,#acx .r,#acx .it,#acx details,#acx summary,#acx .st span{color:#fff!important;text-shadow:0 1px 3px #000}
+#acx .tg{color:#ffd23f!important}
+#acx .it{background:rgba(0,0,0,.62);font-size:14px}
+#acxCodex{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 40%,rgba(60,36,16,.92),rgba(6,3,10,.96));direction:rtl;font-family:Tahoma,'Segoe UI',sans-serif;overflow:hidden}
+#acxCodex.on{display:flex}
+#acxCodex .dust i{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#ffd66b;box-shadow:0 0 8px #ffb347;opacity:0;animation:acxUp linear infinite}
+@keyframes acxUp{10%{opacity:.9}100%{transform:translate(var(--dx),-105vh);opacity:0}}
+#acxCodex .bk{position:relative;perspective:1400px;width:min(920px,96vw);padding:14px 16px;border-radius:18px;background:linear-gradient(145deg,#5a3418,#2a170a);border:3px solid #a77b3c;box-shadow:0 30px 90px #000,inset 0 0 40px rgba(0,0,0,.55),0 0 46px rgba(255,179,71,.28)}
+#acxCodex .hd{text-align:center;color:#ffd66b;font-weight:900;font-size:21px;margin-bottom:10px;text-shadow:0 0 14px #ffb347}
+#acxCodex .hd small{display:block;font-size:12px;color:#d9c39a;font-weight:700}
+#acxCodex .x{position:absolute;top:10px;left:12px;width:34px;height:34px;border-radius:50%;border:1px solid #a77b3c;background:#3a2412;color:#ffd66b;cursor:pointer;font-size:15px}
+#acxCodex .sp{display:flex;justify-content:center;gap:22px;padding:16px;min-height:380px;max-height:68vh;overflow:auto;border-radius:10px;background:linear-gradient(90deg,#d6bf94,#f1e4c3 47%,#b99c68 50%,#f1e4c3 53%,#d6bf94);box-shadow:inset 0 0 40px rgba(110,80,40,.55)}
+#acxCodex .mc{flex:1;max-width:400px;position:relative;padding:12px;border-radius:14px;text-align:center;overflow:hidden;background:linear-gradient(160deg,#fff8e6,#ecd9aa);border:2px solid var(--c);color:#3b2a14;box-shadow:0 8px 20px rgba(0,0,0,.35),0 0 18px var(--c);animation:mcIn .6s cubic-bezier(.2,1.2,.3,1) backwards;transition:transform .15s}
+#acxCodex .mc::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.55),transparent 55%)}
+@keyframes mcIn{from{opacity:0;transform:translateY(34px) rotate(-3deg) scale(.88)}}
+#acxCodex .mc.bs{border-width:3px;border-color:#ffd66b;background:linear-gradient(160deg,#fff3cf,#f0d27c);animation:mcIn .6s cubic-bezier(.2,1.2,.3,1) backwards,bsG 2.4s ease-in-out infinite}
+@keyframes bsG{50%{box-shadow:0 8px 20px rgba(0,0,0,.35),0 0 34px #ffd66b}}
+#acxCodex .mc.lk{filter:grayscale(1) brightness(.78)}
+#acxCodex .mt{display:inline-block;padding:2px 12px;border-radius:10px;font-size:12px;font-weight:900;color:#fff;background:#3b2a14}
+#acxCodex .mi{height:150px;margin:8px 0;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(255,255,255,.3),rgba(0,0,0,.25));border:2px solid rgba(0,0,0,.2)}
+#acxCodex .mi img{width:100%;height:100%;object-fit:cover;animation:mfl 4s ease-in-out infinite}
+@keyframes mfl{50%{transform:scale(1.08)}}
+#acxCodex .mi span{font-size:64px}
+#acxCodex .mn{font-size:19px;font-weight:900}
+#acxCodex .me{font-weight:800;margin:2px 0}
+#acxCodex .mp{font-size:13px;line-height:1.7;margin:4px 0}
+#acxCodex .ch{display:inline-block;margin:2px;padding:2px 8px;border-radius:9px;font-size:12px;font-weight:800;background:rgba(0,0,0,.12)}
+#acxCodex .ch.w{background:#e5502e;color:#fff;animation:chp 1.4s infinite}
+#acxCodex .ch.r{background:#3f6fc0;color:#fff}
+@keyframes chp{50%{box-shadow:0 0 10px #ff5d3d}}
+#acxCodex .nv{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:#ffd66b;font-weight:800}
+#acxCodex .nv button{padding:8px 18px;border-radius:12px;border:1px solid #a77b3c;background:#3a2412;color:#ffd66b;font:inherit;cursor:pointer}
+#acxCodex .nv button:disabled{opacity:.3;cursor:default}
+</style>
+<script id="arcanaCombat211">(function(){
+'use strict';
+var EM={physical:'🗡️',fire:'🔥',ice:'❄️',dark:'🌑',holy:'✨',lightning:'⚡',poison:'☠️',wind:'🌪️'},
+COL={physical:'#c9cfdd',fire:'#ff7a3d',ice:'#7fd8ff',dark:'#b56bff',holy:'#ffe28a',lightning:'#ffd23f',poison:'#7be07b',wind:'#9ee8d0'};
+function D(e,w,r,sm,sr,ai,pn,pd,ph,ls){return{e:e,w:w,r:r,sm:sm,sr:sr,ai:ai,pn:pn,pd:pd,ph:ph||[],ls:ls}}
+var P={
+grunt:D('physical',['fire'],[],45,1,'Berserker','اندفاع الفوضى','هجماته السريعة أقوى لما صحته فوق 70%'),
+warrior:D('physical',['wind'],[],65,1,'Guardian','حارس العصابة','يميل للدفاع لما تنزل صحته تحت 50%'),
+boss:D('dark',['fire'],['dark'],110,.8,'Boss','زعيم العصابة','تحت 50% مرحلة ثانية، وتحت 25% غضب أخير',[[.5,'👑 الزعيم دخل المرحلة الثانية!',1.1,1,1,1],[.25,'🔴 غضب الزعيم!',1.15,1,1.1,1]]),
+evil_girl:D('dark',['fire'],['dark'],80,1,'Mage','حاملة اللعنة','تجمّع الطاقة وتضرب بأقوى مهاراتها',[[.5,'💜 اللعنة استيقظت!',1.15,1,1,1]]),
+sand_scorpion:D('poison',['ice'],['poison'],55,1,'Controller','سم الصحراء','يفضّل الحركات المزعجة ويبطّئ إيقاعك'),
+desert_warrior:D('physical',['ice'],[],75,1,'Berserker','كسر الحراسة','يهاجم أقوى كل ما نزل دمه'),
+ruins_guardian:D('physical',['wind'],['physical'],150,.6,'Tank','حارس المعبد','توازنه عالي، لكن لو انكسر يتوقف دورين',[],1),
+desert_boss:D('wind',['ice'],['wind'],140,.8,'Boss','سيد العاصفة الرملية','عند 70% العاصفة، وعند 40% غضب',[[.7,'🌪️ بدأت العاصفة الرملية!',1.05,1,1,1],[.4,'🔴 غضب الصحراء!',1.15,1,1.1,1]]),
+ice_wolf:D('ice',['fire'],['ice'],50,1,'Assassin','صياد القطيع','أخطر لما تنزل صحتك تحت 35%'),
+ice_giant:D('ice',['fire'],['ice'],170,.5,'Tank','جسد الجبل','توازن عالي جدًا وضرر ثقيل'),
+ice_witch:D('ice',['fire'],['ice'],60,1,'Mage','سحر التجميد','تجمّع الطاقة للمهارة الأقوى'),
+ice_king:D('ice',['fire'],['ice'],130,.8,'Boss','عرش الصقيع','تحت 50% يتجمد العرش: دفاع وضرر أعلى',[[.5,'❄️ العرش المتجمد!',1.1,1.2,1,1]]),
+white_ice_dragon:D('ice',['fire'],['ice'],220,.5,'Boss','صحوة التنين','عند 65% عاصفة التنين، وعند 30% يصحى',[[.65,'🐉 عاصفة التنين!',1.08,1,1,1],[.3,'❄️ صحوة التنين!',1.15,1,1.2,.8]]),
+arena_red_duelist:D('physical',['wind'],[],70,1,'Duelist','ضغط المبارزة','يضغط عليك لما تنزل صحتك'),
+arena_dark_witch:D('dark',['fire'],['dark'],65,1,'Mage','سلاسل الفراغ','تتحكم بإيقاع القتال'),
+arena_thunder_knight:D('lightning',['wind'],['lightning'],85,1,'Burst','شحنة العاصفة','يجمّع الطاقة ثم يضرب بقوة'),
+arena_shadow_assassin:D('dark',['fire'],['dark'],60,1,'Assassin','الضربة الصامتة','يرفع احتمال أقوى ضربة لما تضعف'),
+arena_king:D('holy',['dark'],['holy'],150,.7,'Boss','حكم الملك','تحت 50% ضرر ودفاع أعلى',[[.5,'👑 حكم الملك!',1.15,1.15,1,1]]),
+special_volcanic:D('fire',['ice'],['fire'],260,.5,'Boss','غضب البركان','يشتد عند 65% وعند 35%',[[.65,'🌋 ثوران صغير!',1.08,1,1,1],[.35,'🔥 غضب البركان!',1.15,1,1,.8]])
+};
+function prof(e){return e&&P[e.id]||null}
+function T(f,d,t,v,w){try{window.arcanaSfx.tone(f,d,t,v,w||0)}catch(e){}}
+function log(m,t){try{addBattleLog(m,t||'')}catch(e){}}
+function cx(){try{return JSON.parse(localStorage.getItem('arcana_codex_v1')||'{}')}catch(e){return{}}}
+function sx(c){try{localStorage.setItem('arcana_codex_v1',JSON.stringify(c))}catch(e){}}
+function rec(id){var c=cx();c[id]=c[id]||{w:0,k:{}};return c}
+function pop(txt,col,em){var F=window.arcanaFX||{},el=document.getElementById('battleEnemyImage');if(!el||!F.floatText)return;F.floatText(el,txt,col);if(F.ring)F.ring(el,col,150);if(em&&F.burst)F.burst(el,{emoji:em,count:10,spread:90})}
+function shake(){var c=document.querySelector('.enemy-card');if(c)c.animate([{transform:'translateX(0)'},{transform:'translateX(-9px)'},{transform:'translateX(9px)'},{transform:'translateX(0)'}],{duration:320})}
+function init(en,p){if(en.__ax)return;en.__ax=1;en.__st={};en.sm=p.sm;en.sg=p.sm;en.__ph=[];en.__srm=1;en.__vuln=0;en.__stun=0;var c=rec(en.id);c[en.id].n=en.name;c[en.id].i=en.image;c[en.id].s=1;sx(c)}
+/* ---- الحالات (مركزية) ---- */
+function applyStatusEffect(en,k){var s=en.__st,b=battleState;
+ if(k==='burn'){var o=s.burn=s.burn||{n:0};o.n=Math.min(3,o.n+1);b.enemyBurnDamage=Math.max(b.enemyBurnDamage||0,3*o.n+2);b.enemyBurnTurns=3;log('🔥 تم تطبيق الحرق!'+(o.n>1?' ×'+o.n:''),'damage')}
+ else if(k==='poison'){s.poison={t:3,d:Math.max(2,Math.round(en.maxHp*.02))};log('☠️ تم تسميم العدو!','damage')}
+ else if(k==='slow'){b.enemySlowTurns=Math.max(b.enemySlowTurns||0,2);log('❄️ العدو تباطأ!','defense')}
+ else if(k==='brk'){if(!s.brk){s.brk={t:3,d:en.def};en.def=Math.max(0,Math.round(en.def*.8))}else s.brk.t=3;log('💔 كُسر دفاع العدو مؤقتًا!','damage')}}
+function removeStatusEffect(en,k){var s=en.__st;if(k==='brk'&&s.brk){en.def=s.brk.d}delete s[k]}
+function tickStatusEffects(en){var s=en.__st;
+ if(s.poison){en.hp=Math.max(0,en.hp-s.poison.d);log('☠️ السم يسبب '+s.poison.d+' ضرر!','damage');if(--s.poison.t<=0)removeStatusEffect(en,'poison')}
+ if(s.brk&&--s.brk.t<=0)removeStatusEffect(en,'brk')}
+function elementStatus(en,el,tag){if(tag==='res')return;var r=Math.random(),s=en.__st;
+ if(el==='fire'&&r<.4)applyStatusEffect(en,'burn');else if(el==='ice'&&r<.5)applyStatusEffect(en,'slow');else if(el==='dark'&&r<.4)applyStatusEffect(en,'poison');else if(el==='wind'&&r<.3)applyStatusEffect(en,'brk');
+ else if(el==='physical'){var b=s.bleed=s.bleed||{n:0};if(++b.n>=4){b.n=0;var d=Math.round(en.maxHp*.05);en.hp=Math.max(1,en.hp-d);log('🩸 انفجار نزيف! '+d+' ضرر','damage');pop('🩸 -'+d,'#ff4d5e',['🩸'])}}}
+/* ---- التوازن + العناصر ---- */
+function breakEnemyStagger(en,p){en.__stun=p.ls?2:1;en.__vuln=1;en.sg=Math.round(en.sm*.4);battleState.enemyShield=0;battleState.enemyShieldMax=0;
+ log('💥 تم كسر توازن العدو!','damage');pop('💥 العدو مترنّح!','#ffd23f',['💫','⭐','✨']);shake();T(200,.15,'square',.09);T(120,.3,'sawtooth',.08,.05);T(1200,.25,'triangle',.06,.18)}
+var oQ=window.qteApplyAttackMultiplier;
+window.qteApplyAttackMultiplier=function(b,q){var d=oQ.apply(this,arguments),en=battleState.enemy,p=prof(en),sk=window.__arcanaLastSkill;
+ if(!p||!sk||!en.__ax||battleState.isBattleOver)return d;
+ try{var el=getHeroSkillElement(sk),g=(q&&q.grade)||'good',k=g==='perfect'?2:g==='good'?1.2:g==='close'?.8:.4,tag='';
+  if(p.w.indexOf(el)>-1){d=Math.round(d*1.5);tag='weak';log('🔥 WEAK! ضعف العدو أمام '+EM[el],'damage');pop(EM[el]+' WEAK!',COL[el],[EM[el],'✨']);T(900,.1,'square',.08);T(1400,.2,'triangle',.07,.08)}
+  else if(p.r.indexOf(el)>-1){d=Math.round(d*.5);tag='res';log('🛡️ RESIST! العدو يقاوم '+EM[el],'defense');pop('🛡️ RESIST','#8fa3c4');T(200,.15,'square',.06)}
+  var c=rec(en.id);c[en.id].k[el]=tag||'n';sx(c);
+  if(en.__vuln>0){d=Math.round(d*1.15);en.__vuln--}
+  if(!en.__stun&&d>0){var sd=Math.round((6+(sk.dmg||0)*.4)*(sk.cost>=2?1.4:1)*k*p.sr*en.__srm*(tag==='weak'?1.2:1));en.sg=Math.max(0,en.sg-sd);if(en.sg<=0)breakEnemyStagger(en,p)}
+  elementStatus(en,el,tag)}catch(e){console.warn(e)}
+ return d};
+/* ---- مراحل الزعيم / الغضب ---- */
+function handleBossPhase(en,p){var hr=en.hp/en.maxHp;p.ph.forEach(function(h,i){if(hr<=h[0]&&!en.__ph[i]&&en.hp>0){en.__ph[i]=1;en.atk=Math.round(en.atk*h[2]);en.def=Math.round(en.def*h[3]);en.spd=Math.round(en.spd*h[4]);en.__srm*=h[5];
+ en.skills.forEach(function(s){if(s.dmg)s.dmg=Math.round(s.dmg*h[2])});log(h[1],'damage');pop(h[1],'#ff5d6c',['🔴','✨']);shake();T(110,.5,'sawtooth',.1);T(220,.4,'square',.07,.1);
+ var c=document.querySelector('.enemy-card');if(c)c.animate([{filter:'brightness(2.2) saturate(2)'},{filter:'none'}],{duration:700})}})}
+/* ---- ذكاء الأعداء + النية ---- */
+var oPK=window.pickAffordableEnemySkill;
+function strong(l){return l.reduce(function(a,b){return (b.dmg||0)>(a.dmg||0)?b:a},l[0])}
+function chooseEnemyAction(en,p){var af=en.skills.filter(function(s){return getEnemySkillCost(en,s)<=(en.energy||0)}),at=af.filter(function(s){return s.type==='attack'}),df=af.filter(function(s){return s.type==='defense'}),
+ hr=en.hp/en.maxHp,ch=getChar(),pr=ch.hp/Math.max(1,ch.maxHp),R=Math.random(),a=p.ai,full=en.energy>=en.maxEnergy*.8,s=null;
+ if((a==='Guardian'||a==='Tank')&&hr<.5&&df.length&&R<.55)s=df[0];
+ else if(a==='Berserker'&&hr<.5&&at.length&&R<.5)s=strong(at);
+ else if((a==='Assassin'||a==='Duelist')&&pr<.35&&at.length&&R<.5)s=strong(at);
+ else if((a==='Mage'||a==='Burst'||a==='Boss')&&full&&at.length&&R<.6)s=strong(at);
+ else if(a==='Controller'&&at.length&&R<.4){var cc=at.filter(function(x){return x.slowTurns||x.burnDamage});if(cc.length)s=cc[0]}
+ if(!s)s=oPK(en);
+ if(s.type==='defense'&&(battleState.enemyShield||0)>0&&at.length)s=at[Math.floor(Math.random()*at.length)];
+ return s}
+window.pickAffordableEnemySkill=function(en){var p=prof(en);if(!p||!en.__ax)return oPK(en);var s=en.__plan;en.__plan=null;if(s&&getEnemySkillCost(en,s)<=(en.energy||0))return s;return chooseEnemyAction(en,p)};
+function getEnemyIntent(en,s){var c=getEnemySkillCost(en,s),mx=Math.max.apply(null,en.skills.map(function(x){return x.dmg||0}))||1;
+ if(s.type==='defense')return['#5fb4ff','🛡️ يستعد للدفاع'];
+ if(c===0&&en.energy<en.maxEnergy*.5)return['#ffd23f','⚡ يجمع الطاقة'];
+ if((s.dmg||0)>=mx*.85&&c>0)return['#ffd23f','⚠️ هجوم قوي قادم'];
+ if(s.slowTurns||s.burnDamage)return['#b56bff','🔥 يجهز حالة مزعجة'];
+ return['#ff6a6a','🔴 يستعد لهجوم']}
+/* ---- تخطي الدور (ترنح) + تيك الحالات ---- */
+var oET=window.enemyTurn;
+window.enemyTurn=async function(bonus){var en=battleState.enemy,p=prof(en);
+ if(p&&en.__ax&&!bonus&&!battleState.isBattleOver){
+  tickStatusEffects(en);
+  if(en.hp<=0){en.hp=0;updateBattleUI();finishVictory();battleState.isProcessing=false;return}
+  if(en.__stun>0){en.__stun--;log('💫 '+en.name+' مترنّح ويفقد دوره!','defense');en.energy=Math.min(en.maxEnergy,(en.energy||0)+1);battleState.shieldUsedThisTurn=false;battleState.isPlayerTurn=true;battleState.isProcessing=false;log('⏳ دورك! الطاقة: '+getChar().energy);updateBattleUI();renderHand();return}}
+ return oET.apply(this,arguments)};
+/* ---- الواجهة ---- */
+function ui(){var en=battleState.enemy,p=prof(en),c=document.querySelector('.enemy-card'),b=document.getElementById('acx');if(!c)return;
+ if(!b){b=document.createElement('div');b.id='acx';var a=document.getElementById('enemyStatusText');a.parentNode.insertBefore(b,a)}
+ if(!p){b.style.display='none';return}
+ b.style.display='block';init(en,p);handleBossPhase(en,p);
+ if(!en.__plan&&battleState.isPlayerTurn&&!battleState.isBattleOver&&en.skills&&en.skills.length)en.__plan=chooseEnemyAction(en,p);
+ var it=en.__plan?getEnemyIntent(en,en.__plan):['#8fa3c4','…'],s=en.__st,bs=battleState,ic=[];
+ if((bs.enemyBurnTurns||0)>0)ic.push('🔥×'+((s.burn&&s.burn.n)||1)+' ('+bs.enemyBurnTurns+')');
+ if(s.poison)ic.push('☠️ ('+s.poison.t+')');if((bs.enemySlowTurns||0)>0)ic.push('❄️ ('+bs.enemySlowTurns+')');
+ if(s.brk)ic.push('💔 ('+s.brk.t+')');if(s.bleed&&s.bleed.n)ic.push('🩸 '+s.bleed.n+'/4');
+ var k=(cx()[en.id]||{}).k||{},kn=Object.keys(k).map(function(e){return EM[e]+' '+(k[e]==='weak'?'ضعف':k[e]==='res'?'مقاومة':'عادي')}).join(' · ')||'❔ جرّب عناصر مختلفة',
+ op=b.querySelector('details'),open=op&&op.open;
+ b.innerHTML='<div class="r">⚖️ التوازن<div class="bar"><i style="width:'+Math.round(en.sg/en.sm*100)+'%"></i></div></div>'+(en.__stun?'<div class="tg">💫 مترنّح!</div>':'')+'<div class="it" style="border-color:'+it[0]+'">'+it[1]+'</div>'+(ic.length?'<div class="st">'+ic.map(function(x){return'<span>'+x+'</span>'}).join('')+'</div>':'')+
+ '<details'+(open?' open':'')+'><summary>'+EM[p.e]+' '+p.ai+' — معلومات</summary>السلبية: <b>'+p.pn+'</b><br>'+p.pd+'<br>'+kn+'</details>'}
+var oU=window.updateBattleUI;
+window.updateBattleUI=function(){var r=oU.apply(this,arguments);try{ui()}catch(e){console.warn(e)}return r};
+/* ---- سجل الوحوش ---- */
+var oFV=window.finishVictory;
+window.finishVictory=function(){try{var en=battleState.enemy;if(prof(en)&&!en.__won){en.__won=1;var c=rec(en.id);c[en.id].w=(c[en.id].w||0)+1;sx(c)}}catch(e){}return oFV.apply(this,arguments)};
+function codex(){
+ var c=cx(),ids=Object.keys(P),per=innerWidth>760?2:1,pages=Math.ceil(ids.length/per),cur=0,busy=0,o=document.getElementById('acxCodex'),seen=ids.filter(function(i){return c[i]&&c[i].s}).length;
+ if(!o){o=document.createElement('div');o.id='acxCodex';document.body.appendChild(o)}
+ function close(){o.classList.remove('on');document.removeEventListener('keydown',key)}
+ function key(e){if(e.key==='Escape')close();else if(e.key==='ArrowLeft')go(1);else if(e.key==='ArrowRight')go(-1)}
+ function card(id,i){var p=P[id],r=c[id]||{},s=r.s,k=r.k||{},im=r.i||'',bs=p.ph.length>0,
+  ch=Object.keys(k).map(function(e){return'<span class="ch '+(k[e]==='weak'?'w':k[e]==='res'?'r':'')+'">'+EM[e]+' '+(k[e]==='weak'?'ضعف':k[e]==='res'?'مقاومة':'عادي')+'</span>'}).join('')||'<span class="ch">❔ لم تُكتشف</span>',
+  lb=id==='special_volcanic'?'🌋 وحش خاص':bs?'👑 زعيم':id.indexOf('arena_')===0?'🏟️ ساحة النخبة':'👹 وحش';
+  return'<div class="mc'+(bs?' bs':'')+(s?'':' lk')+'" style="--c:'+COL[p.e]+';animation-delay:'+(i*.14)+'s"><span class="mt">'+lb+'</span><div class="mi">'+(s&&/^(https?:|data:)/.test(im)?'<img src="'+im+'" alt="">':'<span>'+(s?'👹':'❔')+'</span>')+'</div><div class="mn">'+(s?r.n:'؟؟؟')+'</div>'+
+  (s?'<div class="me">'+EM[p.e]+' '+p.ai+'</div><div class="mp"><b>'+p.pn+'</b><br>'+p.pd+'</div><div>'+ch+'</div><div class="mp">🏆 الانتصارات: '+(r.w||0)+'</div>':'<div class="mp">قابل هذا الوحش لتفتح بطاقته</div>')+'</div>'}
+ function sfx(){T(320,.1,'sawtooth',.03);T(190,.12,'triangle',.04,.05);T(760,.08,'sine',.025,.12)}
+ function draw(){var sp=o.querySelector('.sp');sp.innerHTML=ids.slice(cur*per,cur*per+per).map(card).join('');
+  o.querySelector('.pn').textContent=(cur+1)+' / '+pages;o.querySelector('.pv').disabled=cur<=0;o.querySelector('.nx').disabled=cur>=pages-1;
+  sp.querySelectorAll('.mc').forEach(function(m){m.onpointermove=function(e){var b=m.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;m.style.transform='perspective(700px) rotateY('+x*14+'deg) rotateX('+(-y*14)+'deg) scale(1.03)';m.style.setProperty('--gx',(x+.5)*100+'%');m.style.setProperty('--gy',(y+.5)*100+'%')};m.onpointerleave=function(){m.style.transform=''}});
+  var F=window.arcanaFX;if(F&&F.burst)try{F.burst(sp,{emoji:['✨','⭐'],count:8,spread:120,rise:20})}catch(e){}}
+ function go(d){var n=cur+d;if(n<0||n>=pages||busy)return;busy=1;sfx();var sp=o.querySelector('.sp'),a=d>0?'-':'';
+  sp.animate([{transform:'rotateY(0)',opacity:1},{transform:'rotateY('+a+'75deg)',opacity:.15}],{duration:200,easing:'ease-in'}).onfinish=function(){cur=n;draw();sp.animate([{transform:'rotateY('+(d>0?'':'-')+'75deg)',opacity:.15},{transform:'rotateY(0)',opacity:1}],{duration:260,easing:'ease-out'}).onfinish=function(){busy=0}}}
+ var dust='';for(var i=0;i<22;i++)dust+='<i style="left:'+Math.random()*100+'%;--dx:'+(Math.random()*120-60)+'px;animation-duration:'+(5+Math.random()*7)+'s;animation-delay:'+Math.random()*6+'s"></i>';
+ o.innerHTML='<div class="dust">'+dust+'</div><div class="bk"><button class="x">✕</button><div class="hd">📖 سجل الوحوش<small>اكتشفت '+seen+' من '+ids.length+'</small></div><div class="sp"></div><div class="nv"><button class="pv">→ السابق</button><span class="pn"></span><button class="nx">التالي ←</button></div></div>';
+ o.querySelector('.x').onclick=close;o.querySelector('.pv').onclick=function(){go(-1)};o.querySelector('.nx').onclick=function(){go(1)};
+ o.onclick=function(e){if(e.target===o)close()};
+ var x0=0;o.onpointerdown=function(e){x0=e.clientX};o.onpointerup=function(e){var dx=e.clientX-x0;if(Math.abs(dx)>70)go(dx<0?1:-1)};
+ document.addEventListener('keydown',key);o.classList.add('on');draw();
+ var bk=o.querySelector('.bk');if(bk.animate)bk.animate([{transform:'rotateX(28deg) scale(.6)',opacity:0},{transform:'none',opacity:1}],{duration:550,easing:'cubic-bezier(.2,1.2,.3,1)'});
+ T(392,.3,'sine',.05);T(523,.3,'sine',.05,.1);T(784,.5,'sine',.05,.2);T(1047,.5,'sine',.03,.3)}
+var bt=document.createElement('button');bt.id='acxBtn';bt.textContent='📖 سجل الوحوش';bt.onclick=codex;document.body.appendChild(bt);
+window.arcanaCombat={applyStatusEffect:applyStatusEffect,removeStatusEffect:removeStatusEffect,tickStatusEffects:tickStatusEffects,breakEnemyStagger:breakEnemyStagger,getEnemyIntent:getEnemyIntent,chooseEnemyAction:chooseEnemyAction,handleBossPhase:handleBossPhase,profiles:P};
+})();</script>
+<style id="arcanaCombat212Style">#acxCodex .bk{width:min(1200px,98vw);max-height:96vh;padding:18px 22px}
+#acxCodex .hd{font-size:26px}
+#acxCodex .sp{min-height:470px;max-height:80vh;gap:30px;padding:22px}
+#acxCodex .mc{max-width:540px;padding:16px}
+#acxCodex .mi{height:240px}
+#acxCodex .mn{font-size:24px}
+#acxCodex .mp,#acxCodex .me,#acxCodex .ch{font-size:15px}
+#acxBrk{position:fixed;left:50%;top:40%;z-index:2147483100;pointer-events:none;text-align:center;font:1000 clamp(44px,12vw,92px) Tahoma,sans-serif;color:#ffd23f;-webkit-text-stroke:3px #7a2d00;text-shadow:0 0 30px #ff7a3d,0 6px 0 #7a2d00;direction:rtl;white-space:nowrap}
+#acxBrk small{display:block;font-size:.28em;color:#fff;-webkit-text-stroke:0;text-shadow:0 2px 6px #000}
+#battleEnemyImage.acx-dizzy{position:relative;filter:saturate(.45) brightness(.85)}
+#battleEnemyImage.acx-dizzy::after{content:'⭐ 💫 ⭐';position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:26px;white-space:nowrap;animation:dzs 1.2s ease-in-out infinite}
+@keyframes dzs{50%{transform:translateX(-50%) translateY(-7px) scale(1.15)}}
+#acp{margin-top:6px;font-size:12px;color:#fff;direction:rtl;text-align:right;text-shadow:0 1px 3px #000}
+#acp .r{display:flex;align-items:center;gap:6px;margin-top:3px}
+#acp .bar{flex:1;height:7px;border-radius:7px;background:rgba(255,255,255,.14);overflow:hidden}
+#acp .bar i{display:block;height:100%;transition:width .3s}
+#acp .mx i{box-shadow:0 0 12px #ffd23f}
+#acp button{margin-top:5px;padding:3px 10px;border-radius:9px;border:1px solid #3b5178;background:#16213a;color:#fff;font:inherit;cursor:pointer}
+#acxDet{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:rgba(3,5,12,.85);direction:rtl;color:#fff}
+#acxDet.on{display:flex}
+#acxDet .bx{width:min(420px,94vw);padding:18px;border-radius:18px;background:#10172a;border:1px solid #3b5178;line-height:1.9;font-size:14px}
+#acxDet .bx div{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.acx-crack{position:fixed;z-index:2147482985;pointer-events:none;border-radius:16px;box-shadow:inset 0 0 34px #ff7a3d;background:repeating-conic-gradient(from 20deg at 50% 45%,rgba(255,180,90,.3) 0 2deg,transparent 2deg 22deg);animation:acxCr 1s ease-out forwards}
+@keyframes acxCr{to{opacity:0}}
+.acx-pb{position:fixed;left:50%;top:60%;z-index:2147483050;pointer-events:none;color:#ffb347;font:900 26px Tahoma,sans-serif;text-shadow:0 2px 8px #000,0 0 14px #ff7a3d;direction:rtl;white-space:nowrap}
+.acx-dv{position:fixed;inset:0;z-index:2147482980;pointer-events:none;background:radial-gradient(circle,transparent 25%,rgba(120,0,10,.8) 100%)}
+#acxBal{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:rgba(3,5,12,.88);direction:rtl;color:#fff}
+#acxBal.on{display:flex}
+#acxBal .bx{width:min(520px,95vw);padding:18px;border-radius:18px;background:#10172a;border:1px solid #3b5178;text-align:center}
+#acxBal h3{margin:0 0 4px}
+#acxBal .g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+#acxBal .g button{display:flex;flex-direction:column;gap:4px;padding:12px 8px;border-radius:14px;border:1px solid #3b5178;background:#16213a;color:#fff;cursor:pointer;font:inherit;transition:transform .15s,box-shadow .15s}
+#acxBal .g button:hover{transform:translateY(-3px);box-shadow:0 0 18px #ffb347}
+#acxBal .g span{color:#ffd66b;font-weight:900}
+#acxBal small{color:#aeb8d4;line-height:1.5}
+#acxBal .cx{padding:7px 24px;border-radius:12px;border:1px solid #3b5178;background:#1a2740;color:#fff;cursor:pointer}
+</style>
+<script id="arcanaCombat212">(function(){
+'use strict';
+var A=window.arcanaCombat;if(!A||!A.profiles)return;
+var P=A.profiles,SG={grunt:[70,1.3],warrior:[130,.9],boss:[260,.7],evil_girl:[120,1.1],sand_scorpion:[100,1],desert_warrior:[170,.85],ruins_guardian:[420,.45],desert_boss:[320,.65],ice_wolf:[75,1.2],ice_giant:[480,.4],ice_witch:[115,1.05],ice_king:[360,.6],white_ice_dragon:[560,.4],arena_red_duelist:[140,.95],arena_dark_witch:[115,1.05],arena_thunder_knight:[170,.85],arena_shadow_assassin:[80,1.25],arena_king:[360,.6],special_volcanic:[620,.4]};
+Object.keys(SG).forEach(function(k){if(P[k]){P[k].sm=SG[k][0];P[k].sr=SG[k][1]}});
+var M,lt=99;
+function PM(){try{var c=getChar();return(10+((c&&c.balanceLv)||0))*8}catch(e){return 80}}function RS(k){try{var c=getChar();return(c&&c.res&&c.res[k])||0}catch(e){return 0}}function rs(){var p=PM();M={mo:0,nx:0,pf:0,pa:0,dm:0,pr:0,ps:p,pm:p,st:{},sc:0,dd:0,lethal:0}}rs();
+function T(f,d,t,v,w){try{window.arcanaSfx.tone(f,d,t,v,w||0)}catch(e){}}
+function lg(m,t){try{addBattleLog(m,t||'')}catch(e){}}
+function FX(){return window.arcanaFX||{}}
+function fl(id,txt,col,em){var e=document.getElementById(id),F=FX();if(!e)return;if(F.floatText)F.floatText(e,txt,col);if(F.ring)F.ring(e,col,170);if(em&&F.burst)F.burst(e,{emoji:em,count:12,spread:110,rise:20})}
+function flash(c,ms){var f=document.createElement('div');f.style.cssText='position:fixed;inset:0;z-index:2147482990;pointer-events:none;background:radial-gradient(circle,'+c+'aa,transparent 70%)';document.body.appendChild(f);f.animate([{opacity:0},{opacity:1,offset:.15},{opacity:0}],{duration:ms||600}).onfinish=function(){f.remove()}}
+function mom(n){var o=M.mo;M.mo=Math.max(0,Math.min(10,M.mo+n));if(M.mo>=10&&o<10){M.nx=1;lg('⚡ MOMENTUM MAX! الضربة القادمة +15%','damage');fl('battleHeroImage','⚡ MOMENTUM MAX!','#ffd23f',['⚡','✨']);flash('#ffd23f',700);T(523,.15,'square',.07);T(784,.15,'square',.07,.1);T(1047,.4,'triangle',.07,.2)}}
+function ps(n){if(n<0&&M.st.freeze)n=Math.round(n*1.25);M.ps=Math.max(0,Math.min(M.pm,M.ps+n));if(M.ps<=0){M.ps=Math.round(M.pm*.5);M.pr=1;mom(-3);lg('💥 توازنك انكسر! الخصم يضغط عليك','damage');if(!M.lethal)pbreak()}}
+function breakFx(en){
+ var b=document.createElement('div');b.id='acxBrk';b.innerHTML='💥 BREAK!<small>'+en.name+' مترنّح</small>';document.body.appendChild(b);
+ b.animate([{transform:'translate(-50%,-50%) scale(.2) rotate(-12deg)',opacity:0},{transform:'translate(-50%,-50%) scale(1.2) rotate(2deg)',opacity:1,offset:.3},{transform:'translate(-50%,-50%) scale(1)',opacity:1,offset:.7},{transform:'translate(-50%,-60%) scale(1.1)',opacity:0}],{duration:1100}).onfinish=function(){b.remove()};
+ flash('#ffb347',450);
+ var F=FX(),e=document.getElementById('battleEnemyImage'),pg=document.getElementById('pageBattle');
+ if(e&&F.ring){F.ring(e,'#ffd23f',300);setTimeout(function(){F.ring(e,'#fff',380)},160)}
+ if(e&&F.burst)F.burst(e,{emoji:['💥','⭐','💫'],count:16,spread:210,rise:40});
+ if(pg)pg.animate([{transform:'translate(0,0)'},{transform:'translate(-8px,5px)'},{transform:'translate(7px,-5px)'},{transform:'none'}],{duration:340});
+ T(70,.45,'sawtooth',.12);T(2400,.12,'square',.05,.05);T(1800,.15,'square',.05,.1);T(523,.12,'sine',.06,.3);T(784,.12,'sine',.06,.4);T(1175,.35,'sine',.06,.5)}
+/* هجوم اللاعب: توازن الضرر + Crit + زخم */
+var oA=window.qteApplyAttackMultiplier;
+window.qteApplyAttackMultiplier=function(b,q){
+ var en=battleState.enemy,was=en&&en.__stun,d=oA.apply(this,arguments),g=q&&q.grade;
+ if(battleState.isBattleOver)return d;
+ try{d=Math.round(d*.9);if(M.st.freeze)d=Math.round(d*.88);
+  if(M.nx){d=Math.round(d*1.15);M.nx=0;M.mo=0;lg('⚡ انفجر الزخم: +15% ضرر!','damage')}
+  var cr=Math.random()<.08+(g==='perfect'?.1:0);
+  if(cr){d=Math.round(d*1.5);lg('🎯 CRITICAL!','damage');fl('battleEnemyImage','💥 CRITICAL!','#ff4d5e',['💥','✨']);T(1500,.08,'square',.08);T(2000,.2,'sawtooth',.07,.05)}
+  mom(g==='perfect'?1:g==='miss'?-2:0);if(cr)mom(2);
+  if(g==='perfect'){if(++M.pa>=2){M.pa=0;mom(1);lg('⭐ مقاتل سريع: +1 زخم')}}else M.pa=0;
+  if(en&&en.__stun>0&&!was){mom(2);if(!(en.hp-d<=0&&!(battleState.enemyShield>0)))setTimeout(function(){breakFx(en)},60)}}catch(e){console.warn(e)}
+ return d};
+/* دفاع اللاعب: perfect = 0، good نصف، close كامل، miss زيادة، مع قوة أعداء أعلى */
+var oD=window.qteApplyDefenseMultiplier;
+window.qteApplyDefenseMultiplier=function(inc,q){
+ var g=q&&q.grade,arr=!!(q&&q.arrowResults&&q.finalDamage!=null),m=arr?1:{perfect:0,good:.5,close:1,miss:1.2}[g];if(m==null)return oD.apply(this,arguments);
+ var k=arr?1:m*1.1;if(M.dm){k*=.75;M.dm=0}if(M.pr){k*=1.1;M.pr=0}
+ var d=Math.max(0,Math.round((arr?q.finalDamage:inc)*k));
+ try{if(g==='perfect'){if(++M.pf>=2){M.pf=0;M.dm=1;ps(5);var c=getChar();c.energy=Math.min(getMaxEnergy(c),c.energy+1);lg('🛡️ Defense Mastery! +5 توازن، +1 طاقة','defense');fl('battleHeroImage','🛡️ MASTERY','#5fb4ff',['🛡️','✨']);T(660,.12,'triangle',.06);T(990,.25,'triangle',.06,.1)}}else M.pf=0;
+  if(g==='miss')mom(-1);M.lethal=0;
+  var en=battleState.enemy,pf=en&&P[en.id],ek=pf&&EK[pf.e];
+  if(ek&&d>0)d=Math.max(1,Math.round(d*(1-RS(ek)/100*.25)));
+  var ch=getChar(),lethal=d>0&&ch&&ch.hp-Math.max(0,d-(battleState.playerShield||0))<=0;
+  M.lethal=lethal?1:0;
+  if(d>0){ps(-Math.round(d*.4));if(!lethal)rollSt(en,pf,ek)}
+  if(lethal&&!battleState.isEvilGirlFight)setTimeout(deathFx,300)}catch(e){console.warn(e)}
+ return d};
+var oE=window.enemyTurn;
+window.enemyTurn=function(b){var en=battleState.enemy;if(!b)try{tickP(en)}catch(e){}if(!b&&en&&en.__ax&&!en.__stun&&en.sg<en.sm)en.sg=Math.min(en.sm,en.sg+Math.round(en.sm*.05));return oE.apply(this,arguments)};
+var EK={fire:'burn',poison:'poison',ice:'freeze',lightning:'stun'},SI={burn:'🔥',poison:'☠️',freeze:'❄️',stun:'⚡'},SB={fire:.28,poison:.32,ice:.26,lightning:.2},SD={burn:3,poison:4,freeze:2,stun:1},SN={burn:'الحرق',poison:'السم',freeze:'التجميد',stun:'الصعق'},SC={burn:'#ff7a3d',poison:'#7be07b',freeze:'#7fd8ff',stun:'#ffd23f'};
+function stTxt(){var k=Object.keys(M.st);return k.length?k.map(function(x){return SI[x]+'('+M.st[x].t+')'}).join(' '):'لا توجد'}
+function stRow(){return'<div class="r">الحالات: '+stTxt()+'</div>'}
+/* الحالات على اللاعب: المقاومة تخفف فقط (60% كحد أقصى من الأثر) وما فيه مناعة */
+function rollSt(en,pf,ek){if(!ek||!pf||!en||M.st[ek]||(ek==='stun'&&M.sc>0))return;var f=RS(ek)/100*.6;if(Math.random()>=SB[pf.e]*(1-f))return;
+ var t=Math.max(1,Math.round(SD[ek]*(1-f)));M.st[ek]={t:t,d:Math.max(2,Math.round((en.atk||20)*(ek==='burn'?.07:.04)*(1-f)))};
+ lg(SI[ek]+' أُصبت بـ'+SN[ek]+'! ('+t+' أدوار)','damage');fl('battleHeroImage',SI[ek],SC[ek],[SI[ek]]);if(ek==='stun')M.sc=3;ps(-({freeze:14,stun:10,burn:3,poison:2}[ek]))}
+function tickP(en){if(M.sc>0)M.sc--;var c=getChar(),s=M.st;['burn','poison'].forEach(function(k){if(s[k]){c.hp=Math.max(1,c.hp-s[k].d);lg(SI[k]+' '+SN[k]+' يسبب '+s[k].d+' ضرر!','damage');ps(-(k==='burn'?3:2));if(--s[k].t<=0)delete s[k]}});
+ if(s.freeze&&--s.freeze.t<=0)delete s.freeze;try{updateBattleUI()}catch(e){}}
+function pbreak(){var c=document.querySelector('.hero-card');if(!c||c.__bk)return;c.__bk=1;var r=c.getBoundingClientRect(),o=document.createElement('div');o.className='acx-crack';o.style.cssText='left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px';document.body.appendChild(o);
+ c.animate([{transform:'translateX(-9px) rotate(-1deg)'},{transform:'translateX(9px) rotate(1deg)'},{transform:'translateX(-4px)'},{transform:'none'}],{duration:380});setTimeout(function(){o.remove();c.__bk=0},1000);
+ var b=document.createElement('div');b.className='acx-pb';b.textContent='⚖️ توازنك انكسر!';document.body.appendChild(b);b.animate([{opacity:0,transform:'translate(-50%,0) scale(.6)'},{opacity:1,transform:'translate(-50%,-10px) scale(1.1)',offset:.25},{opacity:0,transform:'translate(-50%,-40px) scale(1)'}],{duration:1000}).onfinish=function(){b.remove()};
+ T(900,.08,'square',.06);T(500,.2,'sawtooth',.07,.06);T(200,.4,'triangle',.07,.14)}
+function deathFx(){var c=getChar();if(M.dd||!c||c.hp>0)return;M.dd=1;var h=document.querySelector('.hero-card'),v=document.createElement('div');v.className='acx-dv';document.body.appendChild(v);
+ v.animate([{opacity:0},{opacity:1,offset:.4},{opacity:0}],{duration:1500}).onfinish=function(){v.remove();M.dd=0};
+ if(h)h.animate([{transform:'none',filter:'none'},{transform:'translateY(26px) rotate(7deg) scale(.96)',filter:'grayscale(1) brightness(.6)',offset:.45},{transform:'translateY(26px) rotate(7deg) scale(.96)',filter:'grayscale(1) brightness(.6)',offset:.8},{transform:'none',filter:'none'}],{duration:1500});
+ fl('battleHeroImage','💀','#ff4d5e',['💀']);T(300,.6,'sawtooth',.09);T(200,.8,'sawtooth',.09,.2);T(110,1.1,'triangle',.1,.5)}
+/* واجهة اللاعب */
+function pui(){var bs=battleState,t=bs.turnCounter||0;if(t<lt)rs();lt=t;var pm=PM();if(M.pm!==pm){M.ps=Math.min(pm,M.ps+Math.max(0,pm-M.pm));M.pm=pm}
+ var a=document.getElementById('acp'),h=document.getElementById('battleHeroEnergy');
+ if(!a&&h){a=document.createElement('div');a.id='acp';h.parentNode.parentNode.insertBefore(a,h.parentNode.nextSibling);a.onclick=function(e){if(e.target.tagName==='BUTTON')det()}}
+ if(a)a.innerHTML='<div class="r">🟠 التوازن<div class="bar"><i style="width:'+Math.round(M.ps/M.pm*100)+'%;background:#ffb347"></i></div>'+M.ps+'/'+M.pm+'</div><div class="r'+(M.mo>=10?' mx':'')+'">🔥 الزخم<div class="bar"><i style="width:'+M.mo*10+'%;background:linear-gradient(90deg,#ff6a3d,#ffd23f)"></i></div>'+M.mo+'/10</div>'+stRow()+'<button>📊 تفاصيل القتال</button>';
+ var im=document.getElementById('battleEnemyImage');if(im)im.classList.toggle('acx-dizzy',!!(bs.enemy&&bs.enemy.__stun>0))}
+function det(){var g=function(i){var e=document.getElementById(i);return e?e.textContent:'-'},o=document.getElementById('acxDet');
+ if(!o){o=document.createElement('div');o.id='acxDet';document.body.appendChild(o)}
+ var R=[['❤️ HP',g('battleHeroHpText')+'/'+g('battleHeroMaxHpText')],['⚔️ ATK',g('battleHeroAtk')],['🛡️ DEF',g('battleHeroDef')],['⚡ SPD',g('battleHeroSpd')],['⚡ Energy',g('battleHeroEnergy')+'/'+g('battleHeroMaxEnergy')],['⚖️ التوازن',(10+((getChar()||{}).balanceLv||0))+' ('+M.ps+'/'+M.pm+')'],['🔥 مقاومة الحرق',RS('burn')+'%'],['☠️ مقاومة السم',RS('poison')+'%'],['❄️ مقاومة التجميد',RS('freeze')+'%'],['⚡ مقاومة الصعق',RS('stun')+'%'],['🎯 Crit Rate','8% (+10% مع Perfect)'],['💥 Crit Damage','150%'],['⚔️ Element','جسدي'],['🧬 Passive','صمود'],['⭐ Trait','مقاتل سريع: Perfect مرتين = +1 زخم'],['🔥 Momentum',M.mo+'/10'],['🔴 الحالات',stTxt()],['🛡️ Defense Mastery',M.pf+'/2']];
+ o.innerHTML='<div class="bx"><h3 style="margin:0 0 6px">📊 Kael — الإحصائيات القتالية</h3>'+R.map(function(r){return'<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'}).join('')+'<div style="border:0;justify-content:center;margin-top:8px"><button style="padding:6px 22px;border-radius:12px;border:1px solid #3b5178;background:#1a2740;color:#fff;cursor:pointer">إغلاق</button></div></div>';
+ o.classList.add('on');o.onclick=function(e){if(e.target===o||e.target.tagName==='BUTTON')o.classList.remove('on')}}
+var oU=window.updateBattleUI;
+window.updateBattleUI=function(){var r=oU.apply(this,arguments);try{pui()}catch(e){console.warn(e)}return r};
+/* تطوير التوازن + اختيار المقاومة */
+var RK=[['burn','🔥','مقاومة الحرق','تقلل فرصة الحرق ومدته وضرره'],['poison','☠️','مقاومة السم','تقلل فرصة السم ومدته وضرره'],['freeze','❄️','مقاومة التجميد','تقلل فرصة التجميد ومدته وضغطه على التوازن'],['stun','⚡','مقاومة الصعق','تقلل فرصة الصعق وفقدان الدور']];
+function pickR(k){var c=getChar();if(!c||!(c.skillPoints>0))return;c.res=c.res||{};c.res[k]=Math.min(80,(c.res[k]||0)+5);c.balanceLv=(c.balanceLv||0)+1;c.skillPoints-=1;applyEquipmentEffects();c.hp=c.maxHp;saveCurrent();updateUI();closeLevelUpModal();playClickSound();flash('#ffb347',600);T(523,.15,'triangle',.06);T(784,.25,'triangle',.06,.1)}
+window.arcanaBalanceUpgrade=function(){var c=getChar();if(!c||!(c.skillPoints>0))return;var o=document.getElementById('acxBal');if(!o){o=document.createElement('div');o.id='acxBal';document.body.appendChild(o)}
+ o.innerHTML='<div class="bx"><h3>⚖️ تطوير التوازن</h3><p>اختر نوع المقاومة التي تريد تطويرها (+1 توازن)</p><div class="g">'+RK.map(function(r){var v=RS(r[0]);return'<button data-k="'+r[0]+'"><b>'+r[1]+' '+r[2]+'</b><span>'+v+'% ← '+Math.min(80,v+5)+'%</span><small>'+r[3]+'</small></button>'}).join('')+'</div><button class="cx">إلغاء</button></div>';
+ o.classList.add('on');o.onclick=function(e){var b=e.target.closest&&e.target.closest('button');if(e.target===o||(b&&b.className==='cx')){o.classList.remove('on');return}if(b&&b.dataset.k){pickR(b.dataset.k);o.classList.remove('on')}}};
+var sb=document.querySelector('.upgrade-btn[onclick*="spd"]');
+if(sb&&!document.getElementById('acxBalBtn')){var nb=sb.cloneNode(true);nb.id='acxBalBtn';nb.setAttribute('onclick','window.arcanaBalanceUpgrade()');nb.innerHTML='<div class="upgrade-name">⚖️ توازن</div><div class="upgrade-desc">+1 توازن · +5% مقاومة</div>';sb.parentNode.insertBefore(nb,sb.nextSibling)}
+/* الصعق: فقدان الدور (محدود) */
+var oS=window.useSkill;
+window.useSkill=function(){var bs=battleState;
+ if(M.st.stun&&bs.isPlayerTurn&&!bs.isProcessing&&!bs.isBattleOver){delete M.st.stun;bs.isProcessing=true;bs.isPlayerTurn=false;bs.turnCounter=(bs.turnCounter||0)+1;lg('⚡ صُعقت! فقدت دورك','damage');fl('battleHeroImage','⚡ STUN','#ffd23f',['⚡']);T(1800,.08,'square',.07);T(900,.2,'sawtooth',.06,.06);setTimeout(function(){window.enemyTurn()},800);return}
+ return oS.apply(this,arguments)};
 })();</script>
 </body>
 </html>
