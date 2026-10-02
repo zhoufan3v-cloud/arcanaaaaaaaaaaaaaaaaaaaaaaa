@@ -8131,7 +8131,7 @@ window.arcanaBoot={done:done};
   }
   function save(d){localStorage.setItem(KEY,JSON.stringify(d));publishProfile(d);if(window.arcanaQueueCloud)window.arcanaQueueCloud()}
   /* ===== 🌐 الأصدقاء عبر السيرفر (Supabase): البحث بالـID + طلبات الصداقة بين الأجهزة (ضيف أو حساب) ===== */
-  var CLOUD_P='arcana_profiles',CLOUD_R='arcana_friend_requests',cloudPubT=null,cloudBusy=false;
+  var CLOUD_P='arcana_social_profiles',CLOUD_R='arcana_social_requests',cloudPubT=null,cloudBusy=false;
   async function cloudClient(){try{return window.__ARCANA_SUPABASE_READY?await window.__ARCANA_SUPABASE_READY:null}catch(e){return null}}
   function cloudPublish(d){
     clearTimeout(cloudPubT);
