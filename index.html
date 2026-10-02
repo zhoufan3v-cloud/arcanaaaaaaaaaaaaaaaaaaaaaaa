@@ -53,8 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.11.4",
+  "version": "2.12.0",
   "history": [
+    {"version":"2.12.0","date":"2026-10-02","title":"أصوات المهارات ومهارات البوصات وإحياء القصة","notes":["🔊 كل مهارة خاصة (من المراحل ومن السيوف) لها صوت ومؤثر وبانر باسمها عند الإطلاق وعند الإصابة","⚖️ توازن البطل صار ينكسر فعلًا: الحد أقل، والخسارة أكبر، وClose/Miss يكسرانه أسرع","🎬 صور القصة (الفتاة الشريرة، اللعنة، تنين الجليد) صارت حية: جسيمات، هالة، نبض، وهز","👑 كل بوص يطلق مهارته القصوى مرة واحدة عند نصف دمه: سهام، شاشة مظلمة، رجّة وأصوات قوية"]},
     {"version":"2.11.4","date":"2026-10-01","title":"أسهم QTE بضرر مستقل وأصدقاء عبر السيرفر","notes":["🏹 دفاع QTE جديد: ضرر المهارة يتقسم على عدد الأسهم، وكل سهم له ضرره الخاص (Perfect 0% · Good 50% · Close 100% · Miss 120%)، ويُطبَّق مجموع الأسهم دفعة واحدة في النهاية","🎁 المكافأة الإضافية للمرحلة (ذهب/جرعة/مادة) تُمنح أول مرة فقط عند إكمال المرحلة","🌐 الأصدقاء عبر السيرفر: ابحث بالـ ID عن أي لاعب (ضيف أو حساب) على أي جهاز، وأرسل طلب صداقة واقبله (يتطلب تشغيل ملف SQL مرة واحدة)","⚖️ توازن اللاعب صار شريطًا واضحًا في واجهة القتال مثل العدو، ينقص مع أثر أحمر، ويتوهج لما يقل"]},
     {"version":"2.11.3","date":"2026-10-01","title":"تطوير التوازن والمقاومات وإصلاح اللاق","notes":["⚖️ زر جديد «توازن» في ترقية المستوى: +1 توازن، وتختار مقاومة (حرق / سم / تجميد / صعق) تزيد +5%، وحدها الأقصى 80%","🛡️ المقاومة تخفف الأثر فقط (فرصة الحالة ومدتها وضررها، وضرر العنصر قليلًا) بدون مناعة وبدون قوة زايدة","🔥 الأعداء يطبقون عليك حرق وسم وتجميد وصعق حسب عنصرهم، وتظهر تحت بطاقتك","🚀 إصلاح اللاق لما ينكسر التوازن مع قتل العدو أو الخسارة، مع مؤثر خاص لكسر توازنك وانميشن لموتك","📊 تفاصيل القتال تعرض التوازن والمقاومات والحالات"]},
     {"version":"2.11.2","date":"2026-10-01","title":"توازن الضرر ومؤثرات كسر التوازن","notes":["🛡️ دفاع QTE أوضح: Perfect = صفر ضرر، Good = نصف الضرر، Close = ضرر كامل، Miss = ضرر زايد، وضرر الأعداء أقوى شوي وضرر اللاعب أخف شوي","💥 كسر التوازن بمؤثرات قوية: BREAK! ضخمة، وميض، رجّة شاشة، حلقات ونجوم، ونجوم تدور فوق العدو وهو مترنّح","🟠 توازن كل وحش صار مختلف: الدبابات والزعماء توازنهم عالي وصعب الكسر، والقتلة والذئاب ينكسرون أسرع، ويرجع التوازن شوي كل دور","🎯 اللاعب: ضربة حرجة CRITICAL، شريط زخم ⚡ (عند 10 ضربة +15%)، توازن للاعب، Defense Mastery، زر 📊 تفاصيل القتال","📖 سجل الوحوش أعرض وأكبر والبطاقات أوضح"]},
@@ -10271,7 +10272,7 @@ var A=window.arcanaCombat;if(!A||!A.profiles)return;
 var P=A.profiles,SG={grunt:[70,1.3],warrior:[130,.9],boss:[260,.7],evil_girl:[120,1.1],sand_scorpion:[100,1],desert_warrior:[170,.85],ruins_guardian:[420,.45],desert_boss:[320,.65],ice_wolf:[75,1.2],ice_giant:[480,.4],ice_witch:[115,1.05],ice_king:[360,.6],white_ice_dragon:[560,.4],arena_red_duelist:[140,.95],arena_dark_witch:[115,1.05],arena_thunder_knight:[170,.85],arena_shadow_assassin:[80,1.25],arena_king:[360,.6],special_volcanic:[620,.4]};
 Object.keys(SG).forEach(function(k){if(P[k]){P[k].sm=SG[k][0];P[k].sr=SG[k][1]}});
 var M,lt=99;
-function PM(){try{var c=getChar();return(10+((c&&c.balanceLv)||0))*8}catch(e){return 80}}function RS(k){try{var c=getChar();return(c&&c.res&&c.res[k])||0}catch(e){return 0}}function rs(){var p=PM();M={mo:0,nx:0,pf:0,pa:0,dm:0,pr:0,ps:p,pm:p,st:{},sc:0,dd:0,lethal:0}}rs();
+function PM(){try{var c=getChar();return(7+((c&&c.balanceLv)||0))*5}catch(e){return 35}}function RS(k){try{var c=getChar();return(c&&c.res&&c.res[k])||0}catch(e){return 0}}function rs(){var p=PM();M={mo:0,nx:0,pf:0,pa:0,dm:0,pr:0,ps:p,pm:p,st:{},sc:0,dd:0,lethal:0}}rs();
 function T(f,d,t,v,w){try{window.arcanaSfx.tone(f,d,t,v,w||0)}catch(e){}}
 function lg(m,t){try{addBattleLog(m,t||'')}catch(e){}}
 function FX(){return window.arcanaFX||{}}
@@ -10313,7 +10314,7 @@ window.qteApplyDefenseMultiplier=function(inc,q){
   if(ek&&d>0)d=Math.max(1,Math.round(d*(1-RS(ek)/100*.25)));
   var ch=getChar(),lethal=d>0&&ch&&ch.hp-Math.max(0,d-(battleState.playerShield||0))<=0;
   M.lethal=lethal?1:0;
-  if(d>0){ps(-Math.round(d*.4));if(!lethal)rollSt(en,pf,ek)}
+  if(d>0){ps(-Math.round(d*.8+({close:3,miss:7}[g]||0)));if(!lethal)rollSt(en,pf,ek)}
   if(lethal&&!battleState.isEvilGirlFight)setTimeout(deathFx,300)}catch(e){console.warn(e)}
  return d};
 var oE=window.enemyTurn;
@@ -10352,7 +10353,7 @@ function pui(){var bs=battleState,t=bs.turnCounter||0;if(t<lt)rs();lt=t;var pm=P
  var im=document.getElementById('battleEnemyImage');if(im)im.classList.toggle('acx-dizzy',!!(bs.enemy&&bs.enemy.__stun>0))}
 function det(){var g=function(i){var e=document.getElementById(i);return e?e.textContent:'-'},o=document.getElementById('acxDet');
  if(!o){o=document.createElement('div');o.id='acxDet';document.body.appendChild(o)}
- var R=[['❤️ HP',g('battleHeroHpText')+'/'+g('battleHeroMaxHpText')],['⚔️ ATK',g('battleHeroAtk')],['🛡️ DEF',g('battleHeroDef')],['⚡ SPD',g('battleHeroSpd')],['⚡ Energy',g('battleHeroEnergy')+'/'+g('battleHeroMaxEnergy')],['⚖️ التوازن',(10+((getChar()||{}).balanceLv||0))+' ('+M.ps+'/'+M.pm+')'],['🔥 مقاومة الحرق',RS('burn')+'%'],['☠️ مقاومة السم',RS('poison')+'%'],['❄️ مقاومة التجميد',RS('freeze')+'%'],['⚡ مقاومة الصعق',RS('stun')+'%'],['🎯 Crit Rate','8% (+10% مع Perfect)'],['💥 Crit Damage','150%'],['⚔️ Element','جسدي'],['🧬 Passive','صمود'],['⭐ Trait','مقاتل سريع: Perfect مرتين = +1 زخم'],['🔥 Momentum',M.mo+'/10'],['🔴 الحالات',stTxt()],['🛡️ Defense Mastery',M.pf+'/2']];
+ var R=[['❤️ HP',g('battleHeroHpText')+'/'+g('battleHeroMaxHpText')],['⚔️ ATK',g('battleHeroAtk')],['🛡️ DEF',g('battleHeroDef')],['⚡ SPD',g('battleHeroSpd')],['⚡ Energy',g('battleHeroEnergy')+'/'+g('battleHeroMaxEnergy')],['⚖️ التوازن',(7+((getChar()||{}).balanceLv||0))+' ('+M.ps+'/'+M.pm+')'],['🔥 مقاومة الحرق',RS('burn')+'%'],['☠️ مقاومة السم',RS('poison')+'%'],['❄️ مقاومة التجميد',RS('freeze')+'%'],['⚡ مقاومة الصعق',RS('stun')+'%'],['🎯 Crit Rate','8% (+10% مع Perfect)'],['💥 Crit Damage','150%'],['⚔️ Element','جسدي'],['🧬 Passive','صمود'],['⭐ Trait','مقاتل سريع: Perfect مرتين = +1 زخم'],['🔥 Momentum',M.mo+'/10'],['🔴 الحالات',stTxt()],['🛡️ Defense Mastery',M.pf+'/2']];
  o.innerHTML='<div class="bx"><h3 style="margin:0 0 6px">📊 Kael — الإحصائيات القتالية</h3>'+R.map(function(r){return'<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'}).join('')+'<div style="border:0;justify-content:center;margin-top:8px"><button style="padding:6px 22px;border-radius:12px;border:1px solid #3b5178;background:#1a2740;color:#fff;cursor:pointer">إغلاق</button></div></div>';
  o.classList.add('on');o.onclick=function(e){if(e.target===o||e.target.tagName==='BUTTON')o.classList.remove('on')}}
 var oU=window.updateBattleUI;
@@ -10371,5 +10372,88 @@ window.useSkill=function(){var bs=battleState;
  if(M.st.stun&&bs.isPlayerTurn&&!bs.isProcessing&&!bs.isBattleOver){delete M.st.stun;bs.isProcessing=true;bs.isPlayerTurn=false;bs.turnCounter=(bs.turnCounter||0)+1;lg('⚡ صُعقت! فقدت دورك','damage');fl('battleHeroImage','⚡ STUN','#ffd23f',['⚡']);T(1800,.08,'square',.07);T(900,.2,'sawtooth',.06,.06);setTimeout(function(){window.enemyTurn()},800);return}
  return oS.apply(this,arguments)};
 })();</script>
+<script id="arcanaV212">(function(){
+/* ===== صوت ===== */
+var AC;function ctx(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}catch(e){return null}}
+function tn(f1,f2,d,t,v,w){var c=ctx();if(!c)return;var s=c.currentTime+(w||0),o=c.createOscillator(),g=c.createGain();o.type=t||'sine';o.frequency.setValueAtTime(f1,s);o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),s+d);g.gain.setValueAtTime(v||.1,s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.connect(g).connect(c.destination);o.start(s);o.stop(s+d+.05)}
+function nz(d,v,f1,f2,w){var c=ctx();if(!c)return;var s=c.currentTime+(w||0),n=Math.floor(c.sampleRate*d),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);for(var i=0;i<n;i++)a[i]=Math.random()*2-1;var o=c.createBufferSource();o.buffer=b;var f=c.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(f1,s);f.frequency.exponentialRampToValueAtTime(Math.max(40,f2),s+d);var g=c.createGain();g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.connect(f).connect(g).connect(c.destination);o.start(s)}
+/* أصوات المهارات: cast عند البدء، hit عند الإصابة */
+var SK={
+shadow_strike:{c:'#7a3cff',cast:function(){nz(.35,.25,3000,300);tn(300,80,.3,'sawtooth',.07)},hit:function(){nz(.25,.4,5000,400);tn(140,40,.35,'sine',.3)}},
+ice_heavy_strike:{c:'#7fd8ff',cast:function(){[1568,2093,2637].forEach(function(f,i){tn(f,f*1.01,.35,'sine',.05,i*.06)})},hit:function(){nz(.4,.4,7000,1500);tn(1200,300,.3,'triangle',.1);tn(90,40,.4,'sine',.35)}},
+flame_arrow:{c:'#ff7a3d',cast:function(){nz(.5,.3,300,3500);tn(200,900,.45,'sawtooth',.06)},hit:function(){nz(.5,.45,2500,200);tn(110,35,.5,'sine',.4);tn(500,120,.3,'square',.06)}},
+desert_wrath:{c:'#e0b060',cast:function(){nz(1,.35,200,2200);tn(70,200,1,'sawtooth',.05)},hit:function(){nz(.9,.5,3000,150);tn(80,30,.7,'sine',.45);tn(300,60,.5,'sawtooth',.1)}},
+arena_frost_hex:{c:'#a8e8ff',cast:function(){tn(880,440,.7,'sine',.08);tn(1320,660,.7,'triangle',.05,.1);nz(.6,.2,6000,900)},hit:function(){tn(2000,500,.5,'triangle',.1);nz(.5,.4,8000,1000);tn(100,40,.5,'sine',.35)}},
+arena_frost_execution:{c:'#bfefff',cast:function(){nz(.4,.3,6000,500);tn(1800,300,.4,'sawtooth',.08)},hit:function(){nz(.15,.6,9000,3000);tn(2400,200,.25,'square',.08);nz(.8,.5,5000,300,.1);tn(70,25,.9,'sine',.5,.1)}},
+arena_dragon_breath:{c:'#7fd8ff',cast:function(){tn(90,45,1.4,'sawtooth',.14);tn(140,60,1.3,'square',.06);nz(1.3,.3,300,1800)},hit:function(){nz(1.4,.55,5000,300);tn(60,25,1.2,'sine',.55);tn(1500,200,.8,'triangle',.07)}}};
+function skFor(s){if(!s||!s.id)return null;if(SK[s.id])return SK[s.id];var b={strike:1,shield:1,heavy_strike:1,retreat:1};if(b[s.id]||s.type!=='attack')return null;
+var t=(s.id+' '+(s.name||'')+' '+(s.icon||'')),k=/fire|flame|🔥|لهب|نار|بركان/i.test(t)?'flame_arrow':/ice|frost|❄|جليد|صقيع/i.test(t)?'ice_heavy_strike':/wind|storm|🌪|عاصفة/i.test(t)?'desert_wrath':'shadow_strike';return SK[k]}
+function fx(){return window.arcanaFX||{}}
+function flash(c,ms){var f=document.createElement('div');f.style.cssText='position:fixed;inset:0;z-index:2147482980;pointer-events:none;background:radial-gradient(circle,'+c+'bb,transparent 70%)';document.body.appendChild(f);f.animate([{opacity:0},{opacity:1,offset:.2},{opacity:0}],{duration:ms||500}).onfinish=function(){f.remove()}}
+function banner(txt,c){var b=document.createElement('div');b.textContent=txt;b.style.cssText='position:fixed;left:50%;top:22%;z-index:2147482985;pointer-events:none;font:900 26px system-ui;color:#fff;white-space:nowrap;text-shadow:0 0 18px '+c+',0 0 40px '+c+',0 3px 0 #000;letter-spacing:1px';document.body.appendChild(b);b.animate([{opacity:0,transform:'translate(-50%,10px) scale(.6)'},{opacity:1,transform:'translate(-50%,0) scale(1.1)',offset:.25},{opacity:1,transform:'translate(-50%,-6px) scale(1)',offset:.75},{opacity:0,transform:'translate(-50%,-22px) scale(1)'}],{duration:1500}).onfinish=function(){b.remove()}}
+function shake(el,a,ms){el=el||document.getElementById('pageBattle');if(el)el.animate([{transform:'translate(0,0)'},{transform:'translate(-'+a+'px,'+a/2+'px)'},{transform:'translate('+a+'px,-'+a/2+'px)'},{transform:'translate(-'+a/2+'px,0)'},{transform:'none'}],{duration:ms||400})}
+var cur=null;
+var lastSk=undefined;
+Object.defineProperty(window,'__arcanaLastSkill',{configurable:true,get:function(){return lastSk},set:function(s){lastSk=s;try{var k=skFor(s);cur=k;if(!k)return;k.cast();flash(k.c,450);banner((s.icon||'')+' '+s.name,k.c);var e=document.getElementById('battleHeroImage'),F=fx();if(e&&F.ring)F.ring(e,k.c,200)}catch(x){}}});
+var pA=window.qteApplyAttackMultiplier;
+window.qteApplyAttackMultiplier=function(){var d=pA.apply(this,arguments);try{var k=skFor(lastSk);if(k&&d>0){k.hit();flash(k.c,380);shake(null,7,350);var e=document.getElementById('battleEnemyImage'),F=fx();if(e&&F.ring)F.ring(e,k.c,260);if(e&&F.burst)F.burst(e,{emoji:['✨','💥'],count:10,spread:160,rise:30})}}catch(x){}return d};
+
+/* ===== مهارات البوصات عند نص الدم ===== */
+var BU={
+boss:{n:'🌲 غضب الغابة',c:'#7bd05a',e:'🏹',k:'arrow'},
+desert_boss:{n:'🌪️ عاصفة الرمال القاتلة',c:'#e0b060',e:'🏜️',k:'sand'},
+ice_king:{n:'❄️ مطر رماح الجليد',c:'#9fe3ff',e:'❄️',k:'ice'},
+white_ice_dragon:{n:'🐉 نَفَس الشتاء الأبدي',c:'#7fd8ff',e:'🐉',k:'ice'},
+special_volcanic:{n:'🌋 ثوران الجمر الأول',c:'#ff6a2a',e:'🔥',k:'fire'},
+arena_king:{n:'👑 حكم الملك',c:'#ffd23f',e:'⚔️',k:'arrow'},
+evil_girl:{n:'💜 لعنة الأرجوانية',c:'#b84aff',e:'🔮',k:'dark'}};
+var doneFor=null,busy=0;
+function ultimate(en,u){busy=1;var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;z-index:2147483000;background:rgba(0,0,0,0);touch-action:none';var cv=document.createElement('canvas');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%';o.appendChild(cv);document.body.appendChild(o);
+var W=cv.width=innerWidth,H=cv.height=innerHeight,g=cv.getContext('2d'),T0=performance.now(),D=3800,ar=[],hitDone=0;
+for(var i=0;i<70;i++)ar.push({x:Math.random()*W,y:-Math.random()*H*1.4-40,v:900+Math.random()*900,l:40+Math.random()*50,w:1+Math.random()*2.5,t:Math.random()*.55});
+o.animate([{background:'rgba(0,0,0,0)'},{background:'rgba(0,0,0,.65)',offset:.15},{background:'rgba(0,0,0,.55)',offset:.85},{background:'rgba(0,0,0,0)'}],{duration:D});
+banner(u.n,u.c);try{addBattleLog('⚠️ '+en.name+' يطلق مهارته القصوى: '+u.n+'!','damage')}catch(e){}
+tn(60,30,1.8,'sawtooth',.16);nz(1.8,.35,120,900);tn(200,800,1.2,'sine',.06,.2);
+var ts=[600,1000,1400,1800,2200,2600];ts.forEach(function(t){setTimeout(function(){nz(.25,.35,4000,300);tn(140,40,.3,'sine',.3)},t)});
+setTimeout(function(){shake(document.body,14,500)},900);setTimeout(function(){shake(document.body,18,700)},1900);
+function draw(now){var t=now-T0;if(t>D){o.remove();busy=0;return}g.clearRect(0,0,W,H);
+ var p=t/D;g.fillStyle=u.c;g.globalAlpha=.10+.1*Math.sin(t/60);g.fillRect(0,0,W,H);g.globalAlpha=1;
+ ar.forEach(function(a){if(t/1000<a.t)return;a.y+=a.v/60;if(a.y>H+80){if(p<.6){a.y=-60-Math.random()*200;a.x=Math.random()*W}else return}
+  g.strokeStyle=u.c;g.lineWidth=a.w;g.shadowColor=u.c;g.shadowBlur=14;g.beginPath();var dx=u.k==='sand'?a.l*.5:u.k==='fire'?a.l*.15:0;g.moveTo(a.x,a.y);g.lineTo(a.x-dx,a.y-a.l);g.stroke();
+  g.fillStyle='#fff';g.beginPath();g.arc(a.x,a.y,a.w+1,0,6.3);g.fill()});g.shadowBlur=0;
+ if(p>.45&&!hitDone){hitDone=1;hitPlayer(en,u)}
+ requestAnimationFrame(draw)}
+requestAnimationFrame(draw)}
+function hitPlayer(en,u){try{var c=(window.getChar||getChar)();var raw=Math.round(c.maxHp*.22),sh=battleState.playerShield||0,ab=Math.min(sh,raw);battleState.playerShield=sh-ab;var d=raw-ab;c.hp=Math.max(1,c.hp-d);
+ try{addBattleLog('💥 '+u.n+' أصابتك بـ '+d+' ضرر'+(ab?' (الدرع امتص '+ab+')':'')+'!','damage')}catch(e){}
+ flash('#ff2a2a',700);var h=document.getElementById('battleHeroImage');if(h&&fx().burst)fx().burst(h,{emoji:[u.e,'💥'],count:16,spread:200,rise:30});
+ tn(80,25,.9,'sawtooth',.25);nz(.8,.5,2500,150);try{updateBattleUI()}catch(e){}}catch(e){console.warn(e)}}
+setInterval(function(){try{var bs=window.battleState||battleState,en=bs&&bs.enemy;if(!en||bs.isBattleOver||busy||bs.isProcessing)return;
+ var u=BU[en.id];if(!u||!(en.hp>0)||!(en.maxHp>0))return;if(doneFor===en)return;
+ if(en.hp<=en.maxHp*.5){doneFor=en;ultimate(en,u)}}catch(e){}},250);
+
+/* ===== مؤثرات صور القصة ===== */
+var css=document.createElement('style');css.textContent='.fxw{position:relative;overflow:hidden;border-radius:14px}.fxw>img{animation:fxKB 14s ease-in-out infinite alternate,fxPulse 3.2s ease-in-out infinite;transform-origin:50% 40%}.fxw canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.fxw .fxv{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.65))}.fxw .fxa{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;animation:fxAura 2.6s ease-in-out infinite}.fxw.t-dark>img{animation:fxKB 14s ease-in-out infinite alternate,fxPulse 3.2s ease-in-out infinite,fxGl 5s steps(1) infinite}.fxw.t-dragon>img{animation:fxKB 9s ease-in-out infinite alternate,fxPulse 2s ease-in-out infinite,fxShk 3.5s linear infinite}@keyframes fxKB{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(-1.5%,-1.5%)}}@keyframes fxPulse{0%,100%{filter:brightness(1) saturate(1)}50%{filter:brightness(1.18) saturate(1.25)}}@keyframes fxAura{0%,100%{opacity:.25}50%{opacity:.8}}@keyframes fxGl{0%,90%,100%{translate:0 0}92%{translate:-4px 1px;filter:hue-rotate(40deg)}95%{translate:5px -1px}}@keyframes fxShk{0%,86%,100%{translate:0 0}88%{translate:-5px 3px}90%{translate:6px -3px}92%{translate:-4px 2px}94%{translate:3px 0}}';document.head.appendChild(css);
+var TH={dark:{col:['#b84aff','#ff6bd6','#6a2cff'],aura:'radial-gradient(circle at 50% 55%,rgba(184,74,255,.55),transparent 60%)',dir:-1,flash:'#b84aff'},
+dragon:{col:['#ffffff','#bfefff','#7fd8ff'],aura:'radial-gradient(circle at 50% 40%,rgba(127,216,255,.5),transparent 65%)',dir:1,flash:'#bfefff',snow:1},
+gold:{col:['#ffe08a','#fff','#ffb347'],aura:'radial-gradient(circle at 50% 50%,rgba(255,210,100,.35),transparent 65%)',dir:-1,flash:'#ffd23f'}};
+function themeOf(pg,img){var s=img.src||'',id=pg.id;if(/ZKyFcxYj|Kz0rDrKr/.test(s))return'dragon';if(id==='pageHiddenQuest'||id==='pageCurse'||id==='pageCurseEffect')return'dark';return'gold'}
+function applyFx(pg,img){var box=img.parentNode;if(!box)return;var th=themeOf(pg,img),T=TH[th];box.classList.add('fxw',th==='dark'?'t-dark':th==='dragon'?'t-dragon':'t-gold');img.__fx=img.src;
+ [].forEach.call(box.querySelectorAll('canvas,.fxv,.fxa'),function(n){n.remove()});
+ var a=document.createElement('div');a.className='fxa';a.style.background=T.aura;var v=document.createElement('div');v.className='fxv';var cv=document.createElement('canvas');box.appendChild(a);box.appendChild(cv);box.appendChild(v);
+ var W=cv.width=box.clientWidth||360,H=cv.height=box.clientHeight||260,g=cv.getContext('2d'),P=[];for(var i=0;i<60;i++)P.push(mk(true));
+ function mk(r){return{x:Math.random()*W,y:T.dir<0?(r?Math.random()*H:H+10):(r?Math.random()*H:-10),r:1+Math.random()*(T.snow?3:2.5),v:(T.snow?30:25)+Math.random()*60,s:Math.random()*6,c:T.col[Math.floor(Math.random()*3)]}}
+ var fl=0,t0=performance.now();
+ function loop(now){if(!document.body.contains(cv)||!pg.classList.contains('active')||img.__fx!==img.src){cv.remove();return}
+  g.clearRect(0,0,W,H);var t=(now-t0)/1000;P.forEach(function(p,i){p.y+=T.dir*p.v/60;p.x+=Math.sin(t*1.5+p.s)*(T.snow?1.2:.6);if(p.y<-12||p.y>H+12||p.x<-12||p.x>W+12)P[i]=mk(false);g.globalAlpha=.55+.4*Math.sin(t*3+p.s);g.fillStyle=p.c;g.shadowColor=p.c;g.shadowBlur=10;g.beginPath();g.arc(p.x,p.y,p.r,0,6.3);g.fill()});g.globalAlpha=1;
+  if(Math.random()<.006&&!fl){fl=1;box.animate([{filter:'brightness(1)'},{filter:'brightness(2.2)'},{filter:'brightness(1)'}],{duration:260});if(th!=='gold'){nz(.5,.12,th==='dragon'?200:900,th==='dragon'?60:400);tn(th==='dragon'?70:300,th==='dragon'?30:120,.5,'sawtooth',.05)}setTimeout(function(){fl=0},900)}
+  requestAnimationFrame(loop)}
+ requestAnimationFrame(loop);
+ if(th==='dragon'){tn(70,28,1.8,'sawtooth',.14);nz(1.6,.3,100,700);setTimeout(function(){shake(box,10,600)},400)}
+ else if(th==='dark'){tn(220,110,1.5,'sine',.08);tn(233,117,1.5,'sine',.06);nz(1,.12,1500,300)}
+ else{tn(660,880,.5,'triangle',.05)}}
+setInterval(function(){try{var pg=document.querySelector('.page.active');if(!pg||!/Story|StageComplete|HiddenQuest|Curse/i.test(pg.id))return;var img=pg.querySelector('.story-image img');if(img&&img.complete&&img.__fx!==img.src)applyFx(pg,img)}catch(e){}},350);
+})();</script>
+
 </body>
 </html>
