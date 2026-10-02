@@ -53,8 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.14.0",
+  "version": "2.14.1",
   "history": [
+    {"version":"2.14.1","date":"2026-10-02","title":"نظام القلوب في المصنف","notes":["❤️ 3 قلوب لكل رتبة: كل خسارة تأخذ قلبًا واحدًا وتبقى المراحل المنتهية كما هي","💔 أنميشن ومؤثرات وصوت عند كسر القلب","🔄 عند نفاد القلوب يعود المسار للبداية وترجع القلوب 3","🏆 إكمال الرتبة وترقيتك للتالية يعيد القلوب كاملة","💾 القلوب تُحفظ محليًا وسحابيًا ولا تتأثر بالخروج أو إعادة المحاولة"]},
     {"version":"2.14.0","date":"2026-10-02","title":"إضافة نقاط المصنف ومتجر المصنف","notes":["⭐ عملة جديدة للمصنف (نقاط المصنف) مستقلة تمامًا عن Rating","💰 مكافآت: فوز +10 · Elite +20 · Boss +50 · إكمال الرتبة +100 · مكافأة Win Streak، والخسارة تخصم مبلغًا صغيرًا (قابل للتعديل) ولا ينزل الرصيد تحت صفر","🏪 متجر المصنف داخل واجهة PvP بخمسة أقسام","🚧 جميع المنتجات حاليًا قريبًا وغير قابلة للشراء","💾 حفظ نقاط المصنف محليًا وسحابيًا مع بيانات PvP، ولا تُصفَّر مع Reset الرانك","🔧 Config جاهز لإضافة المنتجات والرتب والمواسم مستقبلًا"]},
     {"version":"2.13.3","date":"2026-10-02","title":"الترقية بين الرانكات عبر المسار فقط","notes":["🏆 الارتقاء للرانك التالي صار بإكمال كل مراحل المسار المصنف وهزيمة الزعيم، وليس بالنقاط","🔢 حُذفت أرقام الحدود (+1000 وغيرها) من قائمة رتب PvP وحلّت محلها حالة كل رتبة: مكتمل / رتبتك / مقفل","📊 حُذف شريط التقدم؛ نقاط Rating صارت رقمًا فقط يزيد أو ينقص","✨ عند الفوز: عدّ تصاعدي للرقم مع تأثيرات وصوت وانفجار شرارات، دون ترقية","🎉 شاشة إكمال الرتبة تعرض الآن شارة الرانك الجديد مع احتفال"]},
     {"version":"2.13.2","date":"2026-10-02","title":"إصلاح إعادة ضبط موسم المصنف مع الحفظ السحابي","notes":["🔄 فرض تصفير المصنف بعد استرجاع الحفظ السحابي أيضًا حتى لا يعود الرانك القديم","🥉 الجميع يعود إلى البرونزي ويبدأ من 1/12 مع 3 فرص","⭐ تصفير التقدم السابق وWin Streak وبيانات الموسم","📊 إعادة Ranked Rating إلى 1000","💾 كتابة نتيجة التصفير الجديدة إلى الحفظ السحابي والمحلي دون المساس بباقي تقدم اللاعب"]},
@@ -1984,7 +1985,7 @@ window.ARCANA_CONFIG = {
 .rk-done .rk-sparks{position:absolute;inset:0;overflow:hidden;pointer-events:none}.rk-sparks i{position:absolute;top:-10px;width:8px;height:14px;border-radius:2px;animation:rkFall linear infinite}@keyframes rkFall{to{transform:translateY(110vh) rotate(720deg)}}
 .rk-trophy{font-size:64px;animation:rkBounce 1.2s infinite}@keyframes rkBounce{50%{transform:translateY(-10px) scale(1.1)}}.rk-unlock{margin:10px 0;padding:10px;border-radius:12px;background:linear-gradient(90deg,#6f4ac4,#c78cff);font-weight:1000;animation:rkFade 1s infinite alternate}
 </style>
-<style id="rkShopStyle">.rk-shop-view{display:none}.rk-shop-view.active{display:block}.rk-bal{margin-top:6px;font-size:18px;color:#ffd66b;font-weight:800}.rk-bal b,#pvpRkPts{display:inline-block;color:#ffd66b}.rk-pop{animation:rkPop .7s ease}@keyframes rkPop{30%{transform:scale(1.35);text-shadow:0 0 14px #ffd66b}}.rk-sec{margin:14px 0}.rk-sec h4{margin:0 0 8px;color:#e8ecf8;font-size:15px}.rk-sec h4 em{font-style:normal;font-size:12px;color:#8fa2bd;margin-inline-start:6px}.rk-prow{display:flex;gap:10px;flex-wrap:wrap}.rk-pcard{width:132px;max-width:44%;padding:12px 8px;border-radius:12px;background:rgba(20,26,40,.85);border:1px solid rgba(255,214,107,.22);box-shadow:0 0 12px rgba(255,214,107,.08);text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}.rk-pcard.comingSoon{opacity:.7;border-style:dashed}.rk-pi{font-size:28px}.rk-pcard b{font-size:13px;color:#dfe6f8}.rk-pcard span{font-size:12px;color:#ffd66b}.rk-pcard button{width:100%;padding:6px;border-radius:8px;border:0;background:#2a3350;color:#9aa6c4;font-size:12px;cursor:not-allowed}.rk-float{position:fixed;top:18%;left:50%;transform:translateX(-50%);z-index:2147483000;font-size:30px;font-weight:900;color:#ffd66b;text-shadow:0 0 18px rgba(255,190,50,.8);pointer-events:none;animation:rkFl 1.6s ease-out forwards}@keyframes rkFl{from{opacity:0;margin-top:30px}20%{opacity:1}to{opacity:0;margin-top:-50px}}</style>
+<style id="rkShopStyle">.rk-shop-view{display:none}.rk-shop-view.active{display:block}.rk-bal{margin-top:6px;font-size:18px;color:#ffd66b;font-weight:800}.rk-bal b,#pvpRkPts{display:inline-block;color:#ffd66b}.rk-pop{animation:rkPop .7s ease}@keyframes rkPop{30%{transform:scale(1.35);text-shadow:0 0 14px #ffd66b}}.rk-sec{margin:14px 0}.rk-sec h4{margin:0 0 8px;color:#e8ecf8;font-size:15px}.rk-sec h4 em{font-style:normal;font-size:12px;color:#8fa2bd;margin-inline-start:6px}.rk-prow{display:flex;gap:10px;flex-wrap:wrap}.rk-pcard{width:132px;max-width:44%;padding:12px 8px;border-radius:12px;background:rgba(20,26,40,.85);border:1px solid rgba(255,214,107,.22);box-shadow:0 0 12px rgba(255,214,107,.08);text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}.rk-pcard.comingSoon{opacity:.7;border-style:dashed}.rk-pi{font-size:28px}.rk-pcard b{font-size:13px;color:#dfe6f8}.rk-pcard span{font-size:12px;color:#ffd66b}.rk-pcard button{width:100%;padding:6px;border-radius:8px;border:0;background:#2a3350;color:#9aa6c4;font-size:12px;cursor:not-allowed}.rk-hfx{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(50,0,0,.6);pointer-events:none;animation:rkHin .3s ease,rkHout .5s 2.8s forwards}.rk-hrow{display:flex;gap:16px;font-size:56px}.rk-ht{font-size:28px;font-weight:900;color:#ff6b6b;text-shadow:0 0 16px rgba(255,60,60,.7)}.rk-hs{font-size:15px;color:#e8ecf8}@keyframes rkHin{from{opacity:0}}@keyframes rkHout{to{opacity:0}}.rk-float{position:fixed;top:18%;left:50%;transform:translateX(-50%);z-index:2147483000;font-size:30px;font-weight:900;color:#ffd66b;text-shadow:0 0 18px rgba(255,190,50,.8);pointer-events:none;animation:rkFl 1.6s ease-out forwards}@keyframes rkFl{from{opacity:0;margin-top:30px}20%{opacity:1}to{opacity:0;margin-top:-50px}}</style>
 </head>
 <body>
 <div id="arcanaBoot" role="status" aria-live="polite">
@@ -8260,11 +8261,12 @@ window.arcanaBoot={done:done};
     d.rankedProg={bronze:1,silver:1,gold:1,platinum:1,diamond:1,master:1};
     d.rankedCleared={bronze:false,silver:false,gold:false,platinum:false,diamond:false,master:false};
     d.rankedStats={};
-    d.rankedBotCache={};
+    d.rankedBotCache={};d.rankedHearts={};
     d.rankedSeasonResetId=RANKED_GLOBAL_RESET_ID;
     d.rankedSeasonResetAt=new Date().toISOString();
     return true;
   }
+  const RK_HEARTS=3;
   function rkInit(d){
     const __reset=rkApplyGlobalSeasonReset(d);
     if(!d.rankedProg||typeof d.rankedProg!=='object')d.rankedProg={};if(!d.rankedStats||typeof d.rankedStats!=='object')d.rankedStats={};if(!d.rankedCleared||typeof d.rankedCleared!=='object')d.rankedCleared={};if(!d.rankedBotCache||typeof d.rankedBotCache!=='object')d.rankedBotCache={};
@@ -8273,6 +8275,7 @@ window.arcanaBoot={done:done};
     if(!Number.isFinite(d.rankedStreak))d.rankedStreak=0;if(!Number.isFinite(d.rankedBestStreak))d.rankedBestStreak=0;
     const t=RANKED_ORDER[d.rankedTier];d.rankedProg[t]=clamp(Number(d.rankedProg[t]||1),1,RANKED_CONFIG[t].nodes);d.rankedStage=d.rankedProg[t];
     d.rankedHighest=Math.max(Number(d.rankedHighest||0),d.rankedUnlocked);
+    if(!d.rankedHearts||typeof d.rankedHearts!=="object")d.rankedHearts={};RANKED_ORDER.forEach(t=>{const h=Math.round(Number(d.rankedHearts[t]));d.rankedHearts[t]=Number.isFinite(h)&&h>=1?Math.min(h,RK_HEARTS):RK_HEARTS});
     if(__reset){
       try{ save(d); }catch(e){ console.warn('[Arcana] تعذر حفظ تصفير موسم المصنف',e); }
       window.__ARCANA_RANKED_GLOBAL_RESET=true;
@@ -8309,7 +8312,7 @@ window.arcanaBoot={done:done};
     const view=document.getElementById('pvpRankedView'),shell=view&&view.querySelector('.ranked-path-shell');
     if(shell){let bar=document.getElementById('rkTierBar');if(!bar){bar=document.createElement('div');bar.id='rkTierBar';shell.parentNode.insertBefore(bar,shell)}
       const pct=Math.round((stage-1)/N*100);
-      bar.innerHTML=`<div class="rk-head"><div class="rk-title">🏆 المصنف<br><b>${c.icon} ${c.name}</b></div><div class="rk-info"><span>التقدم: ${stage} / ${N}</span><span>🔥 Win Streak ${d.rankedStreak}</span><span>⭐ Rating ${d.rating} (${r.icon} ${r.name})</span></div></div><div class="rk-bar"><i style="width:${pct}%"></i></div><div class="rk-tabs">${RANKED_ORDER.map((t,i)=>`<button type="button" class="rk-tab ${i===ti?'on':''} ${i>d.rankedUnlocked?'lk':''}" onclick="window.rkPickTier(${i})">${i>d.rankedUnlocked?'🔒':RANKED_CONFIG[t].icon} ${RANKED_CONFIG[t].name}${d.rankedCleared[t]?' ✅':''}</button>`).join('')}</div>`}
+      bar.innerHTML=`<div class="rk-head"><div class="rk-title">🏆 المصنف<br><b>${c.icon} ${c.name}</b></div><div class="rk-info"><span>التقدم: ${stage} / ${N}</span><span>${'❤️'.repeat(d.rankedHearts[RANKED_ORDER[ti]])}${'🖤'.repeat(RK_HEARTS-d.rankedHearts[RANKED_ORDER[ti]])}</span><span>🔥 Win Streak ${d.rankedStreak}</span><span>⭐ Rating ${d.rating} (${r.icon} ${r.name})</span></div></div><div class="rk-bar"><i style="width:${pct}%"></i></div><div class="rk-tabs">${RANKED_ORDER.map((t,i)=>`<button type="button" class="rk-tab ${i===ti?'on':''} ${i>d.rankedUnlocked?'lk':''}" onclick="window.rkPickTier(${i})">${i>d.rankedUnlocked?'🔒':RANKED_CONFIG[t].icon} ${RANKED_CONFIG[t].name}${d.rankedCleared[t]?' ✅':''}</button>`).join('')}</div>`}
     const hi=document.getElementById('rankedHeaderIcon');if(hi){const bd=RANK_BADGES[c.name]||RANKS[ti].image;hi.innerHTML=bd?`<img src="${bd}" alt="${c.name}">`:c.icon}
     if(!nodes)return;
     nodes.innerHTML=Array.from({length:N},(_,i)=>{const n=i+1,ty=rkNodeType(tier,n),state=n<stage?'done':n===stage?'current':'locked',rw=rankedReward(tier,n,ty,d.rankedStreak);
@@ -8342,10 +8345,10 @@ window.arcanaBoot={done:done};
   function startRankedStage(){rkSnd('click');rkPreview()}
   /* ===== نتيجة المباراة ===== */
   function rkResolve(d,win,bot){rkInit(d);const tier=bot.rkTier||RANKED_ORDER[d.rankedTier],ti=RANKED_ORDER.indexOf(tier),c=RANKED_CONFIG[tier],node=bot.rkNode||1,s=rkSt(d,tier),res={gold:0,xp:0,rating:0,cleared:false,streak:0,tier:tier};
-    if(!win){s.l++;d.rankedStreak=0;d.rankedProg[tier]=1;Object.keys(d.rankedBotCache).forEach(k=>{if(k.indexOf(tier+':')===0)delete d.rankedBotCache[k]});d.rankedStage=1;setTimeout(()=>rkSnd('lose'),400);return res}
+    if(!win){s.l++;d.rankedStreak=0;const hl=(Number(d.rankedHearts[tier])||RK_HEARTS)-1;res.heartLost=true;if(hl<=0){d.rankedProg[tier]=1;d.rankedHearts[tier]=RK_HEARTS;res.pathReset=true;res.heartsLeft=0}else{d.rankedHearts[tier]=hl;res.heartsLeft=hl}Object.keys(d.rankedBotCache).forEach(k=>{if(k.indexOf(tier+':')===0)delete d.rankedBotCache[k]});d.rankedStage=d.rankedProg[tier];setTimeout(()=>rkSnd('lose'),400);return res}
     s.w++;d.rankedStreak++;d.rankedBestStreak=Math.max(d.rankedBestStreak,d.rankedStreak);s.bs=Math.max(s.bs,d.rankedStreak);s.n=Math.max(s.n,node);if(bot.rkType==='elite')s.e++;
     const rw=rankedReward(tier,node,bot.rkType,d.rankedStreak);res.gold=rw.gold;res.xp=rw.xp;res.rating=rw.rating;res.streak=d.rankedStreak;d.rankedBestStage=Math.max(Number(d.rankedBestStage||1),node);
-    if(node>=c.nodes){res.cleared=true;res.gold+=c.reward.done;res.xp+=Math.round(c.reward.done*.6);const first=!d.rankedCleared[tier];d.rankedCleared[tier]=true;d.rankedProg[tier]=1;
+    if(node>=c.nodes){res.cleared=true;res.gold+=c.reward.done;res.xp+=Math.round(c.reward.done*.6);const first=!d.rankedCleared[tier];d.rankedCleared[tier]=true;d.rankedProg[tier]=1;d.rankedHearts[tier]=RK_HEARTS;if(RANKED_ORDER[ti+1])d.rankedHearts[RANKED_ORDER[ti+1]]=RK_HEARTS;
       if(ti<RANKED_ORDER.length-1){if(d.rankedUnlocked<ti+1){d.rankedUnlocked=ti+1}d.rankedTier=ti+1}
       window.__rkDone={tier,ti,s:Object.assign({},s),boss:bot.name,bossImg:bot.image,first,next:RANKED_ORDER[ti+1]||null,bonus:c.reward.done};setTimeout(rkTierDone,2200)}
     else d.rankedProg[tier]=node+1;
@@ -8369,10 +8372,19 @@ window.arcanaBoot={done:done};
   function rkAward(type,cleared,streak){const R=RANKED_CURRENCY_CONFIG.rewards;const base=type==='boss'?R.bossWin:type==='elite'?R.eliteWin:R.normalWin;let sb=0;Object.keys(R.streakBonus).map(Number).sort((a,b)=>a-b).forEach(k=>{if(streak>=k)sb=R.streakBonus[k]});const rc=cleared?R.rankComplete:0;return{base,sb,rc,total:base+sb+rc}}
   const __rk0=rkResolve;
   rkResolve=function(d,win,bot){const res=__rk0.apply(this,arguments);try{if(!win&&bot&&!bot.__ptsPaid){bot.__ptsPaid=1;const cur=rkPts(d),loss=Math.min(cur,Math.max(0,Math.floor(Number(RANKED_CURRENCY_CONFIG.lossPenalty)||0)));d[RANKED_CURRENCY_CONFIG.key]=cur-loss;res.ptsLoss=loss}if(win&&bot&&!bot.__ptsPaid){bot.__ptsPaid=1;const a=rkAward(bot.rkType,res.cleared,res.streak);d[RANKED_CURRENCY_CONFIG.key]=rkPts(d)+a.total;res.pts=a.total;res.sb=a.sb;res.rc=a.rc;if(window.__rkDone)window.__rkDone.pts=a.total}}catch(e){console.warn('[Arcana] ranked points',e)}return res};
+
+  function rkHeartFx(rk){if(!rk||!rk.heartLost)return;const left=rk.heartsLeft||0;setTimeout(()=>{const o=document.createElement('div');o.className='rk-hfx';let h='';for(let i=0;i<RK_HEARTS;i++){const was=rk.pathReset?(i===0):(i<=left);h+=`<span class="rk-h${i===left?' brk':''}">${i<left?'❤️':(i===left?'❤️':'🖤')}</span>`}
+    o.innerHTML=`<div class="rk-hrow">${h}</div><div class="rk-ht">${rk.pathReset?'💀 خسرت كل القلوب!':'💔 -1 قلب'}</div><div class="rk-hs">${rk.pathReset?'يعود المسار للبداية':'المتبقي '+left+' / '+RK_HEARTS}</div>`;document.body.appendChild(o);
+    const b=o.querySelector('.brk');setTimeout(()=>{if(!b)return;b.textContent='💔';const r=b.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;b.animate([{transform:'scale(1.6) rotate(-10deg)'},{transform:'scale(1) rotate(6deg)',opacity:.5}],{duration:700,fill:'forwards'});
+      for(let k=0;k<14;k++){const p=document.createElement('span');p.textContent=k%2?'💔':'✦';p.style.cssText=`position:fixed;left:${x}px;top:${y}px;font-size:${12+Math.random()*14}px;color:#ff4d4d;z-index:2147483001;pointer-events:none`;document.body.appendChild(p);const a=Math.random()*6.28,d=60+Math.random()*110;p.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d+50}px) rotate(${Math.random()*360}deg)`,opacity:0}],{duration:900+Math.random()*400}).onfinish=()=>p.remove()}
+      try{document.body.animate([{transform:'translateX(0)'},{transform:'translateX(-9px)'},{transform:'translateX(9px)'},{transform:'translateX(-5px)'},{transform:'translateX(0)'}],{duration:420})}catch(_){}
+      try{if(typeof window.playTone==='function'){window.playTone(300,.25,'sawtooth',.08);setTimeout(()=>window.playTone(150,.4,'sawtooth',.09),150)}}catch(_){}},450);
+    if(rk.pathReset)setTimeout(()=>{const row=o.querySelector('.rk-hrow'),t=o.querySelector('.rk-hs');if(row)row.innerHTML='<span class="rk-h" style="animation:rkPop .7s">❤️</span>'.repeat(RK_HEARTS);if(t)t.textContent='🔄 عادت القلوب '+RK_HEARTS+'/'+RK_HEARTS},1700);
+    setTimeout(()=>o.remove(),3300)},900)}
   let __shown=null,__animUntil=0;
   function rkPaint(anim){const v=rkPts();['pvpRkPts','rkShopBal'].forEach(id=>{const e=$r(id);if(!e)return;const from=(anim&&__shown!=null)?__shown:v;if(!anim||from>=v){e.textContent=rkFmt(v);return}const t0=performance.now();__animUntil=Date.now()+1000;(function f(n){const p=Math.min(1,(n-t0)/900);e.textContent=rkFmt(Math.round(from+(v-from)*p));if(p<1)requestAnimationFrame(f)})(t0);e.classList.remove('rk-pop');void e.offsetWidth;e.classList.add('rk-pop')});__shown=v}
   function rkFloat(n){const e=document.createElement('div');e.className='rk-float';e.textContent='⭐ +'+n;document.body.appendChild(e);setTimeout(()=>e.remove(),1700);try{if(typeof window.playTone==='function')window.playTone(880,.1,'sine',.05)}catch(_){}}
-  window.__rkPtsGain=function(rk){if(rk&&rk.ptsLoss){__shown=rkPts()+rk.ptsLoss;setTimeout(()=>{const e=document.createElement('div');e.className='rk-float';e.style.color='#ff6b6b';e.style.textShadow='0 0 14px rgba(255,60,60,.7)';e.textContent='⭐ -'+rk.ptsLoss;document.body.appendChild(e);setTimeout(()=>e.remove(),1700);rkPaint(false)},500);return}if(!rk||!rk.pts)return;__shown=Math.max(0,rkPts()-rk.pts);setTimeout(()=>{rkFloat(rk.pts);rkPaint(true)},1200)};
+  window.__rkPtsGain=function(rk){try{rkHeartFx(rk)}catch(e){}if(rk&&rk.ptsLoss){__shown=rkPts()+rk.ptsLoss;setTimeout(()=>{const e=document.createElement('div');e.className='rk-float';e.style.color='#ff6b6b';e.style.textShadow='0 0 14px rgba(255,60,60,.7)';e.textContent='⭐ -'+rk.ptsLoss;document.body.appendChild(e);setTimeout(()=>e.remove(),1700);rkPaint(false)},500);return}if(!rk||!rk.pts)return;__shown=Math.max(0,rkPts()-rk.pts);setTimeout(()=>{rkFloat(rk.pts);rkPaint(true)},1200)};
   function rkCard(p){const st=p.status||'comingSoon',L={comingSoon:'🚧 قريبًا',locked:'🔒 مقفل',available:'شراء',soldOut:'نفدت الكمية'};const can=RANKED_SHOP_CONFIG.purchasesEnabled===true&&st==='available';return`<div class="rk-pcard ${st}"><div class="rk-pi">${esc(p.icon||'🎁')}</div><b>${esc(p.name||'')}</b><span>⭐ ${rkFmt(p.price||0)}</span><button ${can?'':'disabled'} data-id="${esc(p.id||'')}" onclick="return window.rankedShopBuy(this.dataset.id)">${L[st]||L.comingSoon}</button></div>`}
   function rkShopRender(){const el=$r('rkShopBody');if(!el)return;const C=RANKED_SHOP_CONFIG;el.innerHTML=Object.keys(C.categoryMeta).map(k=>{const m=C.categoryMeta[k],it=(C.categories[k]||[]).filter(p=>p&&p.enabled!==false);const cards=it.length?it.map(rkCard).join(''):'<div class="rk-pcard comingSoon"><div class="rk-pi">🔒</div><b>عنصر قريبًا</b><button disabled>🚧 قريبًا</button></div>';return`<div class="rk-sec"><h4>${m[0]} ${m[1]} <em>${it.length?it.length+' عنصر':'🚧 قريبًا'}</em></h4><div class="rk-prow">${cards}</div></div>`}).join('')}
   /* لا يوجد شراء في هذه النسخة: الدالة ترفض دائمًا ولا تخصم ولا تمنح شيئًا */
@@ -8651,7 +8663,7 @@ window.arcanaBoot={done:done};
       const btn=wOverlay?.querySelector('.result-btn');if(btn)btn.textContent='🏆 عرض نتيجة PvP';
       showBattleResult(true);
     } else {
-      const sub=dOverlay?.querySelector('.result-subtitle');if(sub)sub.textContent=match.mode==='ranked'?`خسرت أمام ${match.bot.name}. 🔄 عدت إلى النقطة الأولى — لا تُحتسب مكافأة للنقطة.${match.rk&&match.rk.ptsLoss?` · ⭐ -${match.rk.ptsLoss} نقاط مصنف`:''}`:`خسرت أمام ${match.bot.name}. +${gold} ذهب · +${xp} XP${ratingDelta?` · ${ratingDelta} Rating`:''}`;
+      const sub=dOverlay?.querySelector('.result-subtitle');if(sub)sub.textContent=match.mode==='ranked'?`خسرت أمام ${match.bot.name}. ${match.rk&&match.rk.pathReset?'💔 خسرت كل قلوبك! عاد المسار للبداية وعادت القلوب 3/3.':'💔 خسرت قلبًا! المتبقي '+(match.rk?match.rk.heartsLeft:'')+'/3 — مراحلك المنتهية محفوظة.'}${match.rk&&match.rk.ptsLoss?` · ⭐ -${match.rk.ptsLoss} نقاط مصنف`:''}`:`خسرت أمام ${match.bot.name}. +${gold} ذهب · +${xp} XP${ratingDelta?` · ${ratingDelta} Rating`:''}`;
       if(!__perf)showBattleResult(false);
     }
     renderPvpHome();
@@ -8686,7 +8698,7 @@ window.arcanaBoot={done:done};
               </div>
       <div id="pvpShopView" class="rk-shop-view"><div class="ranked-path-head"><div><h3>🏪 متجر المصنف</h3><div class="rk-bal">⭐ نقاط المصنف: <b id="rkShopBal">0</b></div></div><button class="pvp-main-btn" onclick="window.closeRankedShop()">⬅️ رجوع</button></div><div id="rkShopBody"></div></div>
       <div id="pvpRankedView" class="ranked-path-view">
-        <div class="ranked-path-head"><div><h3>🏆 المسار المصنّف</h3><div class="ranked-path-sub">اهزم كل بوت في طريقك. لا توجد خسارة مسموحة في الجولة: الخسارة تعيدك إلى النقطة الأولى.</div></div><div class="pvp-rank-icon" id="rankedHeaderIcon" style="width:58px;height:58px;font-size:28px">🥉</div></div>
+        <div class="ranked-path-head"><div><h3>🏆 المسار المصنّف</h3><div class="ranked-path-sub">اهزم كل بوت في طريقك. لكل رتبة 3 قلوب: كل خسارة تأخذ قلبًا وتبقى مراحلك المنتهية، وعند نفاد القلوب يعود المسار للبداية.</div></div><div class="pvp-rank-icon" id="rankedHeaderIcon" style="width:58px;height:58px;font-size:28px">🥉</div></div>
         <div class="ranked-path-shell">
           <div class="ranked-path-top"><div class="ranked-stat"><span>النقطة الحالية</span><b id="rankedCurrentStage">1 / 12</b></div><div class="ranked-goal" id="rankedRunStatus">🟡 ابدأ من النقطة الأولى</div><div class="ranked-stat"><span>أفضل نقطة</span><b id="rankedBestStage">1 / 12</b></div></div>
           <div class="ranked-path-scroll"><div class="ranked-path" id="rankedPathNodes"></div></div>
