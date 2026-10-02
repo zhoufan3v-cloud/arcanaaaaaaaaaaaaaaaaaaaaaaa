@@ -53,10 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.11.5",
+  "version": "2.11.4",
   "history": [
-    {"version":"2.11.5","date":"2026-10-01","title":"تثبيت نظام الضيف السحابي ونقل التقدم","notes":["☁️ الضيف يعمل بهوية سحابية مؤقتة ويحفظ تقدمه ومقتنياته أونلاين","🔄 عند إنشاء الحساب من داخل وضع الضيف يتم ترقية نفس الهوية بدل إنشاء حفظ جديد","📩 إذا كان تأكيد البريد مفعّلًا، يكمل اللاعب التحويل بعد تأكيد البريد بدون فقدان التقدم","🌍 بعد التحويل يصبح الحساب قابلًا للدخول من أي جهاز واسترجاع نفس التقدم" ]},
-    {"version":"2.11.4","date":"2026-10-01","title":"الضيف السحابي وتحويل الحساب","notes":["☁️ الضيف أصبح جلسة سحابية فعلية عند توفر Supabase ويحفظ تقدمه تلقائيًا","🔄 تحويل الضيف إلى حساب يحافظ على نفس التقدم والحفظ السحابي بدل إنشاء بداية جديدة","🌍 الحساب بعد التحويل يمكن استرجاعه من أي جهاز عبر تسجيل الدخول"]},
+    {"version":"2.11.4","date":"2026-10-01","title":"أسهم QTE بضرر مستقل وأصدقاء عبر السيرفر","notes":["🏹 دفاع QTE جديد: ضرر المهارة يتقسم على عدد الأسهم، وكل سهم له ضرره الخاص (Perfect 0% · Good 50% · Close 100% · Miss 120%)، ويُطبَّق مجموع الأسهم دفعة واحدة في النهاية","🎁 المكافأة الإضافية للمرحلة (ذهب/جرعة/مادة) تُمنح أول مرة فقط عند إكمال المرحلة","🌐 الأصدقاء عبر السيرفر: ابحث بالـ ID عن أي لاعب (ضيف أو حساب) على أي جهاز، وأرسل طلب صداقة واقبله (يتطلب تشغيل ملف SQL مرة واحدة)","⚖️ توازن اللاعب صار شريطًا واضحًا في واجهة القتال مثل العدو، ينقص مع أثر أحمر، ويتوهج لما يقل"]},
     {"version":"2.11.3","date":"2026-10-01","title":"تطوير التوازن والمقاومات وإصلاح اللاق","notes":["⚖️ زر جديد «توازن» في ترقية المستوى: +1 توازن، وتختار مقاومة (حرق / سم / تجميد / صعق) تزيد +5%، وحدها الأقصى 80%","🛡️ المقاومة تخفف الأثر فقط (فرصة الحالة ومدتها وضررها، وضرر العنصر قليلًا) بدون مناعة وبدون قوة زايدة","🔥 الأعداء يطبقون عليك حرق وسم وتجميد وصعق حسب عنصرهم، وتظهر تحت بطاقتك","🚀 إصلاح اللاق لما ينكسر التوازن مع قتل العدو أو الخسارة، مع مؤثر خاص لكسر توازنك وانميشن لموتك","📊 تفاصيل القتال تعرض التوازن والمقاومات والحالات"]},
     {"version":"2.11.2","date":"2026-10-01","title":"توازن الضرر ومؤثرات كسر التوازن","notes":["🛡️ دفاع QTE أوضح: Perfect = صفر ضرر، Good = نصف الضرر، Close = ضرر كامل، Miss = ضرر زايد، وضرر الأعداء أقوى شوي وضرر اللاعب أخف شوي","💥 كسر التوازن بمؤثرات قوية: BREAK! ضخمة، وميض، رجّة شاشة، حلقات ونجوم، ونجوم تدور فوق العدو وهو مترنّح","🟠 توازن كل وحش صار مختلف: الدبابات والزعماء توازنهم عالي وصعب الكسر، والقتلة والذئاب ينكسرون أسرع، ويرجع التوازن شوي كل دور","🎯 اللاعب: ضربة حرجة CRITICAL، شريط زخم ⚡ (عند 10 ضربة +15%)، توازن للاعب، Defense Mastery، زر 📊 تفاصيل القتال","📖 سجل الوحوش أعرض وأكبر والبطاقات أوضح"]},
     {"version":"2.11.1","date":"2026-10-01","title":"تحسين الواجهة وسجل الوحوش","notes":["✍️ نصوص معلومات الوحش (الحركة القادمة والسلبية) صارت بيضاء وواضحة فوق خلفية داكنة","📖 سجل الوحوش صار كتابًا حقيقيًا: صفحات تتقلب، بطاقات وحوش بإطار عنصري، توهج للزعماء، ميلان ثلاثي الأبعاد مع اللمس، وأصوات ومؤثرات"]},
@@ -213,32 +212,23 @@ window.ARCANA_CONFIG = {
     const {data:{session}}=await sb.auth.getSession();
     const current=window.__ARCANA_SESSION;
     if(session?.user){
-      const u=session.user;
-      const uid=u.id;
-      const isAnon=!!u.is_anonymous;
-      const display=u.user_metadata?.display_name || u.email?.split('@')[0] || (isAnon?'ضيف':'لاعب');
-      const next=isAnon
-        ? {mode:'guest',uid,provider:'supabase_guest',name:'ضيف'}
-        : {mode:'account',uid,provider:'supabase',name:display,email:u.email||''};
-      const matches = isAnon
-        ? (current?.mode==='guest' && current?.provider==='supabase_guest' && current?.uid===uid)
-        : (current?.mode==='account' && current?.provider==='supabase' && current?.uid===uid);
-      if(!matches){
+      const uid=session.user.id;
+      const display=session.user.user_metadata?.display_name || session.user.email?.split('@')[0] || 'لاعب';
+      const next={mode:'account',uid,provider:'supabase',name:display,email:session.user.email||''};
+      if(!current || current.mode!=='account' || current.uid!==uid || current.provider!=='supabase'){
         try{ localStorage.setItem('arcanaauth_session',JSON.stringify(next)); }catch(e){}
         location.reload();
         return;
       }
-      // استرجاع الحفظ بعد جاهزية اللعبة، للضيف السحابي والحساب السحابي معًا.
+      // الحساب موجود بالفعل؛ استرجع الحفظ بعد جاهزية بيانات اللعبة.
       if (window.__ARCANA_GAME_READY) window.arcanaCloudRestore();
       else window.addEventListener('arcanaGameReady',()=>window.arcanaCloudRestore(),{once:true});
-    } else if(current?.provider === 'supabase' || current?.provider === 'supabase_guest'){
+    } else if(current?.provider==='supabase'){
       localStorage.removeItem('arcanaauth_session');
       location.reload();
     }
     sb.auth.onAuthStateChange((_event,sess)=>{
-      const u=sess?.user;
-      const cur=window.__ARCANA_SESSION;
-      if(!u && (cur?.provider==='supabase' || cur?.provider==='supabase_guest')){
+      if(!sess?.user && window.__ARCANA_SESSION?.provider==='supabase'){
         localStorage.removeItem('arcanaauth_session');
         location.reload();
       }
@@ -2893,7 +2883,7 @@ window.arcanaBoot={done:done};
     function saveGameData(data) {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            if (!window.__ARCANA_CLOUD_RESTORING && typeof window.arcanaCloudSave === 'function' && ((window.__ARCANA_SESSION?.mode === 'account' && window.__ARCANA_SESSION?.provider === 'supabase') || (window.__ARCANA_SESSION?.mode === 'guest' && window.__ARCANA_SESSION?.provider === 'supabase_guest'))) {
+            if (!window.__ARCANA_CLOUD_RESTORING && window.__ARCANA_SESSION?.mode === 'account' && window.__ARCANA_SESSION?.provider === 'supabase' && typeof window.arcanaCloudSave === 'function') {
                 clearTimeout(__arcanaCloudSaveTimer);
                 const snapshot = JSON.parse(JSON.stringify(data));
                 __arcanaCloudSaveTimer = setTimeout(() => window.arcanaCloudSave(snapshot), 700);
@@ -8116,6 +8106,7 @@ window.arcanaBoot={done:done};
       const c=getChar(),reg=registry();
       reg[d.playerId]={id:d.playerId,name:c.name||'البطل',level:Number(c.level||1),rating:Number(d.rating||1000),server:d.server,avatar:'🗡️',ns:window.__ARCANA_NS||'',t:Date.now()};
       localStorage.setItem('arcanaauth_profiles',JSON.stringify(reg));
+      cloudPublish(d);
     }catch(e){}
   }
   function findPlayer(id){
@@ -8139,6 +8130,45 @@ window.arcanaBoot={done:done};
     return d;
   }
   function save(d){localStorage.setItem(KEY,JSON.stringify(d));publishProfile(d);if(window.arcanaQueueCloud)window.arcanaQueueCloud()}
+  /* ===== 🌐 الأصدقاء عبر السيرفر (Supabase): البحث بالـID + طلبات الصداقة بين الأجهزة (ضيف أو حساب) ===== */
+  var CLOUD_P='arcana_profiles',CLOUD_R='arcana_friend_requests',cloudPubT=null,cloudBusy=false;
+  async function cloudClient(){try{return window.__ARCANA_SUPABASE_READY?await window.__ARCANA_SUPABASE_READY:null}catch(e){return null}}
+  function cloudPublish(d){
+    clearTimeout(cloudPubT);
+    cloudPubT=setTimeout(async function(){
+      try{const sb=await cloudClient();if(!sb||!d||!d.playerId)return;const c=getChar();
+        const r=await sb.from(CLOUD_P).upsert({id:d.playerId,name:c.name||'البطل',level:Number(c.level||1),rating:Number(d.rating||1000),server:d.server||'sahara',avatar:'🗡️',updated_at:new Date().toISOString()});
+        if(r.error)console.warn('[Arcana] cloud profile:',r.error.message);
+      }catch(e){console.warn('[Arcana] cloud profile',e)}
+    },700);
+  }
+  async function cloudFind(id){
+    const sb=await cloudClient();if(!sb)return{err:'no-client'};
+    const r=await sb.from(CLOUD_P).select('*').eq('id',id).maybeSingle();
+    if(r.error)return{err:r.error.message};
+    if(!r.data)return{none:true};
+    const x=r.data;return{player:{id:x.id,name:x.name||'لاعب',level:Number(x.level||1),rating:Number(x.rating||1000),server:x.server||'sahara',avatar:x.avatar||'🗡️',cloud:true}};
+  }
+  async function cloudSync(){
+    if(cloudBusy||!window.__ARCANA_SESSION)return;cloudBusy=true;
+    try{
+      const sb=await cloudClient();if(!sb)return;const d=data();if(!d.playerId)return;let changed=false;
+      const inc=await sb.from(CLOUD_R).select('from_id,from_profile').eq('to_id',d.playerId).eq('status','pending');
+      if(!inc.error&&inc.data)inc.data.forEach(function(row){const fp=row.from_profile||{id:row.from_id,name:'لاعب',level:1,rating:1000,server:'sahara',avatar:'🗡️'};fp.id=row.from_id;
+        if(!d.friends.some(f=>f.id===fp.id)&&!d.requests.some(r=>r.id===fp.id)){d.requests.push(fp);changed=true}});
+      const out=await sb.from(CLOUD_R).select('to_id,to_profile,status').eq('from_id',d.playerId).in('status',['accepted','rejected']);
+      if(!out.error&&out.data)out.data.forEach(function(row){const oi=d.outgoing.findIndex(o=>o.id===row.to_id);if(oi<0)return;
+        const o=d.outgoing.splice(oi,1)[0];changed=true;
+        if(row.status==='accepted'&&!d.friends.some(f=>f.id===row.to_id)){const tp=row.to_profile||o;tp.id=row.to_id;d.friends.push(tp);try{toast('🤝 '+(tp.name||'لاعب')+' قبل طلب صداقتك!','ok')}catch(e){}}});
+      if(changed){save(d);const m=document.getElementById('socialModal');if(m&&m.classList.contains('show'))render();else renderRequests()}
+    }catch(e){console.warn('[Arcana] cloud sync',e)}finally{cloudBusy=false}
+  }
+  function cloudSetStatus(fromId,toId,status,toProfile){
+    cloudClient().then(function(sb){if(!sb)return;const u={status:status};if(toProfile)u.to_profile=toProfile;
+      return sb.from(CLOUD_R).update(u).eq('from_id',fromId).eq('to_id',toId)}).catch(function(e){console.warn(e)});
+  }
+  var cloudPubInit=setInterval(function(){if(window.__ARCANA_SESSION){clearInterval(cloudPubInit);try{publishProfile(data())}catch(e){}setTimeout(cloudSync,2500)}},2000);
+  setInterval(cloudSync,15000);
   function esc(v){return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   function rankFor(r){let cur=RANKS[0];for(const x of RANKS)if(r>=x.min)cur=x;return cur}
   function rankProgress(r){const cur=rankFor(r),next=RANKS.find(x=>x.min>cur.min);return next?{next,percent:clamp((r-cur.min)/(next.min-cur.min)*100,0,100)}:{next:null,percent:100}}
@@ -8259,9 +8289,9 @@ window.arcanaBoot={done:done};
   function showTab(tab){['friends','requests','servers','pvp','account'].forEach(t=>{const cap=t[0].toUpperCase()+t.slice(1),s=document.getElementById('social'+cap+'Section'),b=document.getElementById('social'+cap+'Tab');if(s)s.classList.toggle('active',t===tab);if(b)b.classList.toggle('active',t===tab)});render()}
   let tickTimer=null;
   window.showSocialTab=showTab;
-  window.openSocialPanel=function(tab='friends'){const m=document.getElementById('socialModal');if(m)m.classList.add('show');render();showTab(tab);if(tickTimer)clearInterval(tickTimer);tickTimer=setInterval(()=>{processOutgoing();tickServers()},1500)};
+  window.openSocialPanel=function(tab='friends'){const m=document.getElementById('socialModal');if(m)m.classList.add('show');render();showTab(tab);try{publishProfile(data());cloudSync()}catch(e){}if(tickTimer)clearInterval(tickTimer);tickTimer=setInterval(()=>{processOutgoing();tickServers()},1500)};
   window.closeSocialPanel=function(){const m=document.getElementById('socialModal');if(m)m.classList.remove('show');if(matchTimer)clearTimeout(matchTimer);if(tickTimer){clearInterval(tickTimer);tickTimer=null}};
-  window.addFriendById=function(raw){
+  window.addFriendById=async function(raw){
     const d=data();let id=String(raw||'').trim().toUpperCase().replace(/[\s_]/g,'');
     if(!id)return toast('اكتب ID اللاعب (مثال: ARC-7K4M92)','err');
     if(id.indexOf('ARC-')!==0)id=id.indexOf('ARC')===0?'ARC-'+id.slice(3):'ARC-'+id;
@@ -8270,10 +8300,21 @@ window.arcanaBoot={done:done};
     if(d.outgoing.some(f=>f.id===id))return toast('طلبك له قيد الانتظار','err');
     const ri=d.requests.findIndex(r=>r.id===id);
     if(ri>=0)return window.acceptFriend(ri);
-    const p=findPlayer(id);
-    if(!p)return toast('لم يُعثر على لاعب بهذا الـ ID. تأكد من كتابته.','err');
+    let p=findPlayer(id);
+    if(!p){
+      toast('🔎 جارٍ البحث عن اللاعب...','ok');
+      const cf=await cloudFind(id);
+      if(cf.player)p=cf.player;
+      else if(cf.err)return toast('تعذر الاتصال بالسيرفر: '+cf.err,'err');
+      else return toast('لم يُعثر على لاعب بهذا الـ ID. تأكد من كتابته، ومن أن صديقك فتح النسخة المحدّثة وصفحة الأصدقاء مرة واحدة.','err');
+    }
     const entry={id:p.id,name:p.name,level:p.level,rating:p.rating,server:p.server,avatar:p.avatar||'🗡️'};
-    if(p.real){
+    if(p.cloud){
+      const sb=await cloudClient();if(!sb)return toast('تعذر الاتصال بالسيرفر','err');
+      const r=await sb.from(CLOUD_R).upsert({from_id:d.playerId,to_id:p.id,from_profile:meProfile(d),to_profile:entry,status:'pending'},{onConflict:'from_id,to_id'});
+      if(r.error)return toast('تعذر إرسال الطلب: '+r.error.message,'err');
+      entry.cloud=true;
+    }else if(p.real){
       if(p.ns===(window.__ARCANA_NS||''))return toast('لا يمكنك إضافة نفسك','err');
       const o=otherSocial(p.ns)||Object.assign(defaults(),{playerId:p.id,server:p.server});
       o.requests=Array.isArray(o.requests)?o.requests:[];o.friends=Array.isArray(o.friends)?o.friends:[];
@@ -8289,7 +8330,7 @@ window.arcanaBoot={done:done};
   window.sendFriendRequest=function(){const input=document.getElementById('friendNameInput');const v=(input?.value||'').trim();if(!v)return toast('اكتب ID اللاعب أولًا','err');window.addFriendById(v);if(input)input.value=''};
   window.copyMyId=function(){const id=data().playerId;const done=()=>toast('📋 تم نسخ الـ ID: '+id,'ok');if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(id).then(done,done);else{const t=document.createElement('textarea');t.value=id;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}t.remove();done()}};
   window.joinServer=function(id){const d=data();if(d.server===id)return;d.server=id;save(d);toast(`${srvOf(id).emoji} انضممت إلى ${srvOf(id).name}`,'ok');render()};
-  window.cancelOutgoing=function(i){const d=data(),o=d.outgoing.splice(i,1)[0];if(o&&!o.sim){const reg=registry()[o.id];if(reg){const s=otherSocial(reg.ns);if(s){s.requests=(s.requests||[]).filter(r=>r.id!==d.playerId);saveOther(reg.ns,s)}}}save(d);render()};
+  window.cancelOutgoing=function(i){const d=data(),o=d.outgoing.splice(i,1)[0];if(o&&o.cloud)cloudSetStatus(d.playerId,o.id,'cancelled');if(o&&!o.sim){const reg=registry()[o.id];if(reg){const s=otherSocial(reg.ns);if(s){s.requests=(s.requests||[]).filter(r=>r.id!==d.playerId);saveOther(reg.ns,s)}}}save(d);render()};
   window.removeFriend=function(i){const d=data(),f=d.friends[i];if(!f)return;if(!confirm(`حذف ${f.name} من أصدقائك؟`))return;d.friends.splice(i,1);save(d);const reg=f.id&&registry()[f.id];if(reg){const s=otherSocial(reg.ns);if(s){s.friends=(s.friends||[]).filter(x=>x.id!==d.playerId);saveOther(reg.ns,s)}}render()};
   window.acceptFriend=function(i){
     const d=data(),r=d.requests.splice(i,1)[0];if(!r)return;
@@ -8297,9 +8338,10 @@ window.arcanaBoot={done:done};
     save(d);
     const reg=r.id&&registry()[r.id];
     if(reg){const o=otherSocial(reg.ns);if(o){o.outgoing=(o.outgoing||[]).filter(x=>x.id!==d.playerId);o.friends=Array.isArray(o.friends)?o.friends:[];if(!o.friends.some(f=>f.id===d.playerId))o.friends.push(meProfile(d));saveOther(reg.ns,o)}}
+    if(r.id)cloudSetStatus(r.id,d.playerId,'accepted',meProfile(d));
     toast(`🤝 ${r.name} أصبح صديقك!`,'ok');render();
   };
-  window.rejectFriend=function(i){const d=data(),r=d.requests.splice(i,1)[0];save(d);if(r&&r.id){const reg=registry()[r.id];if(reg){const o=otherSocial(reg.ns);if(o){o.outgoing=(o.outgoing||[]).filter(x=>x.id!==d.playerId);saveOther(reg.ns,o)}}}render()};
+  window.rejectFriend=function(i){const d=data(),r=d.requests.splice(i,1)[0];save(d);if(r&&r.id)cloudSetStatus(r.id,d.playerId,'rejected');if(r&&r.id){const reg=registry()[r.id];if(reg){const o=otherSocial(reg.ns);if(o){o.outgoing=(o.outgoing||[]).filter(x=>x.id!==d.playerId);saveOther(reg.ns,o)}}}render()};
   window.arcanaUpgradeGuest=function(){if(!confirm('سننقلك إلى شاشة إنشاء الحساب مع خيار نقل تقدمك الحالي. متابعة؟'))return;localStorage.removeItem('arcanaauth_session');location.reload()};
   function makeFriendBot(f){
     const base=getBaseStats(),t=BOT_TEMPLATES[hsh(f.id||f.name)%BOT_TEMPLATES.length],lvl=Math.max(1,Number(f.level)||base.level);
@@ -8510,91 +8552,13 @@ window.arcanaBoot={done:done};
   }
   const newUid = () => 'u' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
-  const GUEST_CONVERSION_KEY = 'arcana_guest_conversion_v1';
-  function readGuestConversion(){
-    try { const v=RAW.get(GUEST_CONVERSION_KEY); return v ? JSON.parse(v) : null; } catch(e){ return null; }
-  }
-  function writeGuestConversion(v){ try{ RAW.set(GUEST_CONVERSION_KEY,JSON.stringify(v)); }catch(e){} }
-  function clearGuestConversion(){ try{ RAW.remove(GUEST_CONVERSION_KEY); }catch(e){} }
-  function isCloudGuest(){ return window.__ARCANA_SESSION?.mode === 'guest' && window.__ARCANA_SESSION?.provider === 'supabase_guest'; }
-  function captureGuestSnapshot(){
-    try{ if(typeof saveCurrent==='function') saveCurrent(); }catch(e){}
-    let data=null;
-    try{ data=JSON.parse(RAW.get('arcana_game_data_v3') || 'null'); }catch(e){}
-    if(!data && typeof gameData==='object'){
-      try{ data=JSON.parse(JSON.stringify(gameData)); }catch(e){}
-    }
-    const extras=(typeof window.arcanaCollectExtras==='function') ? window.arcanaCollectExtras() : {};
-    return { data, extras };
-  }
-  async function promoteGuestUser(email,password,display){
-    const sb=await window.__ARCANA_SUPABASE_READY;
-    const {data:{session}}=await sb.auth.getSession();
-    const u=session?.user;
-    if(!u || !u.is_anonymous) throw new Error('هذه الجلسة ليست جلسة ضيف سحابية.');
-    const pending=readGuestConversion() || {};
-    // إذا كانت رسالة التحقق أرسلت سابقًا، فهذه المحاولة تكمل التحويل بإضافة كلمة المرور.
-    if(pending.email){
-      try{ await sb.auth.refreshSession(); }catch(e){}
-      const gu=(await sb.auth.getUser())?.data?.user || u;
-      const verified=!!(gu?.email_confirmed_at || gu?.confirmed_at);
-      if(!verified) throw new Error('أكد بريدك الإلكتروني أولًا، ثم اضغط «إكمال تحويل الضيف».');
-      const {data,error}=await sb.auth.updateUser({password, data:{display_name:pending.displayName||display||'لاعب'}});
-      if(error) throw error;
-      clearGuestConversion();
-      const name=data?.user?.user_metadata?.display_name || pending.displayName || display || email.split('@')[0] || 'لاعب';
-      return {uid:u.id,name,email:data?.user?.email||pending.email};
-    }
-    // نربط البريد أولًا حتى تبقى نفس هوية الضيف وبياناته السحابية.
-    const {data,error}=await sb.auth.updateUser({email,data:{display_name:display||'لاعب'}});
-    if(error) throw error;
-    const nu=data?.user;
-    const verified=!!(nu?.email_confirmed_at || nu?.confirmed_at);
-    if(!verified){
-      writeGuestConversion({email,display:display||'لاعب',displayName:display||'لاعب',startedAt:Date.now()});
-      throw new Error('تم إرسال رسالة تأكيد إلى بريدك. أكد البريد ثم عد إلى اللعبة واضغط «إكمال تحويل الضيف» لإضافة كلمة المرور.');
-    }
-    const out=await sb.auth.updateUser({password,data:{display_name:display||'لاعب'}});
-    if(out.error) throw out.error;
-    clearGuestConversion();
-    const name=out.data?.user?.user_metadata?.display_name || display || email.split('@')[0] || 'لاعب';
-    return {uid:u.id,name,email:out.data?.user?.email||email};
-  }
-  async function beginGuestOnline(){
-    if(!(CFG.SUPABASE_URL && CFG.SUPABASE_KEY)){
-      startSession({mode:'guest',name:'ضيف',provider:'guest_local'});
-      return;
-    }
-    try{
-      const sb=await window.__ARCANA_SUPABASE_READY;
-      let {data:{session}}=await sb.auth.getSession();
-      if(!session?.user || !session.user.is_anonymous){
-        const r=await sb.auth.signInAnonymously({options:{data:{display_name:'ضيف'}}});
-        if(r.error) throw r.error;
-        session=r.data?.session;
-      }
-      const u=session?.user;
-      if(!u?.id || !u.is_anonymous) throw new Error('تعذر إنشاء جلسة الضيف السحابية.');
-      LS.setItem('arcanaauth_session',JSON.stringify({mode:'guest',uid:u.id,provider:'supabase_guest',name:'ضيف'}));
-      location.reload();
-    }catch(e){
-      console.warn('Guest cloud auth failed:',e);
-      try{ LS.setItem('arcanaauth_session',JSON.stringify({mode:'guest',name:'ضيف',provider:'guest_local'})); }catch(x){}
-      try{ msg('تعذر تشغيل الضيف السحابي الآن، سيتم الدخول كضيف محليًا مؤقتًا.'); }catch(x){}
-      setTimeout(()=>location.reload(),450);
-    }
-  }
-
   function hasGuestProgress(){
     try { return !!RAW.get('arcana_game_data_v3'); } catch(e){ return false; }
   }
   function copyGuestProgress(uid){
     const prefix = 'acc_' + uid + ':';
     const keys = [];
-    for (let i = 0; i < LS.length; i++) {
-      const k = LS.key(i);
-      if (k && k.indexOf('arcana_') === 0) keys.push(k);
-    }
+    for (let i = 0; i < LS.length; i++) { const k = LS.key(i); if (k && k.indexOf('arcana_') === 0) keys.push(k); }
     keys.forEach(k => RAW.set(prefix + k, RAW.get(k)));
   }
   function startSession(sess){
@@ -8603,8 +8567,8 @@ window.arcanaBoot={done:done};
   }
 
   window.arcanaLogout = function(){
-    if (!confirm(window.__ARCANA_SESSION?.provider === 'supabase_guest' ? 'الخروج من الضيف؟ سيبقى الحفظ محليًا، لكن جلسة الضيف السحابية الحالية لن يمكن استعادتها بعد تسجيل الخروج. الأفضل تحويل الضيف إلى حساب أولًا.' : 'تسجيل الخروج؟ تقدمك محفوظ ويمكنك العودة إليه عند الدخول مجددًا.')) return;
-    if ((window.__ARCANA_SESSION?.provider === 'supabase' || window.__ARCANA_SESSION?.provider === 'supabase_guest') && window.arcanaSupabase) {
+    if (!confirm('تسجيل الخروج؟ تقدمك محفوظ ويمكنك العودة إليه عند الدخول مجددًا.')) return;
+    if (window.__ARCANA_SESSION?.provider === 'supabase' && window.arcanaSupabase) {
       window.arcanaSupabase.auth.signOut().finally(()=>{ LS.removeItem('arcanaauth_session'); location.reload(); });
     } else {
       LS.removeItem('arcanaauth_session');
@@ -8657,8 +8621,6 @@ window.arcanaBoot={done:done};
     if (!hasAcc && tab === 'login' && !render._init) { tab = 'register'; }
     render._init = true;
     const guestData = hasGuestProgress();
-    const cloudGuest = isCloudGuest();
-    const pendingGuest = readGuestConversion();
     body.innerHTML = `
       <div class="auth-tabs">
         <button class="auth-tab ${tab === 'login' ? 'active' : ''}" data-tab="login">تسجيل الدخول</button>
@@ -8667,20 +8629,18 @@ window.arcanaBoot={done:done};
       <label class="auth-field"><span>${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? 'البريد الإلكتروني' : 'اسم المستخدم'}</span><input id="authUser" ${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? 'type="email" maxlength="120" autocomplete="email" placeholder="you@example.com"' : 'maxlength="16" autocomplete="username" placeholder="مثال: Warrior_DZ"'}></label>
       ${tab === 'register' ? '<label class="auth-field"><span>الاسم الظاهر في اللعبة (اختياري)</span><input id="authDisplay" maxlength="20" placeholder="اسم بطلك"></label>' : ''}
       <label class="auth-field"><span>كلمة المرور</span><input id="authPass" type="password" autocomplete="${tab === 'login' ? 'current-password' : 'new-password'}" placeholder="4 أحرف على الأقل"></label>
-      ${tab === 'register' && guestData && !cloudGuest ? '<label class="auth-check"><input type="checkbox" id="authKeep" checked><span>نقل تقدمي الحالي في اللعبة إلى هذا الحساب (لن تخسر شيئًا)</span></label>' : ''}
-      ${cloudGuest && tab === 'register' ? '<div class="auth-check"><span>☁️ تقدم الضيف محفوظ سحابيًا وسيبقى معك عند تحويله إلى حساب.</span></div>' : ''}
-      ${pendingGuest && tab === 'register' ? '<div class="auth-check"><span>📩 تم إرسال التحقق إلى <b>'+esc(pendingGuest.email)+'</b>. أكد البريد ثم أرسل كلمة المرور لإكمال التحويل.</span></div>' : ''}
+      ${tab === 'register' && guestData ? '<label class="auth-check"><input type="checkbox" id="authKeep" checked><span>نقل تقدمي الحالي في اللعبة إلى هذا الحساب (لن تخسر شيئًا)</span></label>' : ''}
       <div class="auth-msg" id="authMsg"></div>
       <button class="auth-main" id="authGo">${tab === 'login' ? '⚔️ دخول' : '✨ إنشاء الحساب'}</button>
       <div class="auth-sep">أو</div>
       <button class="auth-guest" id="authGuest">👤 الدخول كضيف</button>
       <button class="auth-guest" id="authImport">📥 استعادة حساب من ملف نسخة احتياطية</button>
       <input type="file" id="authImportFile" accept=".json,application/json" style="display:none">
-      <div class="auth-foot">${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? (cloudGuest ? '☁️ ضيف سحابي: تقدمك ومقتنياتك تُحفظ أونلاين على هذا الجهاز. حوّله إلى حساب من «إنشاء حساب» ليصبح الدخول من أي جهاز ممكنًا.' : '☁️ الحساب السحابي: تقدمك ومقتنياتك تُحفظ في Supabase ويمكنك الدخول من أي جهاز.') : 'تقدم كل حساب يُحفظ في هذا المتصفح، وللنقل إلى جهاز آخر استخدم النسخة الاحتياطية.'}</div>`;
+      <div class="auth-foot">${(CFG.SUPABASE_URL && CFG.SUPABASE_KEY) ? '☁️ الحساب السحابي: تقدمك ومقتنياتك تُحفظ في Supabase ويمكنك الدخول من أي جهاز. ضيف اللعبة يبقى محليًا.' : 'تقدم كل حساب يُحفظ في هذا المتصفح، وعند تحديث اللعبة يعود كما هو إذا فتحتها من نفس المتصفح. لنقل حسابك إلى جهاز أو متصفح آخر: من صفحة الحساب اضغط «نسخة احتياطية» ثم استعدها من هنا.'}</div>`;
     body.querySelectorAll('.auth-tab').forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
     $('authGo').onclick = submit;
     body.querySelectorAll('.auth-field input').forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); }));
-    $('authGuest').onclick = beginGuestOnline;
+    $('authGuest').onclick = guest;
     $('authImport').onclick = () => $('authImportFile').click();
     $('authImportFile').onchange = e => { const f = e.target.files && e.target.files[0]; if (f) importBackup(f); };
   }
@@ -8698,58 +8658,17 @@ window.arcanaBoot={done:done};
       try {
         const sb = await window.__ARCANA_SUPABASE_READY;
         if (tab === 'login') {
-          const wasCloudGuest = isCloudGuest();
-          let guestSnap = null;
-          if (wasCloudGuest) guestSnap = captureGuestSnapshot();
-          const {data,error}=await sb.auth.signInWithPassword({email:user,password:pass});
+          const {data,error} = await sb.auth.signInWithPassword({email:user,password:pass});
           if (error) throw error;
           const u=data.user;
           const display=u?.user_metadata?.display_name || u?.email?.split('@')[0] || 'لاعب';
-          const pending=readGuestConversion();
           const sess={mode:'account',uid:u.id,provider:'supabase',name:display,email:u.email||user};
           const all=accounts();
-          all[u.id]={uid:u.id,provider:'supabase',username:u.email||user,displayName:display,email:u.email||user,created:all[u.id]?.created||Date.now()};
+          all[u.id]={uid:u.id,provider:'supabase',username:u.email||user,displayName:display,email:u.email||user,created:Date.now()};
           saveAccounts(all);
-          // إذا كان هذا الدخول جاء من ضيف سحابي في نفس الجهاز، انقل تقدمه اختياريًا للحساب الذي سجّل الدخول إليه.
-          if(wasCloudGuest && guestSnap?.data){
-            const move = confirm('أنت دخلت بحساب موجود. هل تريد نقل تقدم الضيف الحالي إليه؟\n\nسيتم استبدال حفظ هذا الحساب الحالي بتقدم الضيف.');
-            if(move){
-              await window.arcanaCloudSave(Object.assign({}, guestSnap.data, {__extras: guestSnap.extras || {}}));
-            }
-          } else if(pending?.data){
-            if(!confirm('يوجد تقدم محفوظ من جلسة ضيف سابقة. هل تريد نقله إلى هذا الحساب؟\n\nسيحل محل تقدم هذا الحساب الحالي إذا كان موجودًا.')){
-              clearGuestConversion();
-            }else{
-              const snap= pending.data;
-              await window.arcanaCloudSave(snap);
-              clearGuestConversion();
-            }
-          }
           startSession(sess);
         } else {
-          const display = ($('authDisplay')?.value || '').trim() || user.split('@')[0] || 'لاعب';
-          if (window.__ARCANA_SESSION?.mode === 'guest' && window.__ARCANA_SESSION?.provider === 'supabase_guest') {
-            const snap=captureGuestSnapshot();
-            if(snap.data){
-              try{ writeGuestConversion({ ...(readGuestConversion()||{}), email:user,displayName:display, data:Object.assign({},snap.data,{__extras:snap.extras}), guestUid:window.__ARCANA_SESSION.uid, startedAt:Date.now() }); }catch(e){}
-            }
-            try{
-              const out=await promoteGuestUser(user,pass,display);
-              const uid=out.uid;
-              const all=accounts();
-              all[uid]={uid,provider:'supabase',username:out.email||user,displayName:out.name||display,email:out.email||user,created:all[uid]?.created||Date.now()};
-              saveAccounts(all);
-              const sess={mode:'account',uid,provider:'supabase',name:out.name||display,email:out.email||user};
-              startSession(sess);
-            }catch(e){
-              busy(false);
-              render();
-              try{ $('authUser').value=user; }catch(x){}
-              try{ $('authPass').value=''; }catch(x){}
-              msg(e?.message || 'تعذر تحويل جلسة الضيف إلى حساب.');
-            }
-            return;
-          }
+          const display = ($('authDisplay').value || '').trim() || user.split('@')[0] || 'لاعب';
           const {data,error} = await sb.auth.signUp({email:user,password:pass,options:{data:{display_name:display}}});
           if (error) throw error;
           if (!data.user) throw new Error('تعذر إنشاء الحساب.');
@@ -8762,6 +8681,8 @@ window.arcanaBoot={done:done};
           const all=accounts();
           all[uid]={uid,provider:'supabase',username:user,displayName:display,email:user,created:Date.now()};
           saveAccounts(all);
+          const keep=$('authKeep');
+          if (keep && keep.checked) copyGuestProgress(uid);
           startSession({mode:'account',uid,provider:'supabase',name:display,email:user});
         }
       } catch(e) {
@@ -8797,7 +8718,7 @@ window.arcanaBoot={done:done};
   }
 
   function guest(){
-    return beginGuestOnline();
+    startSession({ mode: 'guest', name: 'ضيف' });
   }
 
   /* ---------- استعادة حساب من ملف ---------- */
@@ -9953,7 +9874,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   function readSession(){ return window.__ARCANA_SESSION || null; }
   function providerName(s){
     if (!s) return '—';
-    if (s.mode === 'guest') return s.provider === 'supabase_guest' ? 'ضيف سحابي ☁️' : 'ضيف';
+    if (s.mode === 'guest') return 'ضيف';
     return ({ local: 'حساب أركانا', supabase: 'حساب سحابي ☁️', google: 'Google', facebook: 'Facebook' })[s.provider] || 'حساب';
   }
   function fmtDate(ts){
@@ -9965,7 +9886,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     var header = document.querySelector('.content > .header') || document.querySelector('.header');
     if (!header || $('arcanaAcctBar')) return;
     var guest = s.mode === 'guest';
-    var guestCloud = guest && s.provider === 'supabase_guest';
     var acc = (window.arcanaGetAccount && window.arcanaGetAccount()) || null;
     var name = (acc && acc.displayName) || s.name || (guest ? 'ضيف' : 'لاعب');
 
@@ -9976,7 +9896,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         '<span class="ac-txt"><span class="ac-name">' + esc(name) + '</span><span class="ac-sub">' + (guest ? '👤 تلعب كضيف' : '🟢 مسجّل الدخول · ' + esc(providerName(s))) + '</span></span>' +
         '<span class="ac-arrow">▼</span>' +
       '</button>' +
-      '<span id="arcanaSaveState" class="' + (guest ? 'guest' : '') + '">' + (guestCloud ? '☁️ الضيف محفوظ سحابيًا' : (guest ? '⚠️ التقدم محفوظ على هذا المتصفح فقط' : (s.provider === 'supabase' ? '☁️ التقدم محفوظ في السحابة' : '💾 يُحفظ تلقائيًا على هذا الجهاز'))) + '</span>' +
+      '<span id="arcanaSaveState" class="' + (guest ? 'guest' : '') + '">' + (guest ? '⚠️ التقدم محفوظ على هذا المتصفح فقط' : (s.provider === 'supabase' ? '☁️ التقدم محفوظ في السحابة' : '💾 يُحفظ تلقائيًا على هذا الجهاز')) + '</span>' +
       '<div id="arcanaAcctPanel" role="dialog"></div>';
     header.parentNode.insertBefore(bar, header);
 
@@ -9993,12 +9913,12 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       if (acc && acc.created) rows.push(['تاريخ الإنشاء', fmtDate(acc.created)]);
       rows.push(['الشخصية الحالية', esc(char.name || '—') + ' · ' + esc(char.lvl || '')]);
       rows.push(['الذهب', '💰 ' + esc(char.gold || '0')]);
-      rows.push(['مكان الحفظ', guestCloud ? 'السحابة ☁️ (جلسة ضيف)' : (guest ? 'هذا المتصفح (مشترك)' : (s.provider === 'supabase' ? 'السحابة ☁️' : 'مساحة مستقلة لحسابك'))]);
+      rows.push(['مكان الحفظ', guest ? 'هذا المتصفح (مشترك)' : (s.provider === 'supabase' ? 'السحابة ☁️' : 'مساحة مستقلة لحسابك')]);
       if (window.ARCANA_VERSION) rows.push(['إصدار اللعبة', 'v' + esc(window.ARCANA_VERSION)]);
       panel.innerHTML =
         '<h4>' + (guest ? '👤 وضع الضيف' : '🪪 معلومات حسابك') + '</h4>' +
         rows.map(function(r){ return '<div class="ap-row"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('') +
-        (guest ? (guestCloud ? '<div class="ap-note">☁️ تقدمك محفوظ أونلاين كضيف مؤقت. أنشئ حسابًا لترقية نفس الحفظ إلى حساب دائم.</div>' : '<div class="ap-note">⚠️ أنت تلعب كضيف محلي. أنشئ حسابًا لحفظ تقدمك بشكل دائم عبر الأجهزة.</div>') : '') +
+        (guest ? '<div class="ap-note">⚠️ أنت تلعب كضيف. أنشئ حسابًا لتفصل تقدمك عن غيرك ولا تخسره.</div>' : '') +
         '<div class="ap-btns">' +
           '<button type="button" data-a="acc">🪪 صفحة الحساب</button>' +
           (guest ? '<button type="button" data-a="up">✨ إنشاء حساب</button>' : '<button type="button" data-a="bk">💾 نسخة احتياطية</button>') +
@@ -10316,6 +10236,15 @@ window.arcanaCombat={applyStatusEffect:applyStatusEffect,removeStatusEffect:remo
 #acp .bar{flex:1;height:7px;border-radius:7px;background:rgba(255,255,255,.14);overflow:hidden}
 #acp .bar i{display:block;height:100%;transition:width .3s}
 #acp .mx i{box-shadow:0 0 12px #ffd23f}
+#acp .pbr{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:13px;color:#fff!important;font-weight:800}
+#acp .pbar{position:relative;flex:1;height:12px;border-radius:8px;background:rgba(255,255,255,.14);overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+#acp .pbar u{position:absolute;top:0;bottom:0;right:0;width:100%;background:#ff5d6c;text-decoration:none;transition:width .9s ease .35s}
+#acp .pbar i{position:absolute;top:0;bottom:0;right:0;width:100%;background:linear-gradient(90deg,#ffb347,#fff3b0);transition:width .35s}
+#acp .pbar.low i{background:linear-gradient(90deg,#ff4d5e,#ffb347);animation:acpLow .7s infinite alternate}
+#acp .pbar b{position:absolute;inset:0;display:grid;place-items:center;font-size:10px;line-height:1;color:#fff;text-shadow:0 1px 2px #000,0 0 4px #000;z-index:2;direction:ltr}
+#acp .pbr.hit .pbar{animation:acpHit .35s}
+@keyframes acpLow{to{filter:brightness(1.45)}}
+@keyframes acpHit{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 #acp button{margin-top:5px;padding:3px 10px;border-radius:9px;border:1px solid #3b5178;background:#16213a;color:#fff;font:inherit;cursor:pointer}
 #acxDet{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:rgba(3,5,12,.85);direction:rtl;color:#fff}
 #acxDet.on{display:flex}
@@ -10410,7 +10339,16 @@ function deathFx(){var c=getChar();if(M.dd||!c||c.hp>0)return;M.dd=1;var h=docum
 function pui(){var bs=battleState,t=bs.turnCounter||0;if(t<lt)rs();lt=t;var pm=PM();if(M.pm!==pm){M.ps=Math.min(pm,M.ps+Math.max(0,pm-M.pm));M.pm=pm}
  var a=document.getElementById('acp'),h=document.getElementById('battleHeroEnergy');
  if(!a&&h){a=document.createElement('div');a.id='acp';h.parentNode.parentNode.insertBefore(a,h.parentNode.nextSibling);a.onclick=function(e){if(e.target.tagName==='BUTTON')det()}}
- if(a)a.innerHTML='<div class="r">🟠 التوازن<div class="bar"><i style="width:'+Math.round(M.ps/M.pm*100)+'%;background:#ffb347"></i></div>'+M.ps+'/'+M.pm+'</div><div class="r'+(M.mo>=10?' mx':'')+'">🔥 الزخم<div class="bar"><i style="width:'+M.mo*10+'%;background:linear-gradient(90deg,#ff6a3d,#ffd23f)"></i></div>'+M.mo+'/10</div>'+stRow()+'<button>📊 تفاصيل القتال</button>';
+ if(a){
+  var pc=Math.max(0,Math.min(100,Math.round(M.ps/Math.max(1,M.pm)*100)));
+  if(!a.__pb){a.innerHTML='<div class="pbr"><span>⚖️ التوازن</span><div class="pbar"><u></u><i></i><b></b></div></div><div class="acpRest"></div>';a.__pb=1;a.__pp=pc}
+  var row=a.querySelector('.pbr'),bar=a.querySelector('.pbar'),fi=bar.querySelector('i'),gh=bar.querySelector('u');
+  fi.style.width=pc+'%';bar.querySelector('b').textContent=M.ps+'/'+M.pm;bar.classList.toggle('low',pc<=30);
+  if(pc>=a.__pp){gh.style.transition='none';gh.style.width=pc+'%';void gh.offsetWidth;gh.style.transition=''}
+  else{gh.style.width=pc+'%';row.classList.remove('hit');void row.offsetWidth;row.classList.add('hit')}
+  a.__pp=pc;
+  a.querySelector('.acpRest').innerHTML='<div class="r'+(M.mo>=10?' mx':'')+'">🔥 الزخم<div class="bar"><i style="width:'+M.mo*10+'%;background:linear-gradient(90deg,#ff6a3d,#ffd23f)"></i></div>'+M.mo+'/10</div>'+stRow()+'<button>📊 تفاصيل القتال</button>';
+ }
  var im=document.getElementById('battleEnemyImage');if(im)im.classList.toggle('acx-dizzy',!!(bs.enemy&&bs.enemy.__stun>0))}
 function det(){var g=function(i){var e=document.getElementById(i);return e?e.textContent:'-'},o=document.getElementById('acxDet');
  if(!o){o=document.createElement('div');o.id='acxDet';document.body.appendChild(o)}
