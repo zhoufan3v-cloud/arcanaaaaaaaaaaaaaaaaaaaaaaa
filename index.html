@@ -9714,12 +9714,24 @@ function E(k){return EL.filter(function(x){return x.k===k})[0]}
 /* ---- توليد الوحش حسب لفل اللاعب والصعوبة والدور ---- */
 function build(el,i,df){var c=ch(),d=C.diff[df],r=C.roles[ROLE[i]],e=E(el),b=e.m[i],P=pstat(),pw=d.pow,id='mine_'+el+'_'+i+'_'+df;
  var A=Math.max(5,Math.round(P.hp*C.hitPct*pw*r.atk)),k=d.sk;
- var sk=[{name:'ضربة '+e.noun,dmg:Math.round(A*.9*k),type:'attack'},{name:(i==1?'نفَس ':i==2?'سحر ':'هجمة ')+e.noun,dmg:Math.round(A*1.35*k),type:'attack'},{name:'درع '+e.noun,defBoost:Math.max(5,Math.round(P.def*.5)),type:'defense'}];
- for(var h=0;h<d.heavy;h++)sk.push({name:'انفجار '+e.noun,dmg:Math.round(A*1.8*k),type:'attack'});
+ var EN={
+  fire:[['مخلب اللهب',.9,'🔥','burnDamage'],['قذف الجمر',1.18,'🔥','burnDamage'],['انفجار الجحيم',1.55,'💥','heavy'],['درع اللهب',0,'🛡️','def']],
+  ice:[['رمح الصقيع',.88,'❄️','slow'],['موجة الجليد',1.2,'❄️','slow'],['عاصفة البلور',1.5,'💎','heavy'],['حاجز الجليد',0,'🛡️','def']],
+  poison:[['لدغة سامة',.9,'☠️','poisonDamage'],['سحابة السم',1.15,'☠️','poisonDamage'],['مطر السموم',1.48,'☠️','heavy'],['درع السم',0,'🛡️','def']],
+  dark:[['نصل الظلال',.92,'🌑','curse'],['موجة العتمة',1.2,'🌑','curse'],['سقوط الفراغ',1.52,'🕳️','heavy'],['حجاب الظلام',0,'🛡️','def']],
+  wind:[['شفرة الريح',.9,'🌪️','break'],['دوامة العاصفة',1.18,'🌪️','break'],['إعصار قاطع',1.5,'🌪️','heavy'],['حاجز الرياح',0,'🛡️','def']],
+  lightning:[['لسعة البرق',.9,'⚡','stunChance'],['سلسلة الصواعق',1.2,'⚡','stunChance'],['غضب الرعد',1.55,'⚡','heavy'],['درع الرعد',0,'🛡️','def']],
+  holy:[['رمح النور',.9,'✨','holy'],['انفجار مقدس',1.2,'✨','holy'],['حكم السماء',1.5,'☀️','heavy'],['درع النور',0,'🛡️','def']]
+ }[el]||[['هجوم '+e.noun,.9,e.i,'basic'],['ضربة '+e.noun,1.2,e.i,'basic'],['انفجار '+e.noun,1.5,e.i,'heavy'],['درع '+e.noun,0,'🛡️','def']];
+ var sk=EN.slice(0,3).map(function(x){return {name:x[0],dmg:Math.round(A*x[1]*k),type:'attack',icon:x[2],element:el,effect:x[3]};});
+ sk.push({name:EN[3][0],defBoost:Math.max(5,Math.round(P.def*.55)),type:'defense',icon:'🛡️',element:el,effect:'def'});
+ for(var h=0;h<d.heavy;h++)sk.push({name:'غضب '+e.noun,dmg:Math.round(A*1.8*k),type:'attack',icon:e.i,element:el,effect:'heavy'});
  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><defs><radialGradient id='g' cx='50%' cy='40%'><stop offset='0' stop-color='"+e.c+"' stop-opacity='.55'/><stop offset='1' stop-color='#05060d'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/></svg>";
  var mo={id:id,rank:'منجم '+e.n,name:b[0],title:d.ic+' '+d.n,icon:e.i,card:b[1],image:b[1],storyImage:b[1],battleBg:'data:image/svg+xml,'+encodeURIComponent(svg),
   hp:Math.round(Math.max(P.atk*C.hpHits,P.hp)*pw*r.hp),atk:A,def:Math.max(1,Math.round(P.def*pw*r.def)),spd:30+i*6,skills:sk,xp:d.xp,gold:d.gold,lvl:Math.max(1,P.lv+d.lv),
-  mine:{el:el,df:df,i:i}};
+  balanceMax:Math.max(35,Math.round((P.def*1.35+ A*.55 + Math.max(P.hp,A*8)*.055) * (i===1?1.28:(i===2?.88:1)))),
+  balanceRate:i===1?.9:(i===2?1.12:1),
+  mine:{el:el,df:df,i:i,weak:el==='fire'?['ice']:el==='ice'?['fire']:el==='poison'?['holy']:el==='dark'?['holy']:el==='wind'?['lightning']:el==='lightning'?['wind']:el==='holy'?['dark']:[],res:[el]}};
  var a=window.ARCANA_MINE_MONSTERS,j=a.findIndex(function(x){return x.id===id});if(j>-1)a[j]=mo;else a.push(mo);
  try{MONSTER_ELEMENT[id]=el}catch(x){}return mo}
 function pstat(){var c=ch();return{hp:Number(c.maxHp)||200,atk:Number(c.atk)||15,def:Number(c.def)||10,lv:Number(c.level)||1}}
@@ -10544,7 +10556,19 @@ arena_shadow_assassin:D('dark',['fire'],['dark'],60,1,'Assassin','الضربة �
 arena_king:D('holy',['dark'],['holy'],150,.7,'Boss','حكم الملك','تحت 50% ضرر ودفاع أعلى',[[.5,'👑 حكم الملك!',1.15,1.15,1,1]]),
 special_volcanic:D('fire',['ice'],['fire'],260,.5,'Boss','غضب البركان','يشتد عند 65% وعند 35%',[[.65,'🌋 ثوران صغير!',1.08,1,1,1],[.35,'🔥 غضب البركان!',1.15,1,1,.8]])
 };
-function prof(e){return e&&P[e.id]||null}
+function prof(e){
+ if(!e)return null;
+ if(P[e.id])return P[e.id];
+ /* ⛏️ وحوش مناجم العناصر: تستخدم نفس Combat Profile المركزي */
+ if(e.mine){
+  var mm=e.mine, ai=mm.i===1?'Tank':(mm.i===2?'Mage':'Berserker');
+  var pn=mm.i===1?'حارس '+(e.title||'العنصر'):mm.i===2?'ساحر '+(e.title||'العنصر'):'هجوم '+(e.title||'العنصر');
+  var pd=mm.i===1?'توازن مرتفع ودفاع ثقيل':mm.i===2?'يجمع الطاقة للمهارات العنصرية الأقوى':'ضغط هجومي وحالة عنصرية مستمرة';
+  var sm=Math.max(35,Number(e.balanceMax)||Math.round((Number(e.def)||5)*1.35+(Number(e.atk)||10)*.55+(Number(e.maxHp)||e.hp||100)*.055));
+  return {e:mm.el,w:mm.weak||[],r:mm.res||[],sm:sm,sr:mm.balanceRate||1,ai:ai,pn:pn,pd:pd,ph:[],ls:mm.i===1?1:0};
+ }
+ return null;
+}
 function T(f,d,t,v,w){try{window.arcanaSfx.tone(f,d,t,v,w||0)}catch(e){}}
 function log(m,t){try{addBattleLog(m,t||'')}catch(e){}}
 function cx(){try{return JSON.parse(localStorage.getItem('arcana_codex_v1')||'{}')}catch(e){return{}}}
