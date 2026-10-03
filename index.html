@@ -53,9 +53,10 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.15.0",
+  "version": "2.15.1",
   "history": [
-    {"version":"2.15.0","date":"2026-10-03","title":"مناجم العناصر","notes":["⛏️ زر جديد «مناجم العناصر» تحت الوحوش الخاصة: 7 عناصر × 3 وحوش × 3 صعوبات","⚡ طاقة العناصر 10/10: معركة = 1 طاقة، +1 كل دقيقتين وتعمل حتى وأنت خارج اللعبة","🧩 80% لسقوط قطعة عنصر، والصعوبة تغيّر الكمية والموارد والذهب وفرصة الحجر الكامل","🔮 10 قطع = حجر عنصر، وتطوير I→V بالقطع (V يحتاج حجرًا إضافيًا)","💾 الحفظ ضمن بيانات اللاعب (محلي وسحابي)","🔧 كل القيم في ARCANA_MINES_CONFIG"]},
+    {"version":"2.15.1","date":"2026-10-03","title":"مناجم العناصر: ورشة الأحجار وصعوبة حسب مستواك","notes":["🔮 صناعة وتطوير الأحجار صارت في ورشة التطوير (تبويب «أحجار العناصر»)","🎚️ الصعوبة تُبنى على قوتك الفعلية: سهلة أضعف منك، عادية بنفس مستواك، صعبة أقوى منك مع مكافآت أكبر","📊 كل صعوبة لها نسب خاصة: موارد، كمية القطع، حجر كامل","↔️ العناصر والوحوش والصعوبات مرتبة بالعرض في صف واحد وواجهات أجمل"]},
+    {"version":"2.15.0","date":"2026-10-03","title":"مناجم العناصر","notes":["⛏️ زر «مناجم العناصر»: 7 عناصر × 3 وحوش × 3 صعوبات","⚡ طاقة العناصر 10/10 تعود +1 كل دقيقتين","🧩 80% لسقوط قطعة، و10 قطع = حجر، وتطوير I→V","💾 الحفظ محلي وسحابي"]},
     {"version":"2.14.0","date":"2026-10-02","title":"إضافة نقاط المصنف ومتجر المصنف","notes":["⭐ عملة جديدة للمصنف (نقاط المصنف) مستقلة تمامًا عن Rating","💰 مكافآت: فوز +10 · Elite +20 · Boss +50 · إكمال الرتبة +100 · مكافأة Win Streak، والخسارة تخصم مبلغًا صغيرًا (قابل للتعديل) ولا ينزل الرصيد تحت صفر","🏪 متجر المصنف داخل واجهة PvP بخمسة أقسام","🚧 جميع المنتجات حاليًا قريبًا وغير قابلة للشراء","💾 حفظ نقاط المصنف محليًا وسحابيًا مع بيانات PvP، ولا تُصفَّر مع Reset الرانك","🔧 Config جاهز لإضافة المنتجات والرتب والمواسم مستقبلًا"]},
     {"version":"2.13.3","date":"2026-10-02","title":"الترقية بين الرانكات عبر المسار فقط","notes":["🏆 الارتقاء للرانك التالي صار بإكمال كل مراحل المسار المصنف وهزيمة الزعيم، وليس بالنقاط","🔢 حُذفت أرقام الحدود (+1000 وغيرها) من قائمة رتب PvP وحلّت محلها حالة كل رتبة: مكتمل / رتبتك / مقفل","📊 حُذف شريط التقدم؛ نقاط Rating صارت رقمًا فقط يزيد أو ينقص","✨ عند الفوز: عدّ تصاعدي للرقم مع تأثيرات وصوت وانفجار شرارات، دون ترقية","🎉 شاشة إكمال الرتبة تعرض الآن شارة الرانك الجديد مع احتفال"]},
     {"version":"2.13.2","date":"2026-10-02","title":"إصلاح إعادة ضبط موسم المصنف مع الحفظ السحابي","notes":["🔄 فرض تصفير المصنف بعد استرجاع الحفظ السحابي أيضًا حتى لا يعود الرانك القديم","🥉 الجميع يعود إلى البرونزي ويبدأ من 1/12 مع 3 فرص","⭐ تصفير التقدم السابق وWin Streak وبيانات الموسم","📊 إعادة Ranked Rating إلى 1000","💾 كتابة نتيجة التصفير الجديدة إلى الحفظ السحابي والمحلي دون المساس بباقي تقدم اللاعب"]},
@@ -2116,7 +2117,6 @@ window.arcanaBoot={done:done};
                 <span class="tile-text"><b>مناجم العناصر</b><small>اجمع القطع واصنع أحجار العناصر</small></span>
             </button>
 
-            <!-- ======== ⛏️ صفحة مناجم العناصر ======== -->
             <div id="pageMines" class="page"><div id="mnBody"></div></div>
 
             <!-- ======== ⚔️ صفحة ساحة النخبة ======== -->
@@ -9626,10 +9626,11 @@ var MINES_CONFIG=window.ARCANA_MINES_CONFIG={
  dropChance:0.8, fragsPerStone:10, maxLevel:5,
  upgrade:[{frags:10},{frags:15},{frags:20},{frags:30,stones:1}],      // I→II … IV→V
  bonusDmgPct:[4,8,13,19,26],                                          // Bonus Damage لكل مستوى
+ hpHits:10, hitPct:.09,   // HP العدو ≈ هجومك×hpHits ، ضرر ضربته ≈ hitPct من HP لاعبك (× قوة الصعوبة)
  diff:{
-  easy:{n:'🟢 سهلة',hp:.7,atk:.7,def:.7,sk:.8,heavy:0,frag:[1,1],res:[1,1],full:.005,gold:50,xp:40},
-  normal:{n:'🟡 عادية',hp:1,atk:1,def:1,sk:1,heavy:1,frag:[1,2],res:[1,2],full:.02,gold:90,xp:70},
-  hard:{n:'🔴 صعبة',hp:1.45,atk:1.4,def:1.3,sk:1.25,heavy:2,frag:[2,3],res:[2,4],full:.05,gold:150,xp:120}},
+  easy:{n:'سهلة',ic:'🟢',c:'#4ade80',tag:'أضعف منك قليلًا',pow:.8,lv:-2,sk:.85,heavy:0,frag:[1,1],res:[1,1],resChance:.6,full:.005,gold:50,xp:40},
+  normal:{n:'عادية',ic:'🟡',c:'#facc15',tag:'بنفس مستواك',pow:1,lv:0,sk:1,heavy:1,frag:[1,2],res:[1,2],resChance:.8,full:.02,gold:90,xp:70},
+  hard:{n:'صعبة',ic:'🔴',c:'#f43f5e',tag:'أقوى منك',pow:1.3,lv:3,sk:1.25,heavy:2,frag:[2,3],res:[2,4],resChance:1,full:.05,gold:150,xp:120}},
  roles:{
   a:{t:'هجمات قوية + حالة حرق/تأثير',hp:1,atk:1.15,def:1},
   b:{t:'هجمات واسعة (نفَس) وتحمّل عالٍ',hp:1.3,atk:1,def:1.2},
@@ -9665,16 +9666,17 @@ function snd(t){try{if(typeof window.playTone==='function')window.playTone(t)}ca
 function rnd(a){return a[0]+Math.floor(Math.random()*(a[1]-a[0]+1))}
 function E(k){return EL.filter(function(x){return x.k===k})[0]}
 /* ---- توليد الوحش حسب لفل اللاعب والصعوبة والدور ---- */
-function build(el,i,df){var c=ch(),L=Number(c.level)||1,d=C.diff[df],r=C.roles[ROLE[i]],e=E(el),b=e.m[i];
- var A=(20+L*6)*d.atk*r.atk,k=d.sk,id='mine_'+el+'_'+i+'_'+df;
- var sk=[{name:'ضربة '+e.noun,dmg:Math.round(A*.9*k),type:'attack'},{name:(i==1?'نفَس ':i==2?'سحر ':'هجمة ')+e.noun,dmg:Math.round(A*1.35*k),type:'attack'},{name:'درع '+e.noun,defBoost:Math.round(10+L*1.5),type:'defense'}];
+function build(el,i,df){var c=ch(),d=C.diff[df],r=C.roles[ROLE[i]],e=E(el),b=e.m[i],P=pstat(),pw=d.pow,id='mine_'+el+'_'+i+'_'+df;
+ var A=Math.max(5,Math.round(P.hp*C.hitPct*pw*r.atk)),k=d.sk;
+ var sk=[{name:'ضربة '+e.noun,dmg:Math.round(A*.9*k),type:'attack'},{name:(i==1?'نفَس ':i==2?'سحر ':'هجمة ')+e.noun,dmg:Math.round(A*1.35*k),type:'attack'},{name:'درع '+e.noun,defBoost:Math.max(5,Math.round(P.def*.5)),type:'defense'}];
  for(var h=0;h<d.heavy;h++)sk.push({name:'انفجار '+e.noun,dmg:Math.round(A*1.8*k),type:'attack'});
  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><defs><radialGradient id='g' cx='50%' cy='40%'><stop offset='0' stop-color='"+e.c+"' stop-opacity='.55'/><stop offset='1' stop-color='#05060d'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/></svg>";
- var mo={id:id,rank:'منجم '+e.n,name:b[0],title:C.diff[df].n,icon:e.i,card:b[1],image:b[1],storyImage:b[1],battleBg:'data:image/svg+xml,'+encodeURIComponent(svg),
-  hp:Math.round((300+L*120)*d.hp*r.hp),atk:Math.round(A),def:Math.round((8+L*2)*d.def*r.def),spd:30+i*6,skills:sk,xp:d.xp,gold:d.gold,
+ var mo={id:id,rank:'منجم '+e.n,name:b[0],title:d.ic+' '+d.n,icon:e.i,card:b[1],image:b[1],storyImage:b[1],battleBg:'data:image/svg+xml,'+encodeURIComponent(svg),
+  hp:Math.round(Math.max(P.atk*C.hpHits,P.hp)*pw*r.hp),atk:A,def:Math.max(1,Math.round(P.def*pw*r.def)),spd:30+i*6,skills:sk,xp:d.xp,gold:d.gold,lvl:Math.max(1,P.lv+d.lv),
   mine:{el:el,df:df,i:i}};
  var a=window.ARCANA_MINE_MONSTERS,j=a.findIndex(function(x){return x.id===id});if(j>-1)a[j]=mo;else a.push(mo);
  try{MONSTER_ELEMENT[id]=el}catch(x){}return mo}
+function pstat(){var c=ch();return{hp:Number(c.maxHp)||200,atk:Number(c.atk)||15,def:Number(c.def)||10,lv:Number(c.level)||1}}
 /* ---- القتال: إعادة استخدام قتال الوحوش الخاصة ---- */
 var origStart=window.arcanaStartSpecialFight,origWin=window.arcanaSpecialVictory;
 window.arcanaStartSpecialFight=function(id){
@@ -9689,19 +9691,21 @@ window.arcanaSpecialVictory=async function(){
  c.gold=(Number(c.gold)||0)+d.gold;c.xp=(Number(c.xp)||0)+d.xp;
  while(Number(c.xp)>=Number(c.maxXp)&&Number(c.maxXp)>0){c.xp-=Number(c.maxXp);c.level=(Number(c.level)||1)+1;c.maxXp=Math.floor(Number(c.maxXp)*1.3);c.skillPoints=(Number(c.skillPoints)||0)+1}
  if(Math.random()<C.dropChance){var q=rnd(d.frag);m.frag[e.k]=(m.frag[e.k]||0)+q;out.push(['🧩','قطع '+e.n+' +'+q,e.fr])}else out.push(['•','لم تسقط قطعة هذه المرة.'])
- var rq=rnd(d.res),rs=C.resources[Math.floor(Math.random()*C.resources.length)];addInventoryItem({id:rs.id,name:rs.name,icon:rs.icon,count:rq});out.push([rs.icon,rs.name+' +'+rq]);
+ if(Math.random()<d.resChance){var rq=rnd(d.res),rs=C.resources[Math.floor(Math.random()*C.resources.length)];addInventoryItem({id:rs.id,name:rs.name,icon:rs.icon,count:rq});out.push([rs.icon,rs.name+' +'+rq])}
  out.push(['🪙','الذهب +'+d.gold]);
  var full=Math.random()<d.full;if(full){m.stones[e.k]=(m.stones[e.k]||0)+1;if(!m.lvl[e.k])m.lvl[e.k]=1;out.push(['✨','حصلت على حجر عنصر كامل! — حجر '+e.n,e.st])}
  saveCurrent();updateUI();battleState.isArenaFight=false;battleState.isSpecialFight=false;snd('win');
  view={s:'home'};showPage('pageMines');render();result(e,out,full)};
 /* ---- واجهة ---- */
 function css(){if(document.getElementById('mnCss'))return;var s=document.createElement('style');s.id='mnCss';s.textContent=
-'#pageMines{flex-direction:column;padding:16px;overflow:auto;gap:12px}.mn-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}.mn-title{margin:0;color:#ffb347;font-size:28px}'+
-'.mn-en{background:#0d1020;border:1px solid #ffb34766;border-radius:12px;padding:8px 14px;color:#ffd98a;font-weight:700}.mn-en small{display:block;color:#9fb0cc;font-weight:400}'+
-'.mn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}.mn-card{--c:#fff;position:relative;background:linear-gradient(160deg,#10142a,#070914);border:2px solid var(--c);border-radius:16px;padding:12px;text-align:center;cursor:pointer;color:#e9eefc;box-shadow:0 0 14px color-mix(in srgb,var(--c) 40%,transparent);transition:.2s}.mn-card:hover{transform:translateY(-4px);box-shadow:0 0 28px var(--c)}'+
-'.mn-card img{width:100%;max-height:150px;object-fit:contain;border-radius:10px;animation:mnf 3s ease-in-out infinite}@keyframes mnf{50%{transform:translateY(-5px)}}.mn-card b{display:block;font-size:19px;margin:6px 0;color:var(--c)}.mn-card small{display:block;color:#b8c4de;line-height:1.7}'+
-'.mn-btn{background:linear-gradient(135deg,#ffb347,#ff7a2e);color:#1a0d00;border:0;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-family:inherit}.mn-btn:disabled{filter:grayscale(1);opacity:.5;cursor:not-allowed}.mn-btn.g{background:#1a2038;color:#cdd8f5;border:1px solid #3a4468}'+
-'.mn-bar{height:8px;background:#1b2036;border-radius:6px;overflow:hidden;margin:4px 0}.mn-bar i{display:block;height:100%;background:var(--c)}.mn-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}'+
+'#pageMines{flex-direction:column;padding:18px;overflow:auto;gap:14px;background:radial-gradient(circle at 50% 0,#1b1436,#070914 70%)}.mn-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.mn-title{margin:0;color:#ffb347;font-size:30px;text-shadow:0 0 18px #ff7a2e88}'+
+'.mn-en{background:linear-gradient(135deg,#171c38,#0b0e1f);border:1px solid #ffb34788;border-radius:14px;padding:9px 16px;color:#ffd98a;font-weight:800;box-shadow:0 0 16px #ffb34733}.mn-en small{display:block;color:#9fb0cc;font-weight:400}'+
+'.mn-h{display:flex;flex-wrap:nowrap;gap:14px;overflow-x:auto;padding:10px 6px 16px;scroll-snap-type:x proximity;align-items:stretch}.mn-h>.mn-card{flex:0 0 200px;scroll-snap-align:center}.mn-h.fit{justify-content:center}.mn-h.fit>.mn-card{flex:1 1 0;min-width:170px;max-width:300px}'+
+'.mn-card{--c:#fff;position:relative;overflow:hidden;background:linear-gradient(165deg,#161b38,#070914 75%);border:2px solid var(--c);border-radius:18px;padding:14px;text-align:center;cursor:pointer;color:#e9eefc;box-shadow:0 0 16px color-mix(in srgb,var(--c) 40%,transparent);transition:.25s}.mn-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0,color-mix(in srgb,var(--c) 28%,transparent),transparent 65%);pointer-events:none}.mn-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 0 34px var(--c)}'+
+'.mn-card img{position:relative;width:100%;height:160px;object-fit:contain;animation:mnf 3s ease-in-out infinite}@keyframes mnf{50%{transform:translateY(-6px)}}.mn-card b{position:relative;display:block;font-size:20px;margin:6px 0;color:var(--c)}.mn-card small{position:relative;display:block;color:#b8c4de;line-height:1.75;font-size:13px}'+
+'.mn-df .mn-ic{font-size:40px;position:relative}.mn-df .mn-li{position:relative;display:flex;justify-content:space-between;gap:8px;font-size:13px;color:#cdd8f5;padding:4px 0;border-bottom:1px dashed #ffffff18}.mn-df .mn-li b{display:inline;font-size:13px;margin:0;color:#fff}'+
+'.mn-btn{background:linear-gradient(135deg,#ffb347,#ff7a2e);color:#1a0d00;border:0;border-radius:11px;padding:10px 18px;font-weight:800;cursor:pointer;font-family:inherit;position:relative;transition:.2s}.mn-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 18px #ff7a2e66}.mn-btn:disabled{filter:grayscale(1);opacity:.5;cursor:not-allowed}.mn-btn.g{background:#1a2038;color:#cdd8f5;border:1px solid #3a4468}'+
+'.mn-bar{position:relative;height:9px;background:#1b2036;border-radius:6px;overflow:hidden;margin:5px 0}.mn-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c),#fff8);transition:width .5s}.mn-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.mn-sub{text-align:center;color:#b8c4de;margin:0}'+
 '.mn-ov{position:fixed;inset:0;z-index:9999;background:rgba(3,4,10,.88);display:flex;align-items:center;justify-content:center;padding:16px}.mn-box{max-width:420px;width:100%;background:#0d1020;border:2px solid var(--c,#ffb347);border-radius:18px;padding:18px;text-align:center;color:#e9eefc;box-shadow:0 0 40px var(--c,#ffb347)}.mn-box img{max-width:70%;max-height:170px;animation:mnp 1.4s ease-in-out infinite}@keyframes mnp{50%{transform:scale(1.08);filter:drop-shadow(0 0 18px var(--c))}}.mn-box p{margin:6px 0}'+
 '.mn-fx{position:fixed;width:34px;height:34px;z-index:10000;pointer-events:none}';document.head.appendChild(s)}
 function ov(html,c){var o=document.createElement('div');o.className='mn-ov';o.style.setProperty('--c',c||'#ffb347');o.innerHTML='<div class="mn-box">'+html+'</div>';document.body.appendChild(o);return o}
@@ -9709,18 +9713,23 @@ function result(e,out,full){var o=ov('<h2 style="color:#ffd98a">🏆 انتصا�
  if(full)o.firstChild.animate([{transform:'scale(.7)',opacity:0},{transform:'scale(1.06)'},{transform:'scale(1)',opacity:1}],{duration:700});
  o.querySelector('#mnOk').onclick=function(){o.remove()}}
 function bar(a,b,c){return '<div class="mn-bar" style="--c:'+c+'"><i style="width:'+Math.min(100,a/b*100)+'%"></i></div>'}
-function render(){var el=document.getElementById('mnBody');if(!el)return;var m=tick(),e=C.energy,h='',v=view;
+function rowH(a,fit){return '<div class="mn-h'+(fit?' fit':'')+'">'+a+'</div>'}
+function stonesHTML(){var m=M();return '<p class="mn-sub">10 قطع من نفس العنصر = حجر. القطع تُجمع من «⛏️ مناجم العناصر».</p>'+rowH(EL.map(function(x){var n=m.frag[x.k]||0,s=m.stones[x.k]||0,l=m.lvl[x.k]||0,up=l&&l<C.maxLevel?C.upgrade[l-1]:null;
+ return '<div class="mn-card" style="--c:'+x.c+';cursor:default"><img id="mnimg_'+x.k+'" src="'+(s?x.st:x.fr)+'" alt=""><b>'+x.i+' '+x.n+'</b><small>🧩 '+n+' / '+C.fragsPerStone+'</small>'+bar(n,C.fragsPerStone,x.c)+'<small>🔮 '+(s?'مستوى '+RN[l-1]+' ×'+s+' · +'+C.bonusDmgPct[l-1]+'% ضرر':'لا يوجد حجر')+'</small><div class="mn-row" style="margin-top:8px"><button class="mn-btn" '+(n>=C.fragsPerStone?'':'disabled')+' onclick="mnCraft(\''+x.k+'\')">🔮 صناعة</button>'+(up?'<button class="mn-btn g" '+(n>=up.frags&&s>=1+(up.stones||0)?'':'disabled')+' onclick="mnUp(\''+x.k+'\')">⭐ → '+RN[l]+' ('+up.frags+(up.stones?'+حجر':'')+')</button>':'')+'</div></div>'}).join(''))}
+function renderStones(){var e=document.getElementById('forgeStonesMode');if(e&&!e.hidden)e.innerHTML=stonesHTML()}
+function render(){renderStones();var el=document.getElementById('mnBody');if(!el)return;var m=tick(),e=C.energy,h='',v=view,P=pstat();
  var rem=Math.max(0,m.ts+e.regenMs-Date.now()),mm=Math.floor(rem/60000),ss=('0'+Math.floor(rem/1000)%60).slice(-2);
  h+='<div class="mn-top"><h2 class="mn-title">⛏️ مناجم العناصر</h2><div class="mn-en">⚡ طاقة العناصر: '+m.energy+'/'+e.max+(m.energy<e.max?'<small>⏱️ الطاقة التالية خلال '+mm+':'+ss+'</small>':'')+'</div></div>';
- if(v.s==='home'||!v.s){h+='<div class="mn-row"><button class="mn-btn" onclick="mnGo({s:\'stones\'})">🔮 صناعة وتطوير الأحجار</button></div><div class="mn-grid">'+EL.map(function(x){var n=m.frag[x.k]||0,s=m.stones[x.k]||0;
-  return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'diff\',el:\''+x.k+'\'})"><img src="'+x.card+'" alt=""><b>'+x.i+' '+x.n+'</b><small>🧩 '+n+' / '+C.fragsPerStone+'</small>'+bar(n,C.fragsPerStone,x.c)+'<small>🔮 حجر '+x.n+': '+(s?'المستوى '+RN[(m.lvl[x.k]||1)-1]+' ×'+s:'—')+'</small></div>'}).join('')+'</div>'}
- else if(v.s==='diff'){var x=E(v.el);h+='<h3 style="color:'+x.c+'">'+x.i+' منجم '+x.n+'</h3><div class="mn-row">'+Object.keys(C.diff).map(function(k){return '<button class="mn-btn" onclick="mnGo({s:\'mons\',el:\''+v.el+'\',df:\''+k+'\'})">'+C.diff[k].n+'</button>'}).join('')+'</div><p style="text-align:center;color:#b8c4de">الصعوبة تغيّر: الدم والهجوم والدفاع ومهارات العدو والمكافآت (احتمال القطعة ثابت '+Math.round(C.dropChance*100)+'%).</p>'}
- else if(v.s==='mons'){var x=E(v.el);h+='<h3 style="color:'+x.c+'">'+x.i+' '+x.n+' — '+C.diff[v.df].n+'</h3><div class="mn-grid">'+x.m.map(function(b,i){return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'prev\',el:\''+v.el+'\',df:\''+v.df+'\',i:'+i+'})"><img src="'+b[1]+'" alt=""><b>'+b[0]+'</b><small>'+C.roles[ROLE[i]].t+'</small></div>'}).join('')+'</div>'}
- else if(v.s==='prev'){var x=E(v.el),d=C.diff[v.df],mo=build(v.el,v.i,v.df);h+='<div class="mn-card" style="--c:'+x.c+';cursor:default;max-width:440px;margin:auto"><img src="'+mo.image+'" alt=""><b>'+mo.name+'</b><small>العنصر: '+x.i+' '+x.n+' · الصعوبة: '+d.n+'</small><small>❤️ '+mo.hp+' · ⚔️ '+mo.atk+' · 🛡️ '+mo.def+'</small><small>الأسلوب: '+C.roles[ROLE[v.i]].t+'</small><small>🎁 قطع: '+d.frag[0]+'–'+d.frag[1]+' ('+Math.round(C.dropChance*100)+'%) · موارد: '+d.res[0]+'–'+d.res[1]+' · 🪙 '+d.gold+' · ✨ حجر كامل: '+(d.full*100).toFixed(1)+'%</small><small>⚡ يستهلك '+e.cost+' طاقة</small><div class="mn-row" style="margin-top:8px"><button class="mn-btn" '+(m.energy<e.cost?'disabled':'')+' onclick="mnFight(\''+mo.id+'\')">⚔️ بدء المعركة</button></div></div>'}
- else if(v.s==='stones'){h+='<div class="mn-grid">'+EL.map(function(x){var n=m.frag[x.k]||0,s=m.stones[x.k]||0,l=m.lvl[x.k]||0,up=l&&l<C.maxLevel?C.upgrade[l-1]:null;
-  return '<div class="mn-card" style="--c:'+x.c+';cursor:default"><img id="mnimg_'+x.k+'" src="'+(s?x.st:x.fr)+'" alt=""><b>'+x.i+' '+x.n+'</b><small>🧩 '+n+' · 🔮 '+(s?'مستوى '+RN[l-1]+' ×'+s+' · +'+C.bonusDmgPct[l-1]+'% ضرر':'لا يوجد')+'</small><div class="mn-row" style="margin-top:6px"><button class="mn-btn" '+(n>=C.fragsPerStone?'':'disabled')+' onclick="mnCraft(\''+x.k+'\')">صناعة ('+C.fragsPerStone+')</button>'+(up?'<button class="mn-btn g" '+(n>=up.frags&&s>=1+(up.stones||0)?'':'disabled')+' onclick="mnUp(\''+x.k+'\')">تطوير → '+RN[l]+' ('+up.frags+(up.stones?'+حجر':'')+')</button>':'')+'</div></div>'}).join('')+'</div>'}
+ if(v.s==='home'||!v.s){h+='<p class="mn-sub">اختر منجمًا لتبدأ — صناعة الأحجار وتطويرها من <a href="#" style="color:#ffb347" onclick="mnWorkshop();return false">⚒️ ورشة التطوير</a></p>'+rowH(EL.map(function(x){var n=m.frag[x.k]||0,s=m.stones[x.k]||0;
+  return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'diff\',el:\''+x.k+'\'})"><img src="'+x.card+'" alt=""><b>'+x.i+' '+x.n+'</b><small>🧩 '+n+' / '+C.fragsPerStone+'</small>'+bar(n,C.fragsPerStone,x.c)+'<small>🔮 حجر '+x.n+': '+(s?'المستوى '+RN[(m.lvl[x.k]||1)-1]+' ×'+s:'—')+'</small></div>'}).join(''))}
+ else if(v.s==='diff'){var x=E(v.el);h+='<h3 class="mn-sub" style="color:'+x.c+';font-size:24px">'+x.i+' منجم '+x.n+'</h3><p class="mn-sub">مستواك الآن: <b style="color:#ffd98a">'+P.lv+'</b> — الأعداء يُبنون على قوتك الفعلية (HP / هجوم / دفاع)</p>'+rowH(Object.keys(C.diff).map(function(k){var d=C.diff[k];
+  return '<div class="mn-card mn-df" style="--c:'+d.c+'" onclick="mnGo({s:\'mons\',el:\''+v.el+'\',df:\''+k+'\'})"><div class="mn-ic">'+d.ic+'</div><b>'+d.n+'</b><small>'+d.tag+'</small>'+
+  '<div class="mn-li"><span>مستوى الأعداء</span><b>'+Math.max(1,P.lv+d.lv)+'</b></div><div class="mn-li"><span>قوتهم مقارنة بك</span><b>'+Math.round(d.pow*100)+'%</b></div><div class="mn-li"><span>🧩 قطعة العنصر</span><b>'+Math.round(C.dropChance*100)+'% · '+d.frag[0]+(d.frag[1]>d.frag[0]?'–'+d.frag[1]:'')+'</b></div><div class="mn-li"><span>📦 موارد</span><b>'+Math.round(d.resChance*100)+'% · '+d.res[0]+(d.res[1]>d.res[0]?'–'+d.res[1]:'')+'</b></div><div class="mn-li"><span>✨ حجر كامل</span><b>'+(d.full*100).toFixed(1)+'%</b></div><div class="mn-li"><span>🪙 / 🏆</span><b>'+d.gold+' / '+d.xp+'</b></div></div>'}).join(''),1)}
+ else if(v.s==='mons'){var x=E(v.el),d=C.diff[v.df];h+='<h3 class="mn-sub" style="color:'+x.c+';font-size:22px">'+x.i+' '+x.n+' — '+d.ic+' '+d.n+'</h3>'+rowH(x.m.map(function(b,i){var mo=build(v.el,i,v.df);return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'prev\',el:\''+v.el+'\',df:\''+v.df+'\',i:'+i+'})"><img src="'+b[1]+'" alt=""><b>'+b[0]+'</b><small>المستوى '+mo.lvl+' · ❤️ '+mo.hp+'</small><small>'+C.roles[ROLE[i]].t+'</small></div>'}).join(''),1)}
+ else if(v.s==='prev'){var x=E(v.el),d=C.diff[v.df],mo=build(v.el,v.i,v.df);h+='<div class="mn-card" style="--c:'+x.c+';cursor:default;max-width:460px;margin:auto"><img src="'+mo.image+'" alt=""><b>'+mo.name+'</b><small>'+x.i+' '+x.n+' · '+d.ic+' '+d.n+' · المستوى '+mo.lvl+'</small><small>❤️ '+mo.hp+' · ⚔️ '+mo.atk+' · 🛡️ '+mo.def+'</small><small>الأسلوب: '+C.roles[ROLE[v.i]].t+'</small><small>🎁 قطع: '+d.frag[0]+'–'+d.frag[1]+' ('+Math.round(C.dropChance*100)+'%) · موارد '+Math.round(d.resChance*100)+'% · ✨ حجر كامل '+(d.full*100).toFixed(1)+'% · 🪙 '+d.gold+'</small><small>⚡ يستهلك '+e.cost+' طاقة</small><div class="mn-row" style="margin-top:10px"><button class="mn-btn" '+(m.energy<e.cost?'disabled':'')+' onclick="mnFight(\''+mo.id+'\')">⚔️ بدء المعركة</button></div></div>'}
  h+='<div class="mn-row"><button class="mn-btn g" onclick="'+(v.s==='home'||!v.s?"showPage('pageLobby')":"mnGo({s:'home'})")+'">'+(v.s==='home'||!v.s?'🏠 الرئيسية':'↩️ رجوع')+'</button></div>';
  el.innerHTML=h}
+window.mnWorkshop=function(){showPage('pageForge');if(window.setForgeMode)window.setForgeMode('stones')};
 window.mnGo=function(v){view=v;snd('click');render()};
 window.mnFight=function(id){var m=tick(),mo=window.ARCANA_MINE_MONSTERS.filter(function(x){return x.id===id})[0];if(!mo||m.energy<C.energy.cost)return;
  if(m.energy>=C.energy.max)m.ts=Date.now();m.energy-=C.energy.cost;saveCurrent();window.arcanaStartSpecialFight(id)};
@@ -9734,6 +9743,17 @@ window.mnUp=function(k){var m=M(),l=m.lvl[k]||0,up=C.upgrade[l-1];if(!up||(m.fra
 document.addEventListener('DOMContentLoaded',function(){css()});if(document.readyState!=='loading')css();
 setInterval(function(){var p=document.getElementById('pageMines');if(p&&p.classList.contains('active')&&!document.querySelector('.mn-ov'))render()},1000);
 window.openMines=function(){view={s:'home'};showPage('pageMines');render()};
+
+/* ---- قسم «أحجار العناصر» داخل ورشة التطوير ---- */
+function wsInit(){var tabs=document.querySelector('#pageForge .upgrade-tabs');if(!tabs||document.getElementById('forgeStonesTab'))return;
+ var b=document.createElement('button');b.className='upgrade-tab';b.id='forgeStonesTab';b.type='button';b.textContent='🔮 أحجار العناصر';b.onclick=function(){window.setForgeMode('stones')};tabs.insertBefore(b,tabs.lastElementChild);
+ var d=document.createElement('div');d.id='forgeStonesMode';d.hidden=true;tabs.parentNode.insertBefore(d,tabs.nextSibling);
+ var orig=window.setForgeMode;window.setForgeMode=function(mode){orig(mode==='stones'?'weapons':mode);
+  var on=mode==='stones',w=document.getElementById('forgeWeaponsMode'),p=document.getElementById('forgePotionsMode');
+  d.hidden=!on;b.classList.toggle('active',on);
+  if(on){if(w)w.hidden=true;if(p)p.hidden=true;['forgeWeaponTab','forgePotionTab'].forEach(function(i){var t=document.getElementById(i);if(t)t.classList.remove('active')});
+   var bg=document.getElementById('forgeModeBadge'),sb=document.getElementById('forgeModeSubtitle');if(bg)bg.textContent='🔮 صناعة وتطوير أحجار العناصر';if(sb)sb.textContent='حوّل قطع العناصر إلى أحجار وطوّرها من المستوى I إلى V.';d.innerHTML=stonesHTML()}}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wsInit);else wsInit();
 })();
 </script>
 <style>
