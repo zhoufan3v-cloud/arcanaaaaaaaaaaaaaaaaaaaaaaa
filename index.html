@@ -53,9 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.14.1",
+  "version": "2.15.0",
   "history": [
-    {"version":"2.14.1","date":"2026-10-02","title":"نظام القلوب في المصنف","notes":["❤️ 3 قلوب لكل رتبة: كل خسارة تأخذ قلبًا واحدًا وتبقى المراحل المنتهية كما هي","💔 أنميشن ومؤثرات وصوت عند كسر القلب","🔄 عند نفاد القلوب يعود المسار للبداية وترجع القلوب 3","🏆 إكمال الرتبة وترقيتك للتالية يعيد القلوب كاملة","💾 القلوب تُحفظ محليًا وسحابيًا ولا تتأثر بالخروج أو إعادة المحاولة"]},
+    {"version":"2.15.0","date":"2026-10-03","title":"مناجم العناصر","notes":["⛏️ زر جديد «مناجم العناصر» تحت الوحوش الخاصة: 7 عناصر × 3 وحوش × 3 صعوبات","⚡ طاقة العناصر 10/10: معركة = 1 طاقة، +1 كل دقيقتين وتعمل حتى وأنت خارج اللعبة","🧩 80% لسقوط قطعة عنصر، والصعوبة تغيّر الكمية والموارد والذهب وفرصة الحجر الكامل","🔮 10 قطع = حجر عنصر، وتطوير I→V بالقطع (V يحتاج حجرًا إضافيًا)","💾 الحفظ ضمن بيانات اللاعب (محلي وسحابي)","🔧 كل القيم في ARCANA_MINES_CONFIG"]},
     {"version":"2.14.0","date":"2026-10-02","title":"إضافة نقاط المصنف ومتجر المصنف","notes":["⭐ عملة جديدة للمصنف (نقاط المصنف) مستقلة تمامًا عن Rating","💰 مكافآت: فوز +10 · Elite +20 · Boss +50 · إكمال الرتبة +100 · مكافأة Win Streak، والخسارة تخصم مبلغًا صغيرًا (قابل للتعديل) ولا ينزل الرصيد تحت صفر","🏪 متجر المصنف داخل واجهة PvP بخمسة أقسام","🚧 جميع المنتجات حاليًا قريبًا وغير قابلة للشراء","💾 حفظ نقاط المصنف محليًا وسحابيًا مع بيانات PvP، ولا تُصفَّر مع Reset الرانك","🔧 Config جاهز لإضافة المنتجات والرتب والمواسم مستقبلًا"]},
     {"version":"2.13.3","date":"2026-10-02","title":"الترقية بين الرانكات عبر المسار فقط","notes":["🏆 الارتقاء للرانك التالي صار بإكمال كل مراحل المسار المصنف وهزيمة الزعيم، وليس بالنقاط","🔢 حُذفت أرقام الحدود (+1000 وغيرها) من قائمة رتب PvP وحلّت محلها حالة كل رتبة: مكتمل / رتبتك / مقفل","📊 حُذف شريط التقدم؛ نقاط Rating صارت رقمًا فقط يزيد أو ينقص","✨ عند الفوز: عدّ تصاعدي للرقم مع تأثيرات وصوت وانفجار شرارات، دون ترقية","🎉 شاشة إكمال الرتبة تعرض الآن شارة الرانك الجديد مع احتفال"]},
     {"version":"2.13.2","date":"2026-10-02","title":"إصلاح إعادة ضبط موسم المصنف مع الحفظ السحابي","notes":["🔄 فرض تصفير المصنف بعد استرجاع الحفظ السحابي أيضًا حتى لا يعود الرانك القديم","🥉 الجميع يعود إلى البرونزي ويبدأ من 1/12 مع 3 فرص","⭐ تصفير التقدم السابق وWin Streak وبيانات الموسم","📊 إعادة Ranked Rating إلى 1000","💾 كتابة نتيجة التصفير الجديدة إلى الحفظ السحابي والمحلي دون المساس بباقي تقدم اللاعب"]},
@@ -1985,7 +1985,7 @@ window.ARCANA_CONFIG = {
 .rk-done .rk-sparks{position:absolute;inset:0;overflow:hidden;pointer-events:none}.rk-sparks i{position:absolute;top:-10px;width:8px;height:14px;border-radius:2px;animation:rkFall linear infinite}@keyframes rkFall{to{transform:translateY(110vh) rotate(720deg)}}
 .rk-trophy{font-size:64px;animation:rkBounce 1.2s infinite}@keyframes rkBounce{50%{transform:translateY(-10px) scale(1.1)}}.rk-unlock{margin:10px 0;padding:10px;border-radius:12px;background:linear-gradient(90deg,#6f4ac4,#c78cff);font-weight:1000;animation:rkFade 1s infinite alternate}
 </style>
-<style id="rkShopStyle">.rk-shop-view{display:none}.rk-shop-view.active{display:block}.rk-bal{margin-top:6px;font-size:18px;color:#ffd66b;font-weight:800}.rk-bal b,#pvpRkPts{display:inline-block;color:#ffd66b}.rk-pop{animation:rkPop .7s ease}@keyframes rkPop{30%{transform:scale(1.35);text-shadow:0 0 14px #ffd66b}}.rk-sec{margin:14px 0}.rk-sec h4{margin:0 0 8px;color:#e8ecf8;font-size:15px}.rk-sec h4 em{font-style:normal;font-size:12px;color:#8fa2bd;margin-inline-start:6px}.rk-prow{display:flex;gap:10px;flex-wrap:wrap}.rk-pcard{width:132px;max-width:44%;padding:12px 8px;border-radius:12px;background:rgba(20,26,40,.85);border:1px solid rgba(255,214,107,.22);box-shadow:0 0 12px rgba(255,214,107,.08);text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}.rk-pcard.comingSoon{opacity:.7;border-style:dashed}.rk-pi{font-size:28px}.rk-pcard b{font-size:13px;color:#dfe6f8}.rk-pcard span{font-size:12px;color:#ffd66b}.rk-pcard button{width:100%;padding:6px;border-radius:8px;border:0;background:#2a3350;color:#9aa6c4;font-size:12px;cursor:not-allowed}.rk-hfx{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(50,0,0,.6);pointer-events:none;animation:rkHin .3s ease,rkHout .5s 2.8s forwards}.rk-hrow{display:flex;gap:16px;font-size:56px}.rk-ht{font-size:28px;font-weight:900;color:#ff6b6b;text-shadow:0 0 16px rgba(255,60,60,.7)}.rk-hs{font-size:15px;color:#e8ecf8}@keyframes rkHin{from{opacity:0}}@keyframes rkHout{to{opacity:0}}.rk-float{position:fixed;top:18%;left:50%;transform:translateX(-50%);z-index:2147483000;font-size:30px;font-weight:900;color:#ffd66b;text-shadow:0 0 18px rgba(255,190,50,.8);pointer-events:none;animation:rkFl 1.6s ease-out forwards}@keyframes rkFl{from{opacity:0;margin-top:30px}20%{opacity:1}to{opacity:0;margin-top:-50px}}</style>
+<style id="rkShopStyle">.rk-shop-view{display:none}.rk-shop-view.active{display:block}.rk-bal{margin-top:6px;font-size:18px;color:#ffd66b;font-weight:800}.rk-bal b,#pvpRkPts{display:inline-block;color:#ffd66b}.rk-pop{animation:rkPop .7s ease}@keyframes rkPop{30%{transform:scale(1.35);text-shadow:0 0 14px #ffd66b}}.rk-sec{margin:14px 0}.rk-sec h4{margin:0 0 8px;color:#e8ecf8;font-size:15px}.rk-sec h4 em{font-style:normal;font-size:12px;color:#8fa2bd;margin-inline-start:6px}.rk-prow{display:flex;gap:10px;flex-wrap:wrap}.rk-pcard{width:132px;max-width:44%;padding:12px 8px;border-radius:12px;background:rgba(20,26,40,.85);border:1px solid rgba(255,214,107,.22);box-shadow:0 0 12px rgba(255,214,107,.08);text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}.rk-pcard.comingSoon{opacity:.7;border-style:dashed}.rk-pi{font-size:28px}.rk-pcard b{font-size:13px;color:#dfe6f8}.rk-pcard span{font-size:12px;color:#ffd66b}.rk-pcard button{width:100%;padding:6px;border-radius:8px;border:0;background:#2a3350;color:#9aa6c4;font-size:12px;cursor:not-allowed}.rk-float{position:fixed;top:18%;left:50%;transform:translateX(-50%);z-index:2147483000;font-size:30px;font-weight:900;color:#ffd66b;text-shadow:0 0 18px rgba(255,190,50,.8);pointer-events:none;animation:rkFl 1.6s ease-out forwards}@keyframes rkFl{from{opacity:0;margin-top:30px}20%{opacity:1}to{opacity:0;margin-top:-50px}}</style>
 </head>
 <body>
 <div id="arcanaBoot" role="status" aria-live="polite">
@@ -2109,6 +2109,15 @@ window.arcanaBoot={done:done};
                 <span class="tile-text"><b>الوحوش الخاصة</b><small>اهزمهم لتنال مهارات خاصة</small></span>
                 <span class="tile-badge" id="lobbySpecialBadge">0/1</span>
             </button>
+
+            <!-- ======== ⛏️ مناجم العناصر ======== -->
+            <button type="button" class="special-tile" id="lobbyMinesTile" style="top:492px" onclick="window.openMines&&window.openMines();" aria-label="مناجم العناصر">
+                <span class="tile-icon">⛏️</span>
+                <span class="tile-text"><b>مناجم العناصر</b><small>اجمع القطع واصنع أحجار العناصر</small></span>
+            </button>
+
+            <!-- ======== ⛏️ صفحة مناجم العناصر ======== -->
+            <div id="pageMines" class="page"><div id="mnBody"></div></div>
 
             <!-- ======== ⚔️ صفحة ساحة النخبة ======== -->
             <div id="pageArena" class="page">
@@ -5382,7 +5391,7 @@ window.arcanaBoot={done:done};
     // ⚔️ ساحة النخبة
     // ================================================================
     function getArenaOpponent(id) {
-        return ARENA_OPPONENTS.find(x => x.id === id) || (window.ARCANA_SPECIAL_MONSTERS || []).find(x => x.id === id) || null;
+        return ARENA_OPPONENTS.find(x => x.id === id) || (window.ARCANA_SPECIAL_MONSTERS || []).find(x => x.id === id) || (window.ARCANA_MINE_MONSTERS || []).find(x => x.id === id) || null;
     }
 
     function getArenaProgress(char=getChar()) {
@@ -7494,26 +7503,23 @@ window.arcanaBoot={done:done};
         const enemy = battleState.enemy;
         if (!enemy) return;
 
-        document.getElementById('battleHeroHp').innerText = Math.max(0, char.hp);
-        
-        let atkBase = char._baseAtk;
-        let atkBonus = char._artifactAtkBonus || 0;
-        document.getElementById('battleHeroAtk').innerHTML = atkBase + (atkBonus > 0 ? ` <span style="color:#ff6b6b;font-weight:bold;">+${atkBonus}</span>` : '');
-
-        let defBase = char._baseDef;
-        let defBonus = char._artifactDefBonus || 0;
-        document.getElementById('battleHeroDef').innerHTML = (defBase + defBonus) + (defBonus > 0 ? ` <span style="color:#4fc3f7;font-weight:bold;">+${defBonus}</span>` : '');
-
-        let spdBase = char._baseSpd;
-        let spdBonus = char._artifactSpdBonus || 0;
-        document.getElementById('battleHeroSpd').innerHTML = spdBase + (spdBonus > 0 ? ` <span style="color:#81c784;font-weight:bold;">+${spdBonus}</span>` : '');
+        // ✨ الأرقام الملونة بجانب الإحصائيات: زيادة العتاد (سلاح/درع/أرتيفاكت) بلون كل إحصائية، ونقص اللعنة بالأرجواني
+        const __curse = char._cursePenalty || 0;
+        const __statHtml = (base, bonus, color) => {
+            let h = String(base);
+            if (bonus > 0) h += ` <span class="stat-bonus" style="color:${color};font-weight:bold;">+${bonus}</span>`;
+            if (__curse > 0) h += ` <span class="stat-bonus" style="color:#b58cff;font-weight:bold;">-${__curse}</span>`;
+            return h;
+        };
+        const __hpBonus = char._artifactHpBonus || 0;
+        document.getElementById('battleHeroHp').innerHTML = Math.max(0, char.hp) + (__hpBonus > 0 ? ` <span class="stat-bonus" style="color:#ffd700;font-weight:bold;">+${__hpBonus}</span>` : '');
+        document.getElementById('battleHeroAtk').innerHTML = __statHtml(char._baseAtk, char._artifactAtkBonus || 0, '#ff6b6b');
+        document.getElementById('battleHeroDef').innerHTML = __statHtml(char._baseDef, char._artifactDefBonus || 0, '#4fc3f7');
+        document.getElementById('battleHeroSpd').innerHTML = __statHtml(char._baseSpd, char._artifactSpdBonus || 0, '#81c784');
 
         document.getElementById('battleHeroHpFill').style.width = `${(Math.max(0, char.hp) / char.maxHp) * 100}%`;
         document.getElementById('battleHeroHpText').innerText = Math.max(0, char.hp);
-        
-        let hpBase = char._baseMaxHp;
-        let hpBonus = char._artifactHpBonus || 0;
-        document.getElementById('battleHeroMaxHpText').innerHTML = hpBase + (hpBonus > 0 ? ` <span style="color:#ffd700;font-weight:bold;">+${hpBonus}</span>` : '');
+        document.getElementById('battleHeroMaxHpText').innerHTML = char._baseMaxHp + (__hpBonus > 0 ? ` <span class="stat-bonus" style="color:#ffd700;font-weight:bold;">+${__hpBonus}</span>` : '');
 
         document.getElementById('battleHeroEnergy').innerText = char.energy;
         const battleHeroMaxEnergy = document.getElementById('battleHeroMaxEnergy'); if (battleHeroMaxEnergy) battleHeroMaxEnergy.innerText = getMaxEnergy(char);
@@ -8261,12 +8267,11 @@ window.arcanaBoot={done:done};
     d.rankedProg={bronze:1,silver:1,gold:1,platinum:1,diamond:1,master:1};
     d.rankedCleared={bronze:false,silver:false,gold:false,platinum:false,diamond:false,master:false};
     d.rankedStats={};
-    d.rankedBotCache={};d.rankedHearts={};
+    d.rankedBotCache={};
     d.rankedSeasonResetId=RANKED_GLOBAL_RESET_ID;
     d.rankedSeasonResetAt=new Date().toISOString();
     return true;
   }
-  const RK_HEARTS=3;
   function rkInit(d){
     const __reset=rkApplyGlobalSeasonReset(d);
     if(!d.rankedProg||typeof d.rankedProg!=='object')d.rankedProg={};if(!d.rankedStats||typeof d.rankedStats!=='object')d.rankedStats={};if(!d.rankedCleared||typeof d.rankedCleared!=='object')d.rankedCleared={};if(!d.rankedBotCache||typeof d.rankedBotCache!=='object')d.rankedBotCache={};
@@ -8275,7 +8280,6 @@ window.arcanaBoot={done:done};
     if(!Number.isFinite(d.rankedStreak))d.rankedStreak=0;if(!Number.isFinite(d.rankedBestStreak))d.rankedBestStreak=0;
     const t=RANKED_ORDER[d.rankedTier];d.rankedProg[t]=clamp(Number(d.rankedProg[t]||1),1,RANKED_CONFIG[t].nodes);d.rankedStage=d.rankedProg[t];
     d.rankedHighest=Math.max(Number(d.rankedHighest||0),d.rankedUnlocked);
-    if(!d.rankedHearts||typeof d.rankedHearts!=="object")d.rankedHearts={};RANKED_ORDER.forEach(t=>{const h=Math.round(Number(d.rankedHearts[t]));d.rankedHearts[t]=Number.isFinite(h)&&h>=1?Math.min(h,RK_HEARTS):RK_HEARTS});
     if(__reset){
       try{ save(d); }catch(e){ console.warn('[Arcana] تعذر حفظ تصفير موسم المصنف',e); }
       window.__ARCANA_RANKED_GLOBAL_RESET=true;
@@ -8312,7 +8316,7 @@ window.arcanaBoot={done:done};
     const view=document.getElementById('pvpRankedView'),shell=view&&view.querySelector('.ranked-path-shell');
     if(shell){let bar=document.getElementById('rkTierBar');if(!bar){bar=document.createElement('div');bar.id='rkTierBar';shell.parentNode.insertBefore(bar,shell)}
       const pct=Math.round((stage-1)/N*100);
-      bar.innerHTML=`<div class="rk-head"><div class="rk-title">🏆 المصنف<br><b>${c.icon} ${c.name}</b></div><div class="rk-info"><span>التقدم: ${stage} / ${N}</span><span>${'❤️'.repeat(d.rankedHearts[RANKED_ORDER[ti]])}${'🖤'.repeat(RK_HEARTS-d.rankedHearts[RANKED_ORDER[ti]])}</span><span>🔥 Win Streak ${d.rankedStreak}</span><span>⭐ Rating ${d.rating} (${r.icon} ${r.name})</span></div></div><div class="rk-bar"><i style="width:${pct}%"></i></div><div class="rk-tabs">${RANKED_ORDER.map((t,i)=>`<button type="button" class="rk-tab ${i===ti?'on':''} ${i>d.rankedUnlocked?'lk':''}" onclick="window.rkPickTier(${i})">${i>d.rankedUnlocked?'🔒':RANKED_CONFIG[t].icon} ${RANKED_CONFIG[t].name}${d.rankedCleared[t]?' ✅':''}</button>`).join('')}</div>`}
+      bar.innerHTML=`<div class="rk-head"><div class="rk-title">🏆 المصنف<br><b>${c.icon} ${c.name}</b></div><div class="rk-info"><span>التقدم: ${stage} / ${N}</span><span>🔥 Win Streak ${d.rankedStreak}</span><span>⭐ Rating ${d.rating} (${r.icon} ${r.name})</span></div></div><div class="rk-bar"><i style="width:${pct}%"></i></div><div class="rk-tabs">${RANKED_ORDER.map((t,i)=>`<button type="button" class="rk-tab ${i===ti?'on':''} ${i>d.rankedUnlocked?'lk':''}" onclick="window.rkPickTier(${i})">${i>d.rankedUnlocked?'🔒':RANKED_CONFIG[t].icon} ${RANKED_CONFIG[t].name}${d.rankedCleared[t]?' ✅':''}</button>`).join('')}</div>`}
     const hi=document.getElementById('rankedHeaderIcon');if(hi){const bd=RANK_BADGES[c.name]||RANKS[ti].image;hi.innerHTML=bd?`<img src="${bd}" alt="${c.name}">`:c.icon}
     if(!nodes)return;
     nodes.innerHTML=Array.from({length:N},(_,i)=>{const n=i+1,ty=rkNodeType(tier,n),state=n<stage?'done':n===stage?'current':'locked',rw=rankedReward(tier,n,ty,d.rankedStreak);
@@ -8345,10 +8349,10 @@ window.arcanaBoot={done:done};
   function startRankedStage(){rkSnd('click');rkPreview()}
   /* ===== نتيجة المباراة ===== */
   function rkResolve(d,win,bot){rkInit(d);const tier=bot.rkTier||RANKED_ORDER[d.rankedTier],ti=RANKED_ORDER.indexOf(tier),c=RANKED_CONFIG[tier],node=bot.rkNode||1,s=rkSt(d,tier),res={gold:0,xp:0,rating:0,cleared:false,streak:0,tier:tier};
-    if(!win){s.l++;d.rankedStreak=0;const hl=(Number(d.rankedHearts[tier])||RK_HEARTS)-1;res.heartLost=true;if(hl<=0){d.rankedProg[tier]=1;d.rankedHearts[tier]=RK_HEARTS;res.pathReset=true;res.heartsLeft=0}else{d.rankedHearts[tier]=hl;res.heartsLeft=hl}Object.keys(d.rankedBotCache).forEach(k=>{if(k.indexOf(tier+':')===0)delete d.rankedBotCache[k]});d.rankedStage=d.rankedProg[tier];setTimeout(()=>rkSnd('lose'),400);return res}
+    if(!win){s.l++;d.rankedStreak=0;d.rankedProg[tier]=1;Object.keys(d.rankedBotCache).forEach(k=>{if(k.indexOf(tier+':')===0)delete d.rankedBotCache[k]});d.rankedStage=1;setTimeout(()=>rkSnd('lose'),400);return res}
     s.w++;d.rankedStreak++;d.rankedBestStreak=Math.max(d.rankedBestStreak,d.rankedStreak);s.bs=Math.max(s.bs,d.rankedStreak);s.n=Math.max(s.n,node);if(bot.rkType==='elite')s.e++;
     const rw=rankedReward(tier,node,bot.rkType,d.rankedStreak);res.gold=rw.gold;res.xp=rw.xp;res.rating=rw.rating;res.streak=d.rankedStreak;d.rankedBestStage=Math.max(Number(d.rankedBestStage||1),node);
-    if(node>=c.nodes){res.cleared=true;res.gold+=c.reward.done;res.xp+=Math.round(c.reward.done*.6);const first=!d.rankedCleared[tier];d.rankedCleared[tier]=true;d.rankedProg[tier]=1;d.rankedHearts[tier]=RK_HEARTS;if(RANKED_ORDER[ti+1])d.rankedHearts[RANKED_ORDER[ti+1]]=RK_HEARTS;
+    if(node>=c.nodes){res.cleared=true;res.gold+=c.reward.done;res.xp+=Math.round(c.reward.done*.6);const first=!d.rankedCleared[tier];d.rankedCleared[tier]=true;d.rankedProg[tier]=1;
       if(ti<RANKED_ORDER.length-1){if(d.rankedUnlocked<ti+1){d.rankedUnlocked=ti+1}d.rankedTier=ti+1}
       window.__rkDone={tier,ti,s:Object.assign({},s),boss:bot.name,bossImg:bot.image,first,next:RANKED_ORDER[ti+1]||null,bonus:c.reward.done};setTimeout(rkTierDone,2200)}
     else d.rankedProg[tier]=node+1;
@@ -8372,19 +8376,10 @@ window.arcanaBoot={done:done};
   function rkAward(type,cleared,streak){const R=RANKED_CURRENCY_CONFIG.rewards;const base=type==='boss'?R.bossWin:type==='elite'?R.eliteWin:R.normalWin;let sb=0;Object.keys(R.streakBonus).map(Number).sort((a,b)=>a-b).forEach(k=>{if(streak>=k)sb=R.streakBonus[k]});const rc=cleared?R.rankComplete:0;return{base,sb,rc,total:base+sb+rc}}
   const __rk0=rkResolve;
   rkResolve=function(d,win,bot){const res=__rk0.apply(this,arguments);try{if(!win&&bot&&!bot.__ptsPaid){bot.__ptsPaid=1;const cur=rkPts(d),loss=Math.min(cur,Math.max(0,Math.floor(Number(RANKED_CURRENCY_CONFIG.lossPenalty)||0)));d[RANKED_CURRENCY_CONFIG.key]=cur-loss;res.ptsLoss=loss}if(win&&bot&&!bot.__ptsPaid){bot.__ptsPaid=1;const a=rkAward(bot.rkType,res.cleared,res.streak);d[RANKED_CURRENCY_CONFIG.key]=rkPts(d)+a.total;res.pts=a.total;res.sb=a.sb;res.rc=a.rc;if(window.__rkDone)window.__rkDone.pts=a.total}}catch(e){console.warn('[Arcana] ranked points',e)}return res};
-
-  function rkHeartFx(rk){if(!rk||!rk.heartLost)return;const left=rk.heartsLeft||0;setTimeout(()=>{const o=document.createElement('div');o.className='rk-hfx';let h='';for(let i=0;i<RK_HEARTS;i++){const was=rk.pathReset?(i===0):(i<=left);h+=`<span class="rk-h${i===left?' brk':''}">${i<left?'❤️':(i===left?'❤️':'🖤')}</span>`}
-    o.innerHTML=`<div class="rk-hrow">${h}</div><div class="rk-ht">${rk.pathReset?'💀 خسرت كل القلوب!':'💔 -1 قلب'}</div><div class="rk-hs">${rk.pathReset?'يعود المسار للبداية':'المتبقي '+left+' / '+RK_HEARTS}</div>`;document.body.appendChild(o);
-    const b=o.querySelector('.brk');setTimeout(()=>{if(!b)return;b.textContent='💔';const r=b.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;b.animate([{transform:'scale(1.6) rotate(-10deg)'},{transform:'scale(1) rotate(6deg)',opacity:.5}],{duration:700,fill:'forwards'});
-      for(let k=0;k<14;k++){const p=document.createElement('span');p.textContent=k%2?'💔':'✦';p.style.cssText=`position:fixed;left:${x}px;top:${y}px;font-size:${12+Math.random()*14}px;color:#ff4d4d;z-index:2147483001;pointer-events:none`;document.body.appendChild(p);const a=Math.random()*6.28,d=60+Math.random()*110;p.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d+50}px) rotate(${Math.random()*360}deg)`,opacity:0}],{duration:900+Math.random()*400}).onfinish=()=>p.remove()}
-      try{document.body.animate([{transform:'translateX(0)'},{transform:'translateX(-9px)'},{transform:'translateX(9px)'},{transform:'translateX(-5px)'},{transform:'translateX(0)'}],{duration:420})}catch(_){}
-      try{if(typeof window.playTone==='function'){window.playTone(300,.25,'sawtooth',.08);setTimeout(()=>window.playTone(150,.4,'sawtooth',.09),150)}}catch(_){}},450);
-    if(rk.pathReset)setTimeout(()=>{const row=o.querySelector('.rk-hrow'),t=o.querySelector('.rk-hs');if(row)row.innerHTML='<span class="rk-h" style="animation:rkPop .7s">❤️</span>'.repeat(RK_HEARTS);if(t)t.textContent='🔄 عادت القلوب '+RK_HEARTS+'/'+RK_HEARTS},1700);
-    setTimeout(()=>o.remove(),3300)},900)}
   let __shown=null,__animUntil=0;
   function rkPaint(anim){const v=rkPts();['pvpRkPts','rkShopBal'].forEach(id=>{const e=$r(id);if(!e)return;const from=(anim&&__shown!=null)?__shown:v;if(!anim||from>=v){e.textContent=rkFmt(v);return}const t0=performance.now();__animUntil=Date.now()+1000;(function f(n){const p=Math.min(1,(n-t0)/900);e.textContent=rkFmt(Math.round(from+(v-from)*p));if(p<1)requestAnimationFrame(f)})(t0);e.classList.remove('rk-pop');void e.offsetWidth;e.classList.add('rk-pop')});__shown=v}
   function rkFloat(n){const e=document.createElement('div');e.className='rk-float';e.textContent='⭐ +'+n;document.body.appendChild(e);setTimeout(()=>e.remove(),1700);try{if(typeof window.playTone==='function')window.playTone(880,.1,'sine',.05)}catch(_){}}
-  window.__rkPtsGain=function(rk){try{rkHeartFx(rk)}catch(e){}if(rk&&rk.ptsLoss){__shown=rkPts()+rk.ptsLoss;setTimeout(()=>{const e=document.createElement('div');e.className='rk-float';e.style.color='#ff6b6b';e.style.textShadow='0 0 14px rgba(255,60,60,.7)';e.textContent='⭐ -'+rk.ptsLoss;document.body.appendChild(e);setTimeout(()=>e.remove(),1700);rkPaint(false)},500);return}if(!rk||!rk.pts)return;__shown=Math.max(0,rkPts()-rk.pts);setTimeout(()=>{rkFloat(rk.pts);rkPaint(true)},1200)};
+  window.__rkPtsGain=function(rk){if(rk&&rk.ptsLoss){__shown=rkPts()+rk.ptsLoss;setTimeout(()=>{const e=document.createElement('div');e.className='rk-float';e.style.color='#ff6b6b';e.style.textShadow='0 0 14px rgba(255,60,60,.7)';e.textContent='⭐ -'+rk.ptsLoss;document.body.appendChild(e);setTimeout(()=>e.remove(),1700);rkPaint(false)},500);return}if(!rk||!rk.pts)return;__shown=Math.max(0,rkPts()-rk.pts);setTimeout(()=>{rkFloat(rk.pts);rkPaint(true)},1200)};
   function rkCard(p){const st=p.status||'comingSoon',L={comingSoon:'🚧 قريبًا',locked:'🔒 مقفل',available:'شراء',soldOut:'نفدت الكمية'};const can=RANKED_SHOP_CONFIG.purchasesEnabled===true&&st==='available';return`<div class="rk-pcard ${st}"><div class="rk-pi">${esc(p.icon||'🎁')}</div><b>${esc(p.name||'')}</b><span>⭐ ${rkFmt(p.price||0)}</span><button ${can?'':'disabled'} data-id="${esc(p.id||'')}" onclick="return window.rankedShopBuy(this.dataset.id)">${L[st]||L.comingSoon}</button></div>`}
   function rkShopRender(){const el=$r('rkShopBody');if(!el)return;const C=RANKED_SHOP_CONFIG;el.innerHTML=Object.keys(C.categoryMeta).map(k=>{const m=C.categoryMeta[k],it=(C.categories[k]||[]).filter(p=>p&&p.enabled!==false);const cards=it.length?it.map(rkCard).join(''):'<div class="rk-pcard comingSoon"><div class="rk-pi">🔒</div><b>عنصر قريبًا</b><button disabled>🚧 قريبًا</button></div>';return`<div class="rk-sec"><h4>${m[0]} ${m[1]} <em>${it.length?it.length+' عنصر':'🚧 قريبًا'}</em></h4><div class="rk-prow">${cards}</div></div>`}).join('')}
   /* لا يوجد شراء في هذه النسخة: الدالة ترفض دائمًا ولا تخصم ولا تمنح شيئًا */
@@ -8663,7 +8658,7 @@ window.arcanaBoot={done:done};
       const btn=wOverlay?.querySelector('.result-btn');if(btn)btn.textContent='🏆 عرض نتيجة PvP';
       showBattleResult(true);
     } else {
-      const sub=dOverlay?.querySelector('.result-subtitle');if(sub)sub.textContent=match.mode==='ranked'?`خسرت أمام ${match.bot.name}. ${match.rk&&match.rk.pathReset?'💔 خسرت كل قلوبك! عاد المسار للبداية وعادت القلوب 3/3.':'💔 خسرت قلبًا! المتبقي '+(match.rk?match.rk.heartsLeft:'')+'/3 — مراحلك المنتهية محفوظة.'}${match.rk&&match.rk.ptsLoss?` · ⭐ -${match.rk.ptsLoss} نقاط مصنف`:''}`:`خسرت أمام ${match.bot.name}. +${gold} ذهب · +${xp} XP${ratingDelta?` · ${ratingDelta} Rating`:''}`;
+      const sub=dOverlay?.querySelector('.result-subtitle');if(sub)sub.textContent=match.mode==='ranked'?`خسرت أمام ${match.bot.name}. 🔄 عدت إلى النقطة الأولى — لا تُحتسب مكافأة للنقطة.${match.rk&&match.rk.ptsLoss?` · ⭐ -${match.rk.ptsLoss} نقاط مصنف`:''}`:`خسرت أمام ${match.bot.name}. +${gold} ذهب · +${xp} XP${ratingDelta?` · ${ratingDelta} Rating`:''}`;
       if(!__perf)showBattleResult(false);
     }
     renderPvpHome();
@@ -8698,7 +8693,7 @@ window.arcanaBoot={done:done};
               </div>
       <div id="pvpShopView" class="rk-shop-view"><div class="ranked-path-head"><div><h3>🏪 متجر المصنف</h3><div class="rk-bal">⭐ نقاط المصنف: <b id="rkShopBal">0</b></div></div><button class="pvp-main-btn" onclick="window.closeRankedShop()">⬅️ رجوع</button></div><div id="rkShopBody"></div></div>
       <div id="pvpRankedView" class="ranked-path-view">
-        <div class="ranked-path-head"><div><h3>🏆 المسار المصنّف</h3><div class="ranked-path-sub">اهزم كل بوت في طريقك. لكل رتبة 3 قلوب: كل خسارة تأخذ قلبًا وتبقى مراحلك المنتهية، وعند نفاد القلوب يعود المسار للبداية.</div></div><div class="pvp-rank-icon" id="rankedHeaderIcon" style="width:58px;height:58px;font-size:28px">🥉</div></div>
+        <div class="ranked-path-head"><div><h3>🏆 المسار المصنّف</h3><div class="ranked-path-sub">اهزم كل بوت في طريقك. لا توجد خسارة مسموحة في الجولة: الخسارة تعيدك إلى النقطة الأولى.</div></div><div class="pvp-rank-icon" id="rankedHeaderIcon" style="width:58px;height:58px;font-size:28px">🥉</div></div>
         <div class="ranked-path-shell">
           <div class="ranked-path-top"><div class="ranked-stat"><span>النقطة الحالية</span><b id="rankedCurrentStage">1 / 12</b></div><div class="ranked-goal" id="rankedRunStatus">🟡 ابدأ من النقطة الأولى</div><div class="ranked-stat"><span>أفضل نقطة</span><b id="rankedBestStage">1 / 12</b></div></div>
           <div class="ranked-path-scroll"><div class="ranked-path" id="rankedPathNodes"></div></div>
@@ -9620,6 +9615,126 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   },150);
 })();
 
+</script>
+<script>
+/* ===== ⛏️ مناجم العناصر v2.15.0 — كل القيم القابلة للتعديل في MINES_CONFIG ===== */
+(function(){
+var P='https://i.postimg.cc/',N='/Chat-GPT-Image-2-aktwbr-2026-';
+function u(id,t,n){return P+id+N+t+'('+n+').png'}
+var MINES_CONFIG=window.ARCANA_MINES_CONFIG={
+ energy:{max:10,cost:1,regenMs:120000},
+ dropChance:0.8, fragsPerStone:10, maxLevel:5,
+ upgrade:[{frags:10},{frags:15},{frags:20},{frags:30,stones:1}],      // I→II … IV→V
+ bonusDmgPct:[4,8,13,19,26],                                          // Bonus Damage لكل مستوى
+ diff:{
+  easy:{n:'🟢 سهلة',hp:.7,atk:.7,def:.7,sk:.8,heavy:0,frag:[1,1],res:[1,1],full:.005,gold:50,xp:40},
+  normal:{n:'🟡 عادية',hp:1,atk:1,def:1,sk:1,heavy:1,frag:[1,2],res:[1,2],full:.02,gold:90,xp:70},
+  hard:{n:'🔴 صعبة',hp:1.45,atk:1.4,def:1.3,sk:1.25,heavy:2,frag:[2,3],res:[2,4],full:.05,gold:150,xp:120}},
+ roles:{
+  a:{t:'هجمات قوية + حالة حرق/تأثير',hp:1,atk:1.15,def:1},
+  b:{t:'هجمات واسعة (نفَس) وتحمّل عالٍ',hp:1.3,atk:1,def:1.2},
+  c:{t:'سحر بعيد المدى، هجوم عالٍ ودفاع منخفض',hp:.8,atk:1.3,def:.8}},
+ resources:[{id:'crystal',name:'بلورة نارية',icon:'💎'},{id:'bone',name:'عظم نادر',icon:'🦴'},{id:'herb',name:'عشبة شفاء',icon:'🌿'}]
+};
+var EL=[
+ {k:'fire',n:'النار',i:'🔥',c:'#ff6a2a',noun:'اللهب',card:u('gjHSKfX6','06-48-10-m',1),fr:u('prgqBRkh','09-04-43-m',1),st:u('HnG6wT6S','09-04-43-m',8),
+  m:[['سيد اللهب',u('gjjsvnpc','07-10-01-m',1)],['التنين الناري',u('1zSKvWSX','07-10-01-m',3)],['ساحر المحترق',u('VNwFK7wZ','07-10-01-m',2)]]},
+ {k:'ice',n:'الجليد',i:'❄️',c:'#5cc8ff',noun:'الصقيع',card:u('Yq8DLBBZ','06-48-10-m',2),fr:u('HWKZm9Hb','09-04-43-m',2),st:u('Gtkqz6NH','09-04-43-m',9),
+  m:[['سيد الجليد',u('vmvtkW8p','07-10-01-m',4)],['عملاق الجليد',u('yx2mcjnJ','07-10-01-m',5)],['ملكة الجليد',u('G3fJW3rb','07-10-01-m',6)]]},
+ {k:'poison',n:'السم',i:'☠️',c:'#7be04a',noun:'السموم',card:u('L6vQgFMR','06-48-10-m',3),fr:u('7Pcs4nDm','09-04-43-m',3),st:u('PfZ3t8qm','09-04-43-m',10),
+  m:[['قاتل السم',u('bvYmz65j','07-10-55-m',1)],['الوحش السام',u('JnGKXsmc','07-10-55-m',2)],['ملكة السموم',u('76fXz5DN','07-10-55-m',3)]]},
+ {k:'dark',n:'الظلام',i:'🌑',c:'#a05cff',noun:'العتمة',card:u('fT5qSQhW','06-48-10-m',4),fr:u('RVHPZJVc','09-04-43-m',4),st:u('HW5Zp7L9','09-04-43-m',11),
+  m:[['قاتل الظلال',u('Y9h8FvkZ','07-10-55-m',4)],['ساحر العتمة',u('vBcXn4by','07-10-55-m',5)],['سيد الضلال',u('QtHS7FhX','07-10-55-m',6)]]},
+ {k:'wind',n:'الرياح',i:'🌪️',c:'#7fe3c9',noun:'العاصفة',card:u('wjGWF5MK','06-48-10-m','5)(1'),fr:u('gkZM2Lks','09-04-43-m',5),st:u('NGTJgr03','09-04-43-m',12),
+  m:[['سيد العاصفة',u('sgTpJ3nX','07-23-35-m',1)],['ملكة الرياح',u('0Nr7Wh39','07-23-35-m',2)],['عملاق العاصف',u('SKjcTH5x','07-23-35-m',3)]]},
+ {k:'lightning',n:'البرق',i:'⚡',c:'#ffe14d',noun:'الصاعقة',card:u('Dz4xNW4m','06-48-10-m',6),fr:u('tCxr4nCm','09-04-43-m',6),st:u('gkHghF88','09-04-43-m',13),
+  m:[['سيد البرق',u('mrh7XKqD','07-23-35-m',4)],['ملكة الرعد',u('tg7FS8f1','07-23-35-m',5)],['الوحش الصاعق',u('HLjbZFK9','07-23-35-m',6)]]},
+ {k:'holy',n:'المقدس',i:'✨',c:'#fff2a8',noun:'النور',card:u('50csWx8N','06-48-10-m','7)(1'),fr:u('X7C2YB7R','09-04-43-m',7),st:u('BnZMcYBy','09-04-43-m',14),
+  m:[['الكاهن المقدس',u('pXZ822MX','07-23-53-m',1)],['سياف النور',u('bNTbzzfZ','07-23-53-m',2)],['حارسة النور',u('Nf4TggvX','07-23-53-m',3)]]}
+];
+var ROLE=['a','b','c'],RN=['I','II','III','IV','V'],C=MINES_CONFIG,view={};
+window.ARCANA_MINE_MONSTERS=[];
+function ch(){return getChar()}
+function M(){var c=ch(),m=c.mines;if(!m||typeof m!=='object')m=c.mines={};
+ m.energy=Number.isFinite(m.energy)?m.energy:C.energy.max;m.ts=m.ts||Date.now();
+ ['frag','stones','lvl'].forEach(function(k){if(!m[k]||typeof m[k]!=='object')m[k]={}});return m}
+function tick(){var m=M(),e=C.energy,now=Date.now();
+ if(m.energy>=e.max){m.energy=e.max;m.ts=now;return m}
+ var g=Math.floor((now-m.ts)/e.regenMs);if(g>0){m.energy=Math.min(e.max,m.energy+g);m.ts+=g*e.regenMs;if(m.energy>=e.max)m.ts=now;saveCurrent()}return m}
+function snd(t){try{if(typeof window.playTone==='function')window.playTone(t)}catch(e){}}
+function rnd(a){return a[0]+Math.floor(Math.random()*(a[1]-a[0]+1))}
+function E(k){return EL.filter(function(x){return x.k===k})[0]}
+/* ---- توليد الوحش حسب لفل اللاعب والصعوبة والدور ---- */
+function build(el,i,df){var c=ch(),L=Number(c.level)||1,d=C.diff[df],r=C.roles[ROLE[i]],e=E(el),b=e.m[i];
+ var A=(20+L*6)*d.atk*r.atk,k=d.sk,id='mine_'+el+'_'+i+'_'+df;
+ var sk=[{name:'ضربة '+e.noun,dmg:Math.round(A*.9*k),type:'attack'},{name:(i==1?'نفَس ':i==2?'سحر ':'هجمة ')+e.noun,dmg:Math.round(A*1.35*k),type:'attack'},{name:'درع '+e.noun,defBoost:Math.round(10+L*1.5),type:'defense'}];
+ for(var h=0;h<d.heavy;h++)sk.push({name:'انفجار '+e.noun,dmg:Math.round(A*1.8*k),type:'attack'});
+ var svg="<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><defs><radialGradient id='g' cx='50%' cy='40%'><stop offset='0' stop-color='"+e.c+"' stop-opacity='.55'/><stop offset='1' stop-color='#05060d'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/></svg>";
+ var mo={id:id,rank:'منجم '+e.n,name:b[0],title:C.diff[df].n,icon:e.i,card:b[1],image:b[1],storyImage:b[1],battleBg:'data:image/svg+xml,'+encodeURIComponent(svg),
+  hp:Math.round((300+L*120)*d.hp*r.hp),atk:Math.round(A),def:Math.round((8+L*2)*d.def*r.def),spd:30+i*6,skills:sk,xp:d.xp,gold:d.gold,
+  mine:{el:el,df:df,i:i}};
+ var a=window.ARCANA_MINE_MONSTERS,j=a.findIndex(function(x){return x.id===id});if(j>-1)a[j]=mo;else a.push(mo);
+ try{MONSTER_ELEMENT[id]=el}catch(x){}return mo}
+/* ---- القتال: إعادة استخدام قتال الوحوش الخاصة ---- */
+var origStart=window.arcanaStartSpecialFight,origWin=window.arcanaSpecialVictory;
+window.arcanaStartSpecialFight=function(id){
+ if(String(id).indexOf('mine_')!==0)return origStart(id);
+ var mo=window.ARCANA_MINE_MONSTERS.filter(function(x){return x.id===id})[0],S=window.ARCANA_SPECIAL_MONSTERS;if(!mo)return;
+ S.push(mo);try{origStart(id)}finally{S.splice(S.indexOf(mo),1)}};
+window.arcanaSpecialVictory=async function(){
+ var id=battleState.arenaOpponentId;if(String(id).indexOf('mine_')!==0)return origWin();
+ var mo=window.ARCANA_MINE_MONSTERS.filter(function(x){return x.id===id})[0];if(!mo)return;
+ var c=ch(),m=M(),d=C.diff[mo.mine.df],e=E(mo.mine.el),out=[];
+ battleState.isBattleOver=true;battleState.isProcessing=false;c.hp=c.maxHp;
+ c.gold=(Number(c.gold)||0)+d.gold;c.xp=(Number(c.xp)||0)+d.xp;
+ while(Number(c.xp)>=Number(c.maxXp)&&Number(c.maxXp)>0){c.xp-=Number(c.maxXp);c.level=(Number(c.level)||1)+1;c.maxXp=Math.floor(Number(c.maxXp)*1.3);c.skillPoints=(Number(c.skillPoints)||0)+1}
+ if(Math.random()<C.dropChance){var q=rnd(d.frag);m.frag[e.k]=(m.frag[e.k]||0)+q;out.push(['🧩','قطع '+e.n+' +'+q,e.fr])}else out.push(['•','لم تسقط قطعة هذه المرة.'])
+ var rq=rnd(d.res),rs=C.resources[Math.floor(Math.random()*C.resources.length)];addInventoryItem({id:rs.id,name:rs.name,icon:rs.icon,count:rq});out.push([rs.icon,rs.name+' +'+rq]);
+ out.push(['🪙','الذهب +'+d.gold]);
+ var full=Math.random()<d.full;if(full){m.stones[e.k]=(m.stones[e.k]||0)+1;if(!m.lvl[e.k])m.lvl[e.k]=1;out.push(['✨','حصلت على حجر عنصر كامل! — حجر '+e.n,e.st])}
+ saveCurrent();updateUI();battleState.isArenaFight=false;battleState.isSpecialFight=false;snd('win');
+ view={s:'home'};showPage('pageMines');render();result(e,out,full)};
+/* ---- واجهة ---- */
+function css(){if(document.getElementById('mnCss'))return;var s=document.createElement('style');s.id='mnCss';s.textContent=
+'#pageMines{flex-direction:column;padding:16px;overflow:auto;gap:12px}.mn-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}.mn-title{margin:0;color:#ffb347;font-size:28px}'+
+'.mn-en{background:#0d1020;border:1px solid #ffb34766;border-radius:12px;padding:8px 14px;color:#ffd98a;font-weight:700}.mn-en small{display:block;color:#9fb0cc;font-weight:400}'+
+'.mn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}.mn-card{--c:#fff;position:relative;background:linear-gradient(160deg,#10142a,#070914);border:2px solid var(--c);border-radius:16px;padding:12px;text-align:center;cursor:pointer;color:#e9eefc;box-shadow:0 0 14px color-mix(in srgb,var(--c) 40%,transparent);transition:.2s}.mn-card:hover{transform:translateY(-4px);box-shadow:0 0 28px var(--c)}'+
+'.mn-card img{width:100%;max-height:150px;object-fit:contain;border-radius:10px;animation:mnf 3s ease-in-out infinite}@keyframes mnf{50%{transform:translateY(-5px)}}.mn-card b{display:block;font-size:19px;margin:6px 0;color:var(--c)}.mn-card small{display:block;color:#b8c4de;line-height:1.7}'+
+'.mn-btn{background:linear-gradient(135deg,#ffb347,#ff7a2e);color:#1a0d00;border:0;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-family:inherit}.mn-btn:disabled{filter:grayscale(1);opacity:.5;cursor:not-allowed}.mn-btn.g{background:#1a2038;color:#cdd8f5;border:1px solid #3a4468}'+
+'.mn-bar{height:8px;background:#1b2036;border-radius:6px;overflow:hidden;margin:4px 0}.mn-bar i{display:block;height:100%;background:var(--c)}.mn-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}'+
+'.mn-ov{position:fixed;inset:0;z-index:9999;background:rgba(3,4,10,.88);display:flex;align-items:center;justify-content:center;padding:16px}.mn-box{max-width:420px;width:100%;background:#0d1020;border:2px solid var(--c,#ffb347);border-radius:18px;padding:18px;text-align:center;color:#e9eefc;box-shadow:0 0 40px var(--c,#ffb347)}.mn-box img{max-width:70%;max-height:170px;animation:mnp 1.4s ease-in-out infinite}@keyframes mnp{50%{transform:scale(1.08);filter:drop-shadow(0 0 18px var(--c))}}.mn-box p{margin:6px 0}'+
+'.mn-fx{position:fixed;width:34px;height:34px;z-index:10000;pointer-events:none}';document.head.appendChild(s)}
+function ov(html,c){var o=document.createElement('div');o.className='mn-ov';o.style.setProperty('--c',c||'#ffb347');o.innerHTML='<div class="mn-box">'+html+'</div>';document.body.appendChild(o);return o}
+function result(e,out,full){var o=ov('<h2 style="color:#ffd98a">🏆 انتصار!</h2>'+out.map(function(x){return '<p>'+(x[2]?'<img src="'+x[2]+'" style="max-height:60px;animation:none"> ':'')+x[0]+' '+x[1]+'</p>'}).join('')+'<button class="mn-btn" id="mnOk">متابعة</button>',e.c);
+ if(full)o.firstChild.animate([{transform:'scale(.7)',opacity:0},{transform:'scale(1.06)'},{transform:'scale(1)',opacity:1}],{duration:700});
+ o.querySelector('#mnOk').onclick=function(){o.remove()}}
+function bar(a,b,c){return '<div class="mn-bar" style="--c:'+c+'"><i style="width:'+Math.min(100,a/b*100)+'%"></i></div>'}
+function render(){var el=document.getElementById('mnBody');if(!el)return;var m=tick(),e=C.energy,h='',v=view;
+ var rem=Math.max(0,m.ts+e.regenMs-Date.now()),mm=Math.floor(rem/60000),ss=('0'+Math.floor(rem/1000)%60).slice(-2);
+ h+='<div class="mn-top"><h2 class="mn-title">⛏️ مناجم العناصر</h2><div class="mn-en">⚡ طاقة العناصر: '+m.energy+'/'+e.max+(m.energy<e.max?'<small>⏱️ الطاقة التالية خلال '+mm+':'+ss+'</small>':'')+'</div></div>';
+ if(v.s==='home'||!v.s){h+='<div class="mn-row"><button class="mn-btn" onclick="mnGo({s:\'stones\'})">🔮 صناعة وتطوير الأحجار</button></div><div class="mn-grid">'+EL.map(function(x){var n=m.frag[x.k]||0,s=m.stones[x.k]||0;
+  return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'diff\',el:\''+x.k+'\'})"><img src="'+x.card+'" alt=""><b>'+x.i+' '+x.n+'</b><small>🧩 '+n+' / '+C.fragsPerStone+'</small>'+bar(n,C.fragsPerStone,x.c)+'<small>🔮 حجر '+x.n+': '+(s?'المستوى '+RN[(m.lvl[x.k]||1)-1]+' ×'+s:'—')+'</small></div>'}).join('')+'</div>'}
+ else if(v.s==='diff'){var x=E(v.el);h+='<h3 style="color:'+x.c+'">'+x.i+' منجم '+x.n+'</h3><div class="mn-row">'+Object.keys(C.diff).map(function(k){return '<button class="mn-btn" onclick="mnGo({s:\'mons\',el:\''+v.el+'\',df:\''+k+'\'})">'+C.diff[k].n+'</button>'}).join('')+'</div><p style="text-align:center;color:#b8c4de">الصعوبة تغيّر: الدم والهجوم والدفاع ومهارات العدو والمكافآت (احتمال القطعة ثابت '+Math.round(C.dropChance*100)+'%).</p>'}
+ else if(v.s==='mons'){var x=E(v.el);h+='<h3 style="color:'+x.c+'">'+x.i+' '+x.n+' — '+C.diff[v.df].n+'</h3><div class="mn-grid">'+x.m.map(function(b,i){return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'prev\',el:\''+v.el+'\',df:\''+v.df+'\',i:'+i+'})"><img src="'+b[1]+'" alt=""><b>'+b[0]+'</b><small>'+C.roles[ROLE[i]].t+'</small></div>'}).join('')+'</div>'}
+ else if(v.s==='prev'){var x=E(v.el),d=C.diff[v.df],mo=build(v.el,v.i,v.df);h+='<div class="mn-card" style="--c:'+x.c+';cursor:default;max-width:440px;margin:auto"><img src="'+mo.image+'" alt=""><b>'+mo.name+'</b><small>العنصر: '+x.i+' '+x.n+' · الصعوبة: '+d.n+'</small><small>❤️ '+mo.hp+' · ⚔️ '+mo.atk+' · 🛡️ '+mo.def+'</small><small>الأسلوب: '+C.roles[ROLE[v.i]].t+'</small><small>🎁 قطع: '+d.frag[0]+'–'+d.frag[1]+' ('+Math.round(C.dropChance*100)+'%) · موارد: '+d.res[0]+'–'+d.res[1]+' · 🪙 '+d.gold+' · ✨ حجر كامل: '+(d.full*100).toFixed(1)+'%</small><small>⚡ يستهلك '+e.cost+' طاقة</small><div class="mn-row" style="margin-top:8px"><button class="mn-btn" '+(m.energy<e.cost?'disabled':'')+' onclick="mnFight(\''+mo.id+'\')">⚔️ بدء المعركة</button></div></div>'}
+ else if(v.s==='stones'){h+='<div class="mn-grid">'+EL.map(function(x){var n=m.frag[x.k]||0,s=m.stones[x.k]||0,l=m.lvl[x.k]||0,up=l&&l<C.maxLevel?C.upgrade[l-1]:null;
+  return '<div class="mn-card" style="--c:'+x.c+';cursor:default"><img id="mnimg_'+x.k+'" src="'+(s?x.st:x.fr)+'" alt=""><b>'+x.i+' '+x.n+'</b><small>🧩 '+n+' · 🔮 '+(s?'مستوى '+RN[l-1]+' ×'+s+' · +'+C.bonusDmgPct[l-1]+'% ضرر':'لا يوجد')+'</small><div class="mn-row" style="margin-top:6px"><button class="mn-btn" '+(n>=C.fragsPerStone?'':'disabled')+' onclick="mnCraft(\''+x.k+'\')">صناعة ('+C.fragsPerStone+')</button>'+(up?'<button class="mn-btn g" '+(n>=up.frags&&s>=1+(up.stones||0)?'':'disabled')+' onclick="mnUp(\''+x.k+'\')">تطوير → '+RN[l]+' ('+up.frags+(up.stones?'+حجر':'')+')</button>':'')+'</div></div>'}).join('')+'</div>'}
+ h+='<div class="mn-row"><button class="mn-btn g" onclick="'+(v.s==='home'||!v.s?"showPage('pageLobby')":"mnGo({s:'home'})")+'">'+(v.s==='home'||!v.s?'🏠 الرئيسية':'↩️ رجوع')+'</button></div>';
+ el.innerHTML=h}
+window.mnGo=function(v){view=v;snd('click');render()};
+window.mnFight=function(id){var m=tick(),mo=window.ARCANA_MINE_MONSTERS.filter(function(x){return x.id===id})[0];if(!mo||m.energy<C.energy.cost)return;
+ if(m.energy>=C.energy.max)m.ts=Date.now();m.energy-=C.energy.cost;saveCurrent();window.arcanaStartSpecialFight(id)};
+function burst(k,x){var e=E(k),r=document.getElementById('mnimg_'+k),b=r?r.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+ for(var i=0;i<10;i++){var p=document.createElement('div');p.className='mn-fx';p.textContent=x?e.i:'🧩';p.style.left=(b.left+b.width/2-17)+'px';p.style.top=(b.top+b.height/2-17)+'px';document.body.appendChild(p);
+  var a=Math.random()*6.28,dx=Math.cos(a)*120,dy=Math.sin(a)*120;p.animate(x?[{transform:'translate(0,0) scale(.4)',opacity:1},{transform:'translate('+dx+'px,'+dy+'px) scale(1.4)',opacity:0}]:[{transform:'translate('+dx+'px,'+dy+'px) scale(1)',opacity:1},{transform:'translate(0,0) scale(.3)',opacity:0}],{duration:x?800:700,fill:'forwards'}).onfinish=(function(q){return function(){q.remove()}})(p)}}
+window.mnCraft=function(k){var m=M();if((m.frag[k]||0)<C.fragsPerStone)return;m.frag[k]-=C.fragsPerStone;burst(k,0);snd('upgrade');
+ setTimeout(function(){m.stones[k]=(m.stones[k]||0)+1;if(!m.lvl[k])m.lvl[k]=1;saveCurrent();burst(k,1);var e=E(k);ov('<h3>'+e.i+' تم صنع حجر '+e.n+'!</h3><img src="'+e.st+'" alt=""><button class="mn-btn" onclick="this.closest(\'.mn-ov\').remove()">رائع</button>',e.c);render()},750)};
+window.mnUp=function(k){var m=M(),l=m.lvl[k]||0,up=C.upgrade[l-1];if(!up||(m.frag[k]||0)<up.frags||(m.stones[k]||0)<1+(up.stones||0))return;
+ m.frag[k]-=up.frags;m.stones[k]-=up.stones||0;m.lvl[k]=l+1;saveCurrent();burst(k,1);snd('upgrade');render()};
+document.addEventListener('DOMContentLoaded',function(){css()});if(document.readyState!=='loading')css();
+setInterval(function(){var p=document.getElementById('pageMines');if(p&&p.classList.contains('active')&&!document.querySelector('.mn-ov'))render()},1000);
+window.openMines=function(){view={s:'home'};showPage('pageMines');render()};
+})();
 </script>
 <style>
 .rs-ov{position:fixed;inset:0;z-index:2000005;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,rgba(40,90,140,.35),rgba(2,4,10,.94));backdrop-filter:blur(8px)}
