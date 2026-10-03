@@ -53,8 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.15.3",
+  "version": "2.15.4",
   "history": [
+    {"version":"2.15.4","date":"2026-10-03","title":"توازن ومهارات لكل الأعداء","notes":["⚖️ كل عدو صار عنده شريط توازن، حتى وحوش المناجم والخصوم اللي ما عندهم ملف قتال، وقوة التوازن تختلف حسب دور العدو وصعوبته ومستواك: الدبابات صعبة الكسر والسحرة ينكسرون بسرعة","✨ وحوش المناجم لهم مهارات بتأثيرات: حرق، سم، تجميد، صعق، سرقة صحة، ترميم، وهز توازنك","🧠 ذكاء ونية هجوم قادمة ونقاط ضعف ومقاومات عنصرية لكل وحش منجم","🔥 مراحل غضب للوحوش في الصعوبة العادية والصعبة","👁️ معاينة وحش المنجم تعرض توازنه ومهاراته"]},
     {"version":"2.15.3","date":"2026-10-03","title":"تجهيز الأحجار من المخزن","notes":["🎒 خانة جديدة «حجر عنصري» في المخزن لتجهيز الحجر", "🔮 قسم «أحجار العناصر» في المخزن يعرض كل أحجارك ومستواها وزر التجهيز", "⚒️ الورشة للصناعة والتطوير فقط، والتجهيز من المخزن"]},
     {"version":"2.15.2","date":"2026-10-03","title":"أحجار العناصر في القتال","notes":["🔋 شحن الحجر وتفعيله وضرر إضافي", "🎨 مؤثرات وأصوات لكل عنصر", "⛓️ حجر الصهر وخام الحديد في الدروب", "↩️ الخسارة ترجع للمناجم"]},
     {"version":"2.15.1","date":"2026-10-03","title":"مناجم العناصر: ورشة الأحجار وصعوبة حسب مستواك","notes":["🔮 الأحجار في الورشة", "🎚️ صعوبة حسب قوتك", "↔️ ترتيب أفقي"]},
@@ -9712,26 +9713,26 @@ function snd(t){try{if(typeof window.playTone==='function')window.playTone(t)}ca
 function rnd(a){return a[0]+Math.floor(Math.random()*(a[1]-a[0]+1))}
 function E(k){return EL.filter(function(x){return x.k===k})[0]}
 /* ---- توليد الوحش حسب لفل اللاعب والصعوبة والدور ---- */
+var WK=window.ARCANA_ELEM_WK={physical:[['wind'],[]],fire:[['ice'],['fire']],ice:[['fire'],['ice']],poison:[['fire'],['poison']],dark:[['fire'],['dark']],wind:[['ice'],['wind']],lightning:[['wind'],['lightning']],holy:[['dark'],['holy']]};
+/* [اسم المهارة، أيقونة، التأثير، القيمة، اسم السلبية، وصفها] — burn/poison/freeze/stun=فرصة، drain=نسبة سرقة، heal=نسبة ترميم، bal=خسارة توازنك */
+var SIG={fire:['لهيب حارق','🔥','burn',.7,'جمر لا ينطفئ','هجماته تشعل البطل وتحرقه'],ice:['لمسة الصقيع','❄️','freeze',.65,'برد قارس','يجمّد البطل ويضغط على توازنه'],poison:['لدغة سامة','☠️','poison',.8,'سم متراكم','يسمّم البطل ويستنزف صحته'],dark:['امتصاص الظلال','🌑','drain',.45,'ظل ماصّ','يسرق جزءًا من ضرره كصحة'],wind:['إعصار قاصم','🌪️','bal',12,'عاصفة مربكة','تهز توازنك وتكسره أسرع'],lightning:['صاعقة مشلّة','⚡','stun',.5,'شحنة مشلّة','قد يصعقك فتفقد دورك'],holy:['ترميم النور','✨','heal',.1,'نور شافٍ','يرمّم نفسه من جراحه']};
+function mst(x){return x==='burn'||x==='poison'||x==='freeze'||x==='stun'}
+function mineSkills(e,i,df,A,k,P,d){var N=e.noun,g=SIG[e.k],fx=g[2],p=g[3],sk=[{name:'ضربة '+N,icon:e.i,dmg:Math.round(A*.9*k),type:'attack'},{name:g[0],icon:g[1],dmg:Math.round(A*1.15*k),type:'attack',fx:fx,p:p}];
+ if(d.heavy>0){if(i===0)sk.push({name:'انفجار '+N,icon:'💥',dmg:Math.round(A*1.8*k),type:'attack',fx:fx,p:p});else if(i===1)sk.push({name:'نفَس '+N,icon:'🌬️',dmg:Math.round(A*1.35*k),type:'attack',fx:'bal',p:10});else sk.push({name:'سحر '+N,icon:'🔮',dmg:Math.round(A*1.55*k),type:'attack',fx:fx,p:mst(fx)?Math.min(.95,p+.1):p})}
+ sk.push({name:'درع '+N,icon:'🛡️',defBoost:Math.max(5,Math.round(P.def*.5)),type:'defense'});
+ if(d.heavy>1)sk.push({name:'غضب '+N,icon:'☄️',dmg:Math.round(A*2.1*k),type:'attack',fx:fx,p:mst(fx)?Math.min(.95,p+.2):p});
+ return sk}
+/* ملف التوازن: قوة التوازن حسب الدور (هجومي/دبابة/ساحر) × الصعوبة × مستواك */
+window.arcanaMineBalance=function(el,i,df){var d=C.diff[df]||C.diff.normal,L=Math.max(1,(Number(ch().level)||1)+d.lv),g=SIG[el]||SIG.fire,x=E(el)||{i:'✨'},b=[[85,.95,'Berserker'],[170,.55,'Tank'],[60,1.15,'Mage']][i]||[85,1,'Berserker'],ph=[];
+ if(df==='normal')ph=[[.4,x.i+' غضب المنجم!',1.08,1,1.05,1]];else if(df==='hard')ph=[[.5,x.i+' غضب المنجم!',1.08,1.05,1,1],[.25,'🔴 الغضب الأخير!',1.12,1,1.1,.9]];
+ return{e:el,w:WK[el][0],r:WK[el][1],sm:Math.round(b[0]*d.pow*(1+L/120)),sr:b[1],ai:b[2],pn:g[4],pd:g[5],ph:ph,ls:b[2]==='Tank'?1:0,auto:1}};
 function build(el,i,df){var c=ch(),d=C.diff[df],r=C.roles[ROLE[i]],e=E(el),b=e.m[i],P=pstat(),pw=d.pow,id='mine_'+el+'_'+i+'_'+df;
  var A=Math.max(5,Math.round(P.hp*C.hitPct*pw*r.atk)),k=d.sk;
- var EN={
-  fire:[['مخلب اللهب',.9,'🔥','burnDamage'],['قذف الجمر',1.18,'🔥','burnDamage'],['انفجار الجحيم',1.55,'💥','heavy'],['درع اللهب',0,'🛡️','def']],
-  ice:[['رمح الصقيع',.88,'❄️','slow'],['موجة الجليد',1.2,'❄️','slow'],['عاصفة البلور',1.5,'💎','heavy'],['حاجز الجليد',0,'🛡️','def']],
-  poison:[['لدغة سامة',.9,'☠️','poisonDamage'],['سحابة السم',1.15,'☠️','poisonDamage'],['مطر السموم',1.48,'☠️','heavy'],['درع السم',0,'🛡️','def']],
-  dark:[['نصل الظلال',.92,'🌑','curse'],['موجة العتمة',1.2,'🌑','curse'],['سقوط الفراغ',1.52,'🕳️','heavy'],['حجاب الظلام',0,'🛡️','def']],
-  wind:[['شفرة الريح',.9,'🌪️','break'],['دوامة العاصفة',1.18,'🌪️','break'],['إعصار قاطع',1.5,'🌪️','heavy'],['حاجز الرياح',0,'🛡️','def']],
-  lightning:[['لسعة البرق',.9,'⚡','stunChance'],['سلسلة الصواعق',1.2,'⚡','stunChance'],['غضب الرعد',1.55,'⚡','heavy'],['درع الرعد',0,'🛡️','def']],
-  holy:[['رمح النور',.9,'✨','holy'],['انفجار مقدس',1.2,'✨','holy'],['حكم السماء',1.5,'☀️','heavy'],['درع النور',0,'🛡️','def']]
- }[el]||[['هجوم '+e.noun,.9,e.i,'basic'],['ضربة '+e.noun,1.2,e.i,'basic'],['انفجار '+e.noun,1.5,e.i,'heavy'],['درع '+e.noun,0,'🛡️','def']];
- var sk=EN.slice(0,3).map(function(x){return {name:x[0],dmg:Math.round(A*x[1]*k),type:'attack',icon:x[2],element:el,effect:x[3]};});
- sk.push({name:EN[3][0],defBoost:Math.max(5,Math.round(P.def*.55)),type:'defense',icon:'🛡️',element:el,effect:'def'});
- for(var h=0;h<d.heavy;h++)sk.push({name:'غضب '+e.noun,dmg:Math.round(A*1.8*k),type:'attack',icon:e.i,element:el,effect:'heavy'});
+ var sk=mineSkills(e,i,df,A,k,P,d);
  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><defs><radialGradient id='g' cx='50%' cy='40%'><stop offset='0' stop-color='"+e.c+"' stop-opacity='.55'/><stop offset='1' stop-color='#05060d'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/></svg>";
  var mo={id:id,rank:'منجم '+e.n,name:b[0],title:d.ic+' '+d.n,icon:e.i,card:b[1],image:b[1],storyImage:b[1],battleBg:'data:image/svg+xml,'+encodeURIComponent(svg),
   hp:Math.round(Math.max(P.atk*C.hpHits,P.hp)*pw*r.hp),atk:A,def:Math.max(1,Math.round(P.def*pw*r.def)),spd:30+i*6,skills:sk,xp:d.xp,gold:d.gold,lvl:Math.max(1,P.lv+d.lv),
-  balanceMax:Math.max(35,Math.round((P.def*1.35+ A*.55 + Math.max(P.hp,A*8)*.055) * (i===1?1.28:(i===2?.88:1)))),
-  balanceRate:i===1?.9:(i===2?1.12:1),
-  mine:{el:el,df:df,i:i,weak:el==='fire'?['ice']:el==='ice'?['fire']:el==='poison'?['holy']:el==='dark'?['holy']:el==='wind'?['lightning']:el==='lightning'?['wind']:el==='holy'?['dark']:[],res:[el]}};
+  mine:{el:el,df:df,i:i}};
  var a=window.ARCANA_MINE_MONSTERS,j=a.findIndex(function(x){return x.id===id});if(j>-1)a[j]=mo;else a.push(mo);
  try{MONSTER_ELEMENT[id]=el}catch(x){}return mo}
 function pstat(){var c=ch();return{hp:Number(c.maxHp)||200,atk:Number(c.atk)||15,def:Number(c.def)||10,lv:Number(c.level)||1}}
@@ -9784,7 +9785,7 @@ function render(){renderStones();var el=document.getElementById('mnBody');if(!el
   return '<div class="mn-card mn-df" style="--c:'+d.c+'" onclick="mnGo({s:\'mons\',el:\''+v.el+'\',df:\''+k+'\'})"><div class="mn-ic">'+d.ic+'</div><b>'+d.n+'</b><small>'+d.tag+'</small>'+
   '<div class="mn-li"><span>مستوى الأعداء</span><b>'+Math.max(1,P.lv+d.lv)+'</b></div><div class="mn-li"><span>قوتهم مقارنة بك</span><b>'+Math.round(d.pow*100)+'%</b></div><div class="mn-li"><span>🧩 قطعة العنصر</span><b>'+Math.round(C.dropChance*100)+'% · '+d.frag[0]+(d.frag[1]>d.frag[0]?'–'+d.frag[1]:'')+'</b></div><div class="mn-li"><span>📦 موارد</span><b>'+Math.round(d.resChance*100)+'% · '+d.res[0]+(d.res[1]>d.res[0]?'–'+d.res[1]:'')+'</b></div><div class="mn-li"><span>✨ حجر كامل</span><b>'+(d.full*100).toFixed(1)+'%</b></div><div class="mn-li"><span>🪙 / 🏆</span><b>'+d.gold+' / '+d.xp+'</b></div></div>'}).join(''),1)}
  else if(v.s==='mons'){var x=E(v.el),d=C.diff[v.df];h+='<h3 class="mn-sub" style="color:'+x.c+';font-size:22px">'+x.i+' '+x.n+' — '+d.ic+' '+d.n+'</h3>'+rowH(x.m.map(function(b,i){var mo=build(v.el,i,v.df);return '<div class="mn-card" style="--c:'+x.c+'" onclick="mnGo({s:\'prev\',el:\''+v.el+'\',df:\''+v.df+'\',i:'+i+'})"><img src="'+b[1]+'" alt=""><b>'+b[0]+'</b><small>المستوى '+mo.lvl+' · ❤️ '+mo.hp+'</small><small>'+C.roles[ROLE[i]].t+'</small></div>'}).join(''),1)}
- else if(v.s==='prev'){var x=E(v.el),d=C.diff[v.df],mo=build(v.el,v.i,v.df);h+='<div class="mn-card" style="--c:'+x.c+';cursor:default;max-width:460px;margin:auto"><img src="'+mo.image+'" alt=""><b>'+mo.name+'</b><small>'+x.i+' '+x.n+' · '+d.ic+' '+d.n+' · المستوى '+mo.lvl+'</small><small>❤️ '+mo.hp+' · ⚔️ '+mo.atk+' · 🛡️ '+mo.def+'</small><small>الأسلوب: '+C.roles[ROLE[v.i]].t+'</small><small>🎁 قطع: '+d.frag[0]+'–'+d.frag[1]+' ('+Math.round(C.dropChance*100)+'%) · موارد '+Math.round(d.resChance*100)+'% · ✨ حجر كامل '+(d.full*100).toFixed(1)+'% · 🪙 '+d.gold+'</small><small>⚡ يستهلك '+e.cost+' طاقة</small><div class="mn-row" style="margin-top:10px"><button class="mn-btn" '+(m.energy<e.cost?'disabled':'')+' onclick="mnFight(\''+mo.id+'\')">⚔️ بدء المعركة</button></div></div>'}
+ else if(v.s==='prev'){var x=E(v.el),d=C.diff[v.df],mo=build(v.el,v.i,v.df);h+='<div class="mn-card" style="--c:'+x.c+';cursor:default;max-width:460px;margin:auto"><img src="'+mo.image+'" alt=""><b>'+mo.name+'</b><small>'+x.i+' '+x.n+' · '+d.ic+' '+d.n+' · المستوى '+mo.lvl+'</small><small>❤️ '+mo.hp+' · ⚔️ '+mo.atk+' · 🛡️ '+mo.def+'</small><small>الأسلوب: '+C.roles[ROLE[v.i]].t+'</small><small>⚖️ التوازن: '+window.arcanaMineBalance(v.el,v.i,v.df).sm+' · '+mo.skills.filter(function(s){return s.fx}).map(function(s){return s.icon+' '+s.name}).join(' · ')+'</small><small>🎁 قطع: '+d.frag[0]+'–'+d.frag[1]+' ('+Math.round(C.dropChance*100)+'%) · موارد '+Math.round(d.resChance*100)+'% · ✨ حجر كامل '+(d.full*100).toFixed(1)+'% · 🪙 '+d.gold+'</small><small>⚡ يستهلك '+e.cost+' طاقة</small><div class="mn-row" style="margin-top:10px"><button class="mn-btn" '+(m.energy<e.cost?'disabled':'')+' onclick="mnFight(\''+mo.id+'\')">⚔️ بدء المعركة</button></div></div>'}
  h+='<div class="mn-row"><button class="mn-btn g" onclick="'+(v.s==='home'||!v.s?"showPage('pageLobby')":"mnGo({s:'home'})")+'">'+(v.s==='home'||!v.s?'🏠 الرئيسية':'↩️ رجوع')+'</button></div>';
  el.innerHTML=h}
 window.mnWorkshop=function(){showPage('pageForge');if(window.setForgeMode)window.setForgeMode('stones')};
@@ -10556,19 +10557,7 @@ arena_shadow_assassin:D('dark',['fire'],['dark'],60,1,'Assassin','الضربة �
 arena_king:D('holy',['dark'],['holy'],150,.7,'Boss','حكم الملك','تحت 50% ضرر ودفاع أعلى',[[.5,'👑 حكم الملك!',1.15,1.15,1,1]]),
 special_volcanic:D('fire',['ice'],['fire'],260,.5,'Boss','غضب البركان','يشتد عند 65% وعند 35%',[[.65,'🌋 ثوران صغير!',1.08,1,1,1],[.35,'🔥 غضب البركان!',1.15,1,1,.8]])
 };
-function prof(e){
- if(!e)return null;
- if(P[e.id])return P[e.id];
- /* ⛏️ وحوش مناجم العناصر: تستخدم نفس Combat Profile المركزي */
- if(e.mine){
-  var mm=e.mine, ai=mm.i===1?'Tank':(mm.i===2?'Mage':'Berserker');
-  var pn=mm.i===1?'حارس '+(e.title||'العنصر'):mm.i===2?'ساحر '+(e.title||'العنصر'):'هجوم '+(e.title||'العنصر');
-  var pd=mm.i===1?'توازن مرتفع ودفاع ثقيل':mm.i===2?'يجمع الطاقة للمهارات العنصرية الأقوى':'ضغط هجومي وحالة عنصرية مستمرة';
-  var sm=Math.max(35,Number(e.balanceMax)||Math.round((Number(e.def)||5)*1.35+(Number(e.atk)||10)*.55+(Number(e.maxHp)||e.hp||100)*.055));
-  return {e:mm.el,w:mm.weak||[],r:mm.res||[],sm:sm,sr:mm.balanceRate||1,ai:ai,pn:pn,pd:pd,ph:[],ls:mm.i===1?1:0};
- }
- return null;
-}
+function prof(e){if(!e)return null;var p=P[e.id];if(p)return p;if(e.__pf)return e.__pf;if(window.arcanaAutoProfile){try{e.__pf=window.arcanaAutoProfile(e)}catch(x){}}return e.__pf||null}
 function T(f,d,t,v,w){try{window.arcanaSfx.tone(f,d,t,v,w||0)}catch(e){}}
 function log(m,t){try{addBattleLog(m,t||'')}catch(e){}}
 function cx(){try{return JSON.parse(localStorage.getItem('arcana_codex_v1')||'{}')}catch(e){return{}}}
@@ -10617,7 +10606,7 @@ function chooseEnemyAction(en,p){var af=en.skills.filter(function(s){return getE
  else if(a==='Berserker'&&hr<.5&&at.length&&R<.5)s=strong(at);
  else if((a==='Assassin'||a==='Duelist')&&pr<.35&&at.length&&R<.5)s=strong(at);
  else if((a==='Mage'||a==='Burst'||a==='Boss')&&full&&at.length&&R<.6)s=strong(at);
- else if(a==='Controller'&&at.length&&R<.4){var cc=at.filter(function(x){return x.slowTurns||x.burnDamage});if(cc.length)s=cc[0]}
+ else if(a==='Controller'&&at.length&&R<.4){var cc=at.filter(function(x){return x.slowTurns||x.burnDamage||x.fx});if(cc.length)s=cc[0]}
  if(!s)s=oPK(en);
  if(s.type==='defense'&&(battleState.enemyShield||0)>0&&at.length)s=at[Math.floor(Math.random()*at.length)];
  return s}
@@ -10626,7 +10615,7 @@ function getEnemyIntent(en,s){var c=getEnemySkillCost(en,s),mx=Math.max.apply(nu
  if(s.type==='defense')return['#5fb4ff','🛡️ يستعد للدفاع'];
  if(c===0&&en.energy<en.maxEnergy*.5)return['#ffd23f','⚡ يجمع الطاقة'];
  if((s.dmg||0)>=mx*.85&&c>0)return['#ffd23f','⚠️ هجوم قوي قادم'];
- if(s.slowTurns||s.burnDamage)return['#b56bff','🔥 يجهز حالة مزعجة'];
+ if(s.slowTurns||s.burnDamage||s.fx)return['#b56bff','🔥 يجهز حالة مزعجة'];
  return['#ff6a6a','🔴 يستعد لهجوم']}
 /* ---- تخطي الدور (ترنح) + تيك الحالات ---- */
 var oET=window.enemyTurn;
@@ -10681,7 +10670,7 @@ function codex(){
  var bk=o.querySelector('.bk');if(bk.animate)bk.animate([{transform:'rotateX(28deg) scale(.6)',opacity:0},{transform:'none',opacity:1}],{duration:550,easing:'cubic-bezier(.2,1.2,.3,1)'});
  T(392,.3,'sine',.05);T(523,.3,'sine',.05,.1);T(784,.5,'sine',.05,.2);T(1047,.5,'sine',.03,.3)}
 var bt=document.createElement('button');bt.id='acxBtn';bt.textContent='📖 سجل الوحوش';bt.onclick=codex;document.body.appendChild(bt);
-window.arcanaCombat={applyStatusEffect:applyStatusEffect,removeStatusEffect:removeStatusEffect,tickStatusEffects:tickStatusEffects,breakEnemyStagger:breakEnemyStagger,getEnemyIntent:getEnemyIntent,chooseEnemyAction:chooseEnemyAction,handleBossPhase:handleBossPhase,profiles:P};
+window.arcanaCombat={prof:prof,applyStatusEffect:applyStatusEffect,removeStatusEffect:removeStatusEffect,tickStatusEffects:tickStatusEffects,breakEnemyStagger:breakEnemyStagger,getEnemyIntent:getEnemyIntent,chooseEnemyAction:chooseEnemyAction,handleBossPhase:handleBossPhase,profiles:P};
 })();</script>
 <style id="arcanaCombat212Style">#acxCodex .bk{width:min(1200px,98vw);max-height:96vh;padding:18px 22px}
 #acxCodex .hd{font-size:26px}
@@ -10773,7 +10762,7 @@ window.qteApplyDefenseMultiplier=function(inc,q){
  var d=Math.max(0,Math.round((arr?q.finalDamage:inc)*k));
  try{if(g==='perfect'){if(++M.pf>=2){M.pf=0;M.dm=1;ps(5);var c=getChar();c.energy=Math.min(getMaxEnergy(c),c.energy+1);lg('🛡️ Defense Mastery! +5 توازن، +1 طاقة','defense');fl('battleHeroImage','🛡️ MASTERY','#5fb4ff',['🛡️','✨']);T(660,.12,'triangle',.06);T(990,.25,'triangle',.06,.1)}}else M.pf=0;
   if(g==='miss')mom(-1);M.lethal=0;
-  var en=battleState.enemy,pf=en&&P[en.id],ek=pf&&EK[pf.e];
+  var en=battleState.enemy,pf=en&&A.prof(en),ek=pf&&EK[pf.e];
   if(ek&&d>0)d=Math.max(1,Math.round(d*(1-RS(ek)/100*.25)));
   var ch=getChar(),lethal=d>0&&ch&&ch.hp-Math.max(0,d-(battleState.playerShield||0))<=0;
   M.lethal=lethal?1:0;
@@ -10786,7 +10775,7 @@ var EK={fire:'burn',poison:'poison',ice:'freeze',lightning:'stun'},SI={burn:'�
 function stTxt(){var k=Object.keys(M.st);return k.length?k.map(function(x){return SI[x]+'('+M.st[x].t+')'}).join(' '):'لا توجد'}
 function stRow(){return'<div class="r">الحالات: '+stTxt()+'</div>'}
 /* الحالات على اللاعب: المقاومة تخفف فقط (60% كحد أقصى من الأثر) وما فيه مناعة */
-function rollSt(en,pf,ek){if(!ek||!pf||!en||M.st[ek]||(ek==='stun'&&M.sc>0))return;var f=RS(ek)/100*.6;if(Math.random()>=SB[pf.e]*(1-f))return;
+function rollSt(en,pf,ek,pr){if(!ek||!pf||!en||M.st[ek]||(ek==='stun'&&M.sc>0))return;var f=RS(ek)/100*.6;if(Math.random()>=(pr!=null?pr:SB[pf.e])*(1-f))return;
  var t=Math.max(1,Math.round(SD[ek]*(1-f)));M.st[ek]={t:t,d:Math.max(2,Math.round((en.atk||20)*(ek==='burn'?.07:.04)*(1-f)))};
  lg(SI[ek]+' أُصبت بـ'+SN[ek]+'! ('+t+' أدوار)','damage');fl('battleHeroImage',SI[ek],SC[ek],[SI[ek]]);if(ek==='stun')M.sc=3;ps(-({freeze:14,stun:10,burn:3,poison:2}[ek]))}
 function tickP(en){if(M.sc>0)M.sc--;var c=getChar(),s=M.st;['burn','poison'].forEach(function(k){if(s[k]){c.hp=Math.max(1,c.hp-s[k].d);lg(SI[k]+' '+SN[k]+' يسبب '+s[k].d+' ضرر!','damage');ps(-(k==='burn'?3:2));if(--s[k].t<=0)delete s[k]}});
@@ -10833,7 +10822,7 @@ if(sb&&!document.getElementById('acxBalBtn')){var nb=sb.cloneNode(true);nb.id='a
 var oS=window.useSkill;
 window.useSkill=function(){var bs=battleState;
  if(M.st.stun&&bs.isPlayerTurn&&!bs.isProcessing&&!bs.isBattleOver){delete M.st.stun;bs.isProcessing=true;bs.isPlayerTurn=false;bs.turnCounter=(bs.turnCounter||0)+1;lg('⚡ صُعقت! فقدت دورك','damage');fl('battleHeroImage','⚡ STUN','#ffd23f',['⚡']);T(1800,.08,'square',.07);T(900,.2,'sawtooth',.06,.06);setTimeout(function(){window.enemyTurn()},800);return}
- return oS.apply(this,arguments)};
+ return oS.apply(this,arguments)};window.arcanaApplyPlayerStatus=function(en,k,p){try{rollSt(en,{e:k},k,p)}catch(e){}};window.arcanaPlayerBalance=function(n){try{ps(n)}catch(e){}};
 })();</script>
 <script id="arcanaV212">(function(){
 /* ===== صوت ===== */
@@ -10918,5 +10907,29 @@ function applyFx(pg,img){var box=img.parentNode;if(!box)return;var th=themeOf(pg
 setInterval(function(){try{var pg=document.querySelector('.page.active');if(!pg||!/Story|StageComplete|HiddenQuest|Curse/i.test(pg.id))return;var img=pg.querySelector('.story-image img');if(img&&img.complete&&img.__fx!==img.src)applyFx(pg,img)}catch(e){}},350);
 })();</script>
 
+<script id="arcanaMines216">(function(){try{
+var EC={burn:'#ff7a3d',poison:'#7be07b',freeze:'#7fd8ff',stun:'#ffd23f',drain:'#b56bff',heal:'#6bff9a',bal:'#9ee8d0'},EI={burn:'🔥',poison:'☠️',freeze:'❄️',stun:'⚡',drain:'🩸',heal:'✨',bal:'🌪️'},FQ={burn:220,poison:160,freeze:900,stun:1500,drain:120,heal:700,bal:600};
+function T(f,d,t,v,w){try{window.arcanaSfx.tone(f,d,t,v,w||0)}catch(e){}}
+function lg(m,t){try{addBattleLog(m,t||'')}catch(e){}}
+function fl(id,txt,col,em){try{var e=document.getElementById(id),F=window.arcanaFX||{};if(!e)return;if(F.floatText)F.floatText(e,txt,col);if(F.ring)F.ring(e,col,170);if(em&&F.burst)F.burst(e,{emoji:em,count:12,spread:110,rise:20})}catch(x){}}
+/* ملف توازن تلقائي لأي عدو ما عنده ملف: المناجم حسب دورها، والباقي حسب إحصائياته */
+var AI={Tank:['جلد صلب','توازنه عالي ويصعب كسره'],Assassin:['خفة القاتل','توازنه منخفض وينكسر بسرعة'],Berserker:['اندفاع','يهاجم أقوى لما تنزل صحته']};
+window.arcanaAutoProfile=function(en){var id=String(en.id||''),mp=id.indexOf('mine_')===0?id.split('_'):null;
+ if(mp&&window.arcanaMineBalance)return window.arcanaMineBalance(mp[1],+mp[2],mp[3]);
+ var hp=en.maxHp||en.hp||100,atk=en.atk||10,def=en.def||5,el=(typeof MONSTER_ELEMENT!=='undefined'&&MONSTER_ELEMENT[id])||'physical',tank=def>=atk*.9,fast=!tank&&hp<atk*9,ai=tank?'Tank':fast?'Assassin':'Berserker',w=(window.ARCANA_ELEM_WK||{})[el]||[[],[]];
+ return{e:el,w:w[0],r:w[1],sm:Math.round(Math.min(600,Math.max(40,30+hp*.45))*(tank?1.4:fast?.8:1)),sr:tank?.6:fast?1.2:1,ai:ai,pn:AI[ai][0],pd:AI[ai][1],ph:[],ls:tank?1:0,auto:1}};
+/* تأثيرات مهارات الأعداء بعد ما تُحسب الإصابة */
+var oP=window.pickAffordableEnemySkill;
+window.pickAffordableEnemySkill=function(en){var s=oP.apply(this,arguments);if(en)en.__cs=s;return s};
+function heal(en,h,m){if(h<=0||en.hp<=0)return;en.hp=Math.min(en.maxHp,en.hp+h);lg(m,'defense');fl('battleEnemyImage','+'+h,'#6bff9a',['💚']);try{updateBattleUI()}catch(e){}}
+function cast(en,s,d){var f=s.fx,c=EC[f]||'#fff',p=s.p||0;
+ fl('battleEnemyImage',(s.icon||'')+' '+s.name,c,[EI[f]||'✨']);T(FQ[f]||400,.15,'sawtooth',.06);T((FQ[f]||400)*1.5,.25,'triangle',.05,.1);
+ if(f==='burn'||f==='poison'||f==='freeze'||f==='stun'){if(d>0&&window.arcanaApplyPlayerStatus)window.arcanaApplyPlayerStatus(en,f,p)}
+ else if(f==='drain'){var h=Math.round(d*p);if(h>0)heal(en,h,'🩸 '+en.name+' امتص '+h+' صحة منك!')}
+ else if(f==='heal'){var h2=Math.round(en.maxHp*p);heal(en,h2,'✨ '+en.name+' رمّم نفسه +'+h2)}
+ else if(f==='bal'&&d>0&&window.arcanaPlayerBalance){window.arcanaPlayerBalance(-p);lg('🌪️ '+s.name+' هزّ توازنك!','damage');fl('battleHeroImage','⚖️ -'+p,c,['🌪️'])}}
+var oD=window.qteApplyDefenseMultiplier;
+window.qteApplyDefenseMultiplier=function(){var d=oD.apply(this,arguments);try{var en=battleState.enemy,s=en&&en.__cs;if(s&&s.fx&&!battleState.isBattleOver){en.__cs=null;cast(en,s,d)}}catch(e){console.warn(e)}return d};
+}catch(e){console.warn('arcanaMines216',e)}})();</script>
 </body>
 </html>
