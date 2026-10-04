@@ -53,8 +53,9 @@
 <!-- ===== Arcana v2: الإعدادات + سجل التحديثات (يُقرأ أيضًا من النسخة المستضافة للتحقق من التحديثات) ===== -->
 <script type="application/json" id="arcana-meta">
 {
-  "version": "2.15.5",
+  "version": "2.15.6",
   "history": [
+    {"version":"2.15.6","date":"2026-10-03","title":"مقاومة العناصر وإصلاح انتقال التأثيرات","notes":["🧿 كل عدو له نقاط مقاومة عناصر حسب قوته (شريط تحت التوازن): كل ضربة أو مهارة عنصرية تضرر لكن بدون حالة (حرق/جليد/سم...) وتنقص النقطة، ولما تصير 0 تبدأ العناصر تأثر","🛡️ العدو ما يتأثر بعنصره أبدًا وضرر الحجر عليه أقل، ونقطة ضعفه تنقص المقاومة بسرعة وتزيد الضرر","🐞 إصلاح: الحرق والتجميد كانا ينتقلان للعدو التالي (والتجميد ما كان ينتهي)، وصارت التأثيرات تخص العدو المصاب فقط","⏱️ مدة تأثير الحجر 2·2·3·3·4 أدوار حسب المستوى، والتجميد يقلل ضرر العدو 15%","✨ لما تفعّل الحجر تنفجر مؤثرات على كروت المهارات غير العنصرية فقط، والمهارة بعنصر مختلف (جليد مع حجر نار) تبقى بتأثيرها فقط ولا تستهلك الحجر"]},
     {"version":"2.15.5","date":"2026-10-03","title":"مؤثرات الأحجار العنصرية","notes":["💎 تفعيل الحجر يدوم لعدة ضربات/مهارات حسب المستوى (2·2·3·3·4)، والضربات التالية تأخذ 60% من الضرر الإضافي","🎨 لكل عنصر هوية FX مختلفة: نار، جليد، سم، ظلام، رياح، برق، مقدس (جسيمات وهالة وانفجار إصابة وصوت)","🔥 حالات العدو صارت ظاهرة على بطاقته وتختفي بمؤثر نهاية: حرق، تجمد، سم (ضرر مستمر مستقل)، لعنة وكسر دفاع مؤقتان، صعق قد يضيع دوره","⚔️ هجمات الأعداء العنصرية تضرب بطاقتك بمؤثرات عنصرها، وحالاتك (حرق/سم/تجميد/صعق) تظهر على بطاقتك"]},
     {"version":"2.15.4","date":"2026-10-03","title":"توازن ومهارات لكل الأعداء","notes":["⚖️ كل عدو صار عنده شريط توازن، حتى وحوش المناجم والخصوم اللي ما عندهم ملف قتال، وقوة التوازن تختلف حسب دور العدو وصعوبته ومستواك: الدبابات صعبة الكسر والسحرة ينكسرون بسرعة","✨ وحوش المناجم لهم مهارات بتأثيرات: حرق، سم، تجميد، صعق، سرقة صحة، ترميم، وهز توازنك","🧠 ذكاء ونية هجوم قادمة ونقاط ضعف ومقاومات عنصرية لكل وحش منجم","🔥 مراحل غضب للوحوش في الصعوبة العادية والصعبة","👁️ معاينة وحش المنجم تعرض توازنه ومهاراته"]},
     {"version":"2.15.3","date":"2026-10-03","title":"تجهيز الأحجار من المخزن","notes":["🎒 خانة جديدة «حجر عنصري» في المخزن لتجهيز الحجر", "🔮 قسم «أحجار العناصر» في المخزن يعرض كل أحجارك ومستواها وزر التجهيز", "⚒️ الورشة للصناعة والتطوير فقط، والتجهيز من المخزن"]},
@@ -5941,6 +5942,7 @@ window.arcanaBoot={done:done};
         battleState.enemy.energy = battleState.enemy.maxEnergy;
         battleState.enemyMaxHp = data.hp;
         battleState.enemyShield = 0; battleState.enemyShieldMax = 0;
+        battleState.enemyBurnTurns = 0; battleState.enemyBurnDamage = 0; battleState.enemySlowTurns = 0;
         const enemyImageBox = document.getElementById('battleEnemyImage');
         if (data.image) {
             mountImageWithProgress(enemyImageBox, data.image, data.name, 'monster-portrait', { role:'monster', stageId:(battleState.isArenaFight || battleState.isEvilGirlFight) ? '' : battleState.stage });
@@ -6032,6 +6034,7 @@ window.arcanaBoot={done:done};
 
             const div = document.createElement('div');
             div.className = `skill-card ${disabled ? 'disabled' : ''}`;
+            div.dataset.sk = skill.id || skillId; div.dataset.st = skill.type;
             
             if (isShadowStrike) {
                 div.classList.add('shadow-strike');
@@ -6555,8 +6558,8 @@ window.arcanaBoot={done:done};
                 addBattleLog(enemyHpDamage > 0
                     ? `⚔️ ${skill.name} يُسبب ${enemyHpDamage} ضرر! — ${qteResult.grade.toUpperCase()}${enemyAbsorbed > 0 ? ` (الدرع امتص ${enemyAbsorbed})` : ''}`
                     : `⚔️ ${skill.name} — درع ${enemy.name} صدّ الضربة كاملة!`, enemyHpDamage > 0 ? 'damage' : 'defense');
-                if (skill.slowTurns) { battleState.enemySlowTurns = Math.max(battleState.enemySlowTurns || 0, skill.slowTurns); addBattleLog(`❄️ تباطأ العدو لدور ${skill.slowTurns}!`, 'defense'); }
-                if (skill.burnDamage && skill.burnTurns) { battleState.enemyBurnDamage=skill.burnDamage; battleState.enemyBurnTurns=skill.burnTurns; addBattleLog(`🔥 اشتعل العدو! ${skill.burnDamage} ضرر حرق لمدة ${skill.burnTurns} دورين.`, 'damage'); }
+                if (skill.slowTurns && (!window.arcanaElemGate || window.arcanaElemGate(heroSkillElement))) { battleState.enemySlowTurns = Math.max(battleState.enemySlowTurns || 0, skill.slowTurns); addBattleLog(`❄️ تباطأ العدو لدور ${skill.slowTurns}!`, 'defense'); }
+                if (skill.burnDamage && skill.burnTurns && (!window.arcanaElemGate || window.arcanaElemGate(heroSkillElement))) { battleState.enemyBurnDamage=skill.burnDamage; battleState.enemyBurnTurns=skill.burnTurns; addBattleLog(`🔥 اشتعل العدو! ${skill.burnDamage} ضرر حرق لمدة ${skill.burnTurns} دورين.`, 'damage'); }
                 if (isRangedSkillName(skill.name)) spawnProjectile('battleHeroImage', 'battleEnemyImage', skill.icon || '⚔️', heroSkillElement);
                 showCombatFX('battleEnemyImage', enemyHpDamage > 0 ? `-${enemyHpDamage}` : '🛡️', enemyHpDamage > 0 ? 'hit' : 'defense', heroSkillElement);
                 showCombatAction('hero', isShadowStrike ? '🌑' : (skill.icon || '⚔️'), skill.name, enemyHpDamage > 0 ? `-${enemyHpDamage} HP · ${qteResult.grade.toUpperCase()}` : '🛡️ درع العدو', enemyHpDamage > 0 ? 'attack' : 'defense');
@@ -9671,7 +9674,7 @@ function u(id,t,n){return P+id+N+t+'('+n+').png'}
 var MINES_CONFIG=window.ARCANA_MINES_CONFIG={
  energy:{max:10,cost:1,regenMs:120000},
  dropChance:0.8, fragsPerStone:10, maxLevel:5,
- stoneHits:[2,2,3,3,4], followBonus:.6,   // عدد ضربات/مهارات الحجر المفعّل لكل مستوى + نسبة الضرر الإضافي للضربات التالية
+ stoneHits:[2,2,3,3,4], followBonus:.6, stoneTurns:[2,2,3,3,4],   // مدة تأثير الحجر على العدو (أدوار) لكل مستوى   // عدد ضربات/مهارات الحجر المفعّل لكل مستوى + نسبة الضرر الإضافي للضربات التالية
 
  upgrade:[{frags:10},{frags:15},{frags:20},{frags:30,stones:1}],      // I→II … IV→V
  bonusDmgPct:[35,50,70,90,120],charge:{max:100,attack:12,skill:18,defense:10},   // % ضرر إضافي للضربة المفعّلة + قيم الشحن
@@ -9816,8 +9819,9 @@ window.mnEquip=function(k){var m=M();m.equipped=m.equipped===k?null:k;saveCurren
 function ctr(t){var k=eqk();if(!k)return;var b=B();if(b.act||b.pend)return;b.ch=Math.min(C.charge.max,b.ch+(C.charge[t]||0));hud()}
 window.mnCharge=ctr;
 window.arcanaStoneState=function(){var k=eqk(),b=B();return{k:k,act:!!(k&&b.act),left:b.left||0}};
-window.mnStoneBonus=function(dmg,skill){var k=eqk(),b=B();if(!k||!b.act)return 0;var l=M().lvl[k]||1,e=E(k),fk=b.first?C.followBonus:1,add=Math.max(1,Math.round(dmg*C.bonusDmgPct[l-1]/100*fk)),log='';b.first=1;
+window.mnStoneBonus=function(dmg,skill){var k=eqk(),b=B();if(!k||!b.act)return 0;var se='physical';try{se=getHeroSkillElement(skill)}catch(x){}if(se!=='physical'&&se!==k){try{addBattleLog('💎 الحجر لا يتوافق مع عنصر المهارة — يُطبَّق تأثير المهارة فقط','defense')}catch(x){}return 0}var l=M().lvl[k]||1,e=E(k),fk=b.first?C.followBonus:1,add=Math.max(1,Math.round(dmg*C.bonusDmgPct[l-1]/100*fk)),log='';b.first=1;
  if(k==='lightning')add=Math.round(add*1.15);else if(k==='holy')add=Math.round(add*1.1);
+ try{add=Math.max(1,Math.round(add*(window.arcanaElemMul?window.arcanaElemMul(k):1)))}catch(x){}
  try{log=window.arcanaStoneFX?window.arcanaStoneFX.apply(k,l):''}catch(x){}
  b.pend=true;try{addBattleLog(e.i+' حجر '+e.n+' (مستوى '+RN[l-1]+'): +'+add+' ضرر إضافي — '+log,'damage')}catch(x){}return add};
 window.mnStoneAfter=function(id){var b=B(),k=eqk();if(!k)return;if(b.pend){var F=window.arcanaStoneFX;try{if(F)F.hit(k,M().lvl[k]||1)}catch(x){}b.pend=false;b.left=(b.left||1)-1;if(b.left<=0){b.act=false;b.ch=0;b.first=0}hud();return}ctr(id==='strike'?'attack':'skill')};
@@ -10578,7 +10582,7 @@ function removeStatusEffect(en,k){var s=en.__st;if(k==='brk'&&s.brk){en.def=s.br
 function tickStatusEffects(en){var s=en.__st;
  if(s.poison){en.hp=Math.max(0,en.hp-s.poison.d);log('☠️ السم يسبب '+s.poison.d+' ضرر!','damage');if(--s.poison.t<=0)removeStatusEffect(en,'poison')}
  if(s.brk&&--s.brk.t<=0)removeStatusEffect(en,'brk')}
-function elementStatus(en,el,tag){if(tag==='res')return;var r=Math.random(),s=en.__st;
+function elementStatus(en,el,tag){if(tag==='res')return;if(window.arcanaElemGate&&!window.arcanaElemGate(el))return;var r=Math.random(),s=en.__st;
  if(el==='fire'&&r<.4)applyStatusEffect(en,'burn');else if(el==='ice'&&r<.5)applyStatusEffect(en,'slow');else if(el==='dark'&&r<.4)applyStatusEffect(en,'poison');else if(el==='wind'&&r<.3)applyStatusEffect(en,'brk');
  else if(el==='physical'){var b=s.bleed=s.bleed||{n:0};if(++b.n>=4){b.n=0;var d=Math.round(en.maxHp*.05);en.hp=Math.max(1,en.hp-d);log('🩸 انفجار نزيف! '+d+' ضرر','damage');pop('🩸 -'+d,'#ff4d5e',['🩸'])}}}
 /* ---- التوازن + العناصر ---- */
@@ -10639,7 +10643,7 @@ function ui(){var en=battleState.enemy,p=prof(en),c=document.querySelector('.ene
  if(s.brk)ic.push('💔 ('+s.brk.t+')');if(s.bleed&&s.bleed.n)ic.push('🩸 '+s.bleed.n+'/4');
  var k=(cx()[en.id]||{}).k||{},kn=Object.keys(k).map(function(e){return EM[e]+' '+(k[e]==='weak'?'ضعف':k[e]==='res'?'مقاومة':'عادي')}).join(' · ')||'❔ جرّب عناصر مختلفة',
  op=b.querySelector('details'),open=op&&op.open;
- b.innerHTML='<div class="r">⚖️ التوازن<div class="bar"><i style="width:'+Math.round(en.sg/en.sm*100)+'%"></i></div></div>'+(en.__stun?'<div class="tg">💫 مترنّح!</div>':'')+'<div class="it" style="border-color:'+it[0]+'">'+it[1]+'</div>'+(ic.length?'<div class="st">'+ic.map(function(x){return'<span>'+x+'</span>'}).join('')+'</div>':'')+
+ b.innerHTML='<div class="r">⚖️ التوازن<div class="bar"><i style="width:'+Math.round(en.sg/en.sm*100)+'%"></i></div></div>'+(window.arcanaElemRow?window.arcanaElemRow(en):'')+(en.__stun?'<div class="tg">💫 مترنّح!</div>':'')+'<div class="it" style="border-color:'+it[0]+'">'+it[1]+'</div>'+(ic.length?'<div class="st">'+ic.map(function(x){return'<span>'+x+'</span>'}).join('')+'</div>':'')+
  '<details'+(open?' open':'')+'><summary>'+EM[p.e]+' '+p.ai+' — معلومات</summary>السلبية: <b>'+p.pn+'</b><br>'+p.pd+'<br>'+kn+'</details>'}
 var oU=window.updateBattleUI;
 window.updateBattleUI=function(){var r=oU.apply(this,arguments);try{ui()}catch(e){console.warn(e)}return r};
@@ -11038,28 +11042,53 @@ setInterval(function(){try{var pg=document.getElementById('pageBattle'),on=pg&&p
  sync(E,{burn:bs.enemyBurnTurns>0?'fire':0,slow:bs.enemySlowTurns>0?'ice':0,poison:s.poison?'poison':0,curse:m.curse?'dark':0,gale:m.gale?'wind':0,shock:(m.shock&&en.__stun>0)?'lightning':0},'battleEnemyImage');
  if(m.shock&&!(en.__stun>0))delete m.shock;
  var ps=window.arcanaPlayerStatuses?window.arcanaPlayerStatuses():[],st=window.arcanaStoneState&&window.arcanaStoneState(),MP={burn:'fire',poison:'poison',freeze:'ice',stun:'lightning'},a={burn:0,poison:0,freeze:0,stun:0,aura:(st&&st.act)?st.k:0};
- ps.forEach(function(k){if(MP[k])a[k]=MP[k]});sync(Hc,a,'battleHeroImage')}catch(e){}},150);
+ ps.forEach(function(k){if(MP[k])a[k]=MP[k]});sync(Hc,a,'battleHeroImage');syncHand(st)}catch(e){}},150);
 /* ===== تأثيرات الحجر: تفعيل / ضربة / مهارة / تأثير على العدو ===== */
 function flash(bg,ms){var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;z-index:2147482890;pointer-events:none;background:'+bg;document.body.appendChild(o);o.animate([{opacity:0},{opacity:.8,offset:.2},{opacity:0}],ms||500).onfinish=function(){o.remove()}}
 function shk(c,a){if(!c)return;c.animate([{transform:'translate(0,0)'},{transform:'translate(-'+a+'px,'+a/2+'px)'},{transform:'translate('+a+'px,-'+a/2+'px)'},{transform:'translate(-'+a/2+'px,0)'},{transform:'none'}],{duration:340})}
 function banner(t,c){var b=document.createElement('div');b.textContent=t;b.style.cssText='position:fixed;left:50%;top:24%;z-index:2147482895;pointer-events:none;font:900 26px system-ui;color:#fff;white-space:nowrap;text-shadow:0 0 18px '+c+',0 0 40px '+c+',0 3px 0 #000';document.body.appendChild(b);b.animate([{opacity:0,transform:'translate(-50%,10px) scale(.6)'},{opacity:1,transform:'translate(-50%,0) scale(1.1)',offset:.25},{opacity:1,transform:'translate(-50%,-6px) scale(1)',offset:.75},{opacity:0,transform:'translate(-50%,-22px) scale(1)'}],{duration:1500}).onfinish=function(){b.remove()}}
-function activate(k,l){var h=rc('battleHeroImage');snd(k,'a');I[k](h.x,h.y,.7+.08*l);flash(FL[k],700);var c=hc();if(c)c.animate([{transform:'scale(1)'},{transform:'scale(1.07)',filter:'brightness(1.6)'},{transform:'scale(1)'}],{duration:550});add('rune',h.x,h.y,{R:110+l*8,l:1100,c:CL[k],vr:k==='wind'?9:2});banner(IC[k]+' حجر '+NM[k]+' مفعّل!',HX[k])}
+var actT=0;function activate(k,l){actT=Date.now();var h=rc('battleHeroImage');snd(k,'a');I[k](h.x,h.y,.7+.08*l);flash(FL[k],700);var c=hc();if(c)c.animate([{transform:'scale(1)'},{transform:'scale(1.07)',filter:'brightness(1.6)'},{transform:'scale(1)'}],{duration:550});add('rune',h.x,h.y,{R:110+l*8,l:1100,c:CL[k],vr:k==='wind'?9:2});banner(IC[k]+' حجر '+NM[k]+' مفعّل!',HX[k])}
 function hit(k,l){var e=rc('battleEnemyImage');snd(k,'h');I[k](e.x,e.y,1+.15*(l-1));flash(FL[k],k==='lightning'?260:600);shk(ec(),k==='wind'?5:k==='lightning'?9:8)}
-function cast(k,s){if(!s||s.type!=='attack')return;snd(k,'c');trail(k,rc('battleHeroImage'),rc('battleEnemyImage'));var h=hc();if(h)h.animate([{filter:'none'},{filter:'brightness(1.5) drop-shadow(0 0 14px '+HX[k]+')'},{filter:'none'}],{duration:450})}
-function apply(k,l){var bs=battleState,en=bs.enemy,m=en.__mn=en.__mn||{},ex=l>2?1:0,L={fire:'🔥 اشتعل العدو',ice:'❄️ تجمّد العدو وتباطأ',poison:'☠️ تسمّم العدو',dark:'🌑 لُعن العدو (دفاعه أقل مؤقتًا)',wind:'🌪️ كُسر دفاع العدو مؤقتًا',lightning:'⚡ صعق إضافي',holy:'✨ نور مقدس يخترق الدفاع'};
- function burn(){bs.enemyBurnDamage=Math.max(bs.enemyBurnDamage||0,3+l*3);bs.enemyBurnTurns=Math.max(bs.enemyBurnTurns||0,2+ex)}
- if(k==='fire')burn();else if(k==='ice')bs.enemySlowTurns=Math.max(bs.enemySlowTurns||0,1+ex);
- else if(k==='poison'){if(en.__st)en.__st.poison={t:3+ex,d:Math.max(2,Math.round(en.maxHp*(.012+.008*l)))};else burn()}
- else if(k==='dark'||k==='wind'){var n=k==='dark'?'curse':'gale',o=m[n];if(o)o.t=3+ex;else{var r=Math.min(en.def||0,Math.round((en.def||0)*(k==='dark'?.04+.06*l:.05+.05*l)));en.def-=r;m[n]={t:3+ex,r:r}}}
+function cast(k,s){if(!s||s.type!=='attack')return;var ke='physical';try{ke=getHeroSkillElement(s)}catch(e){}if(ke!=='physical'&&ke!==k)return;snd(k,'c');trail(k,rc('battleHeroImage'),rc('battleEnemyImage'));var h=hc();if(h)h.animate([{filter:'none'},{filter:'brightness(1.5) drop-shadow(0 0 14px '+HX[k]+')'},{filter:'none'}],{duration:450})}
+function apply(k,l){var bs=battleState,en=bs.enemy,m=en.__mn=en.__mn||{},CF=window.ARCANA_MINES_CONFIG||{},T=(CF.stoneTurns||[2,2,3,3,4])[l-1]||2,L={fire:'🔥 اشتعل العدو',ice:'❄️ تجمّد العدو وتباطأ (ضرره أقل)',poison:'☠️ تسمّم العدو',dark:'🌑 لُعن العدو (دفاعه أقل مؤقتًا)',wind:'🌪️ كُسر دفاع العدو مؤقتًا',lightning:'⚡ صعق إضافي',holy:'✨ نور مقدس يخترق الدفاع'};
+ if(!window.arcanaElemGate(k)){var ep=epInit(en);return '🧿 بلا تأثير عنصري (مقاومة العناصر '+ep.n+'/'+ep.m+')'}
+ function burn(){bs.enemyBurnDamage=Math.max(bs.enemyBurnDamage||0,3+l*3);bs.enemyBurnTurns=Math.max(bs.enemyBurnTurns||0,T)}
+ if(k==='fire')burn();else if(k==='ice')bs.enemySlowTurns=Math.max(bs.enemySlowTurns||0,T);
+ else if(k==='poison'){if(en.__st)en.__st.poison={t:T,d:Math.max(2,Math.round(en.maxHp*(.012+.008*l)))};else burn()}
+ else if(k==='dark'||k==='wind'){var n=k==='dark'?'curse':'gale',o=m[n];if(o)o.t=T;else{var r=Math.min(en.def||0,Math.round((en.def||0)*(k==='dark'?.04+.06*l:.05+.05*l)));en.def-=r;m[n]={t:T,r:r}}}
  else if(k==='lightning'){if(!(en.__stun>0)&&Math.random()<Math.min(.6,.2+.06*l)){en.__stun=1;m.shock={t:1};L.lightning+=' — وصُعق العدو وفقد دوره!'}}
  return L[k]}
-var oE=window.enemyTurn;window.enemyTurn=function(b){try{var en=battleState.enemy,m=en&&en.__mn;if(m&&!b)['curse','gale'].forEach(function(n){var o=m[n];if(o&&--o.t<=0){en.def+=o.r;delete m[n]}})}catch(e){}return oE.apply(this,arguments)};
+var oE=window.enemyTurn;window.enemyTurn=function(b){try{var bs=battleState,en=bs.enemy,m=en&&en.__mn;if(en&&!b){en.__slowNow=bs.enemySlowTurns>0;if(en.__slowNow)bs.enemySlowTurns--;if(m)['curse','gale'].forEach(function(n){var o=m[n];if(o&&--o.t<0){en.def+=o.r;delete m[n]}})}}catch(e){}return oE.apply(this,arguments)};
 /* مهارة اللاعب أثناء تفعيل الحجر */
 var d0=Object.getOwnPropertyDescriptor(window,'__arcanaLastSkill');
 if(d0&&d0.set)Object.defineProperty(window,'__arcanaLastSkill',{configurable:true,get:d0.get,set:function(s){d0.set.call(this,s);try{var st=window.arcanaStoneState&&window.arcanaStoneState();if(st&&st.act)cast(st.k,s)}catch(e){}}});
 /* هجوم عنصري من العدو: مسار + انفجار على بطاقة اللاعب */
 var oD=window.qteApplyDefenseMultiplier;
-window.qteApplyDefenseMultiplier=function(){var d=oD.apply(this,arguments);try{var bs=battleState,en=bs.enemy,A=window.arcanaCombat,p=en&&A&&A.prof&&A.prof(en),el=p&&p.e;if(d>0&&!bs.isBattleOver&&el&&I[el]){var a=rc('battleEnemyImage'),b=rc('battleHeroImage');trail(el,a,b);setTimeout(function(){I[el](b.x,b.y,.85);snd(el,'h');shk(hc(),7)},300)}}catch(e){}return d};
+window.qteApplyDefenseMultiplier=function(){var d=oD.apply(this,arguments);try{var bs0=battleState,en0=bs0.enemy;if(en0&&en0.__slowNow&&d>0)d=Math.max(1,Math.round(d*.85));var bs=battleState,en=bs.enemy,A=window.arcanaCombat,p=en&&A&&A.prof&&A.prof(en),el=p&&p.e;if(d>0&&!bs.isBattleOver&&el&&I[el]){var a=rc('battleEnemyImage'),b=rc('battleHeroImage');trail(el,a,b);setTimeout(function(){I[el](b.x,b.y,.85);snd(el,'h');shk(hc(),7)},300)}}catch(e){}return d};
+/* ===== نقاط مقاومة العناصر لكل عدو ===== */
+var EPC=window.ARCANA_ELEM_POINTS=window.ARCANA_ELEM_POINTS||{base:1,per:90,min:2,max:8,weakCost:2};
+function prf(en){try{return window.arcanaCombat.prof(en)}catch(e){return null}}
+function epInit(en){if(!en.__ep){var p=prf(en),m=p&&p.ep?p.ep:Math.max(EPC.min,Math.min(EPC.max,Math.round(EPC.base+(p?p.sm:100)/EPC.per)));en.__ep={n:m,m:m}}return en.__ep}
+function say(t,ty){try{addBattleLog(t,ty||'defense')}catch(e){}}
+function fltE(t,c){try{var F=window.arcanaFX;if(F&&F.floatText)F.floatText(document.getElementById('battleEnemyImage'),t,c)}catch(e){}}
+function ebreak(){var e=rc('battleEnemyImage');add('ring',e.x,e.y,{R:170,w:10,l:700,c:'120,170,255'});add('glow',e.x,e.y,{R:110,l:500,c:'120,170,255'});for(var i=0;i<14;i++){var a=R(0,6.28),v=R(120,300);add('shard',e.x,e.y,{vx:Math.cos(a)*v,vy:Math.sin(a)*v,ay:300,vr:R(-6,6),l:800,s:R(4,8)})}tn(900,300,.4,'triangle',.08);tn(1400,500,.3,'square',.05,.08);banner('💠 انكسرت مقاومة العناصر','#7ab8ff')}
+/* يرجع true لو يحق للعنصر يطبّق حالة؛ يستهلك نقطة مقاومة مرة واحدة لكل ضربة */
+window.arcanaElemGate=function(el){var bs=battleState,en=bs&&bs.enemy;if(!en||!el||el==='physical'||el==='guard')return true;var cc=en.__eg,hn=bs.__hitN||0;if(cc&&cc.n===hn&&cc.el===el)return cc.ok;
+ var p=prf(en),ep=epInit(en),ok=true,nm=IC[el]||'';
+ if(p&&(p.e===el||p.r.indexOf(el)>-1)){ok=false;say('🛡️ '+en.name+' لا يتأثر بعنصر '+nm)}
+ else if(ep.n>0){var w=p&&p.w.indexOf(el)>-1;ep.n=Math.max(0,ep.n-(w?EPC.weakCost:1));if(ep.n>0){ok=false;say('🧿 '+en.name+' قاوم تأثير '+nm+' (مقاومة العناصر '+ep.n+'/'+ep.m+')');fltE('🧿 '+ep.n+'/'+ep.m,'#8fb4ff')}else{say('💠 انكسرت مقاومة العناصر! العناصر تؤثر عليه الآن','damage');ebreak()}}
+ en.__eg={n:hn,el:el,ok:ok};return ok};
+window.arcanaElemMul=function(el){var en=battleState.enemy,p=en&&prf(en);if(!p)return 1;if(p.e===el||p.r.indexOf(el)>-1)return .5;if(p.w.indexOf(el)>-1)return 1.3;return 1};
+window.arcanaElemRow=function(en){var e=epInit(en);return '<div class="r">🧿 مقاومة العناصر '+e.n+'/'+e.m+'<div class="bar"><i style="width:'+Math.round(e.n/e.m*100)+'%;background:linear-gradient(90deg,#4f7dff,#b56bff)"></i></div></div>'+(e.n<=0?'<div class="tg">💠 مقاومتها مكسورة</div>':'')};
+var oHN=window.qteApplyAttackMultiplier;window.qteApplyAttackMultiplier=function(){battleState.__hitN=(battleState.__hitN||0)+1;return oHN.apply(this,arguments)};
+/* ===== مؤثرات خانات المهارات: الكروت اللي يطبّق عليها الحجر فقط ===== */
+function syncHand(st){var cs=document.querySelectorAll('#movesContainer .skill-card[data-sk],#skillsContainer .skill-card[data-sk]');
+ for(var i=0;i<cs.length;i++){var c=cs[i],el=0;
+  if(st&&st.act&&c.dataset.st==='attack'){var sk=typeof SKILLS!=='undefined'?SKILLS[c.dataset.sk]:null,ke='physical';try{if(sk)ke=getHeroSkillElement(sk)}catch(e){}if(ke==='physical'||ke===st.k)el=st.k}
+  var L=c.__hl;
+  if(el&&!L){if(getComputedStyle(c).position==='static')c.style.position='relative';L=c.__hl=document.createElement('div');L.className='sfxl sfx-'+el;c.appendChild(L);if(Date.now()-actT<1500){var r=cr(c);I[el](r.x,r.y,.32);c.animate([{transform:'scale(1)'},{transform:'scale(1.09)',filter:'brightness(1.6)'},{transform:'scale(1)'}],{duration:450})}}
+  else if(!el&&L){L.remove();c.__hl=null}
+  if(el)EM[el](cr(c),.4)}}
 window.arcanaStoneFX={activate:activate,hit:hit,apply:apply,cast:cast,end:function(){}};
 var st=document.createElement('style');st.textContent='.sfxl{position:absolute;inset:0;pointer-events:none;z-index:6;border-radius:inherit;overflow:hidden;opacity:0;animation:sfIn .4s forwards}@keyframes sfIn{to{opacity:1}}'+
 '.sfx-fire{background:radial-gradient(ellipse at 50% 115%,#ff6a2aee,#ff3d0077 38%,transparent 70%);box-shadow:inset 0 -18px 30px #ff5a1fcc;animation:sfIn .4s forwards,sfFl .35s infinite alternate}@keyframes sfFl{to{filter:brightness(1.35) saturate(1.2);transform:scaleY(1.03)}}'+
